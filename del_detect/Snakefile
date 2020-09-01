@@ -57,6 +57,8 @@ rule subset_meth:
     shell:
         "python3 filter_meth.py -f {input.meth} -b {input.bam} -o {output}"
 
+#Might have to clear read groups if present in between step above and the next one
+
 #rule split_bam:
 #    input:
 #        ref="GCF_000001405.26_GRCh38_genomic.fna",
