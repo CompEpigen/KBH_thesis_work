@@ -1,0 +1,85 @@
+#configfile: "config.yaml"
+#samples = config["samples"]
+sample = 'FAB39075'
+#deletion = ''
+roi = 'chr17:64803882-66303882'
+
+#Include the above things in the configfile once I get that working
+#Note that this snakefile relies on my methylation calling pipeline to have been run beforehand
+
+import os
+
+def activate_environment():
+    os.system("module load samtools/1.9")
+    os.system("module load anaconda3/2019.07")
+    #os.system("conda activate snakemake")
+
+activate_environment()
+
+rule all:
+    input:
+        expand("{sample}.{roi}.region.bam", sample=sample.split(' '), roi=roi.split(' ')),
+        expand("{sample}.{roi}.region.bam.bai", sample=sample.split(' '), roi=roi.split(' ')),
+        expand("{sample}.{roi}.meth_calls.tsv", sample=sample.split(' '), roi=roi.split(' '))
+
+
+rule def_region:
+    input:
+        bam="{sample}.bam"
+    output:
+        "{sample}.{roi}.region.bam"
+    #params:
+    shell:
+        "samtools view -b {input.bam} '{roi}' > {output}"
+
+rule index_bams:
+    input:
+        "{sample}.{roi}.region.bam"
+    output:
+        "{sample}.{roi}.region.bam.bai"
+    #params:
+    #    jobname="index_bams",
+    #    runtime="8:00",
+    #    memusage="20000",
+    #    slots="1",
+    #    misc=" "
+    shell:
+        "samtools index {input}"
+
+rule subset_meth:
+    input:
+        meth="{sample}.meth_calls.tsv",
+        bam="{sample}.{roi}.region.bam",
+        bai="{sample}.{roi}.region.bam.bai"
+    output:
+        "{sample}.{roi}.meth_calls.tsv"
+    #params:
+    shell:
+        "python3 filter_meth.py -f {input.meth} -b {input.bam} -o {output}"
+
+#rule split_bam:
+#    input:
+#        ref="GCF_000001405.26_GRCh38_genomic.fna",
+#        pos="{deletion}"
+#    output:
+#        ''
+#    params:
+#    shell:
+#        "samtools view -h region.bam | ./samVarSplitter.pl -ref {input.ref} -pos {input.pos}"
+#        "samtools split ..."
+
+#rule extract_readids:
+#    input:
+#    output:
+#    params:
+#    shell:
+
+#rule split_meth:
+#    input:
+#    output:
+#    params:
+#    shell:
+
+#rule diff_meth_analysis:
+#Use pycometh here to do simple differential methylation analysis
+ 
