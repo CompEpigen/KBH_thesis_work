@@ -2,13 +2,6 @@
 
 #Need to activate pysam venv w/ "conda activate pysam-venv" before running this script
 
-#Idea here would be to have non-filtered bam file be the input
-#Then use inbam.fetch to find broad region
-#Then use it again to filter in deletion region
-#Write output to new bam file
-#Include counts 
-
-
 import argparse
 import pysam
 import pandas as pd

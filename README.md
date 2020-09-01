@@ -1,6 +1,6 @@
 # Thesis project of KBH
 
-This repo contains the projects K. Brooks Henry did during his master thesis with the Computational Cancer Epigenomics group at the German Cancer Research Center (DKFZ). Done from 01/08/2020 to 
+This repo contains the projects K. Brooks Henry did during his master thesis with the Computational Cancer Epigenomics group at the German Cancer Research Center (DKFZ). Done from 01/08/2020 to XXXX
 
 Email: k.henry@dkfz-heidelberg.de
 

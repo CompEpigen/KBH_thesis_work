@@ -2,7 +2,6 @@
 
 import argparse
 import pysam
-import pandas as pd
 
 def main ():
 
@@ -24,16 +23,16 @@ def main ():
         type=str,
         help='deletion to filter on (start-end)')
 
-    #required.add_argument(
-    #    '-o',
-    #    '--output',
-    #    type=str,
-    #    help='output location and name')
+    required.add_argument(
+        '-o',
+        '--output',
+        type=str,
+        help='output location and name')
 
     args = parser.parse_args()
 
     '''
-    1. Read in BAM file & extract aligned pair positions
+    1. Read in BAM file & extract aligned pair positions + read id
     '''
 
     inbam = pysam.AlignmentFile(args.bam, "rb")
@@ -42,6 +41,7 @@ def main ():
 
     for read in inbam:
         ids = read.query_name
+        #print(type(ids))
         pairs = read.get_aligned_pairs()
         ap[ids] = pairs
         #print(read.query_name, read.get_aligned_pairs())
@@ -73,17 +73,40 @@ def main ():
 
     reads_w_deletion = list(set(reads_w_deletion))
 
-    print(reads_w_deletion)
+    #print(reads_w_deletion)
+
+    #reads_w_deletion = ', '.join(map(str, reads_w_deletion))
+
+    #print(reads_w_deletion)
+    #for id in reads_w_deletion:
+    #    print(type(id))
+
+    '''
+    2.5 Saving deletion read list as a txt file
+    '''
+
+    with open(args.output + '_deletion_readids.txt', 'w') as fout:
+        for readid in reads_w_deletion:
+            #print(readid)
+            fout.write(readid + '\n')
 
     '''
     3. Save new BAM files
     '''
     
+    #Current issue is that the reads_w_deletion is a string with '', but the read.query_name has no quotes
+
+    outfile_del = pysam.AlignmentFile(args.output + '_deletions.bam', 'w', template=inbam)
+    outfile_nodel = pysam.AlignmentFile(args.output + '_nodeletions.bam', 'w', template=inbam)
+
+    inbam = pysam.AlignmentFile(args.bam, "rb") #Ok so apparently this is necessary to include the inbam again, as the first invocation of it isnt global?
+
     for read in inbam:
         if read.query_name in reads_w_deletion:
-            
+            #print(read)
+            outfile_del.write(read)
         else:
-
+            outfile_nodel.write(read)
 
 
 if __name__ == '__main__':
