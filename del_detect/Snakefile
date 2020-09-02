@@ -27,14 +27,6 @@ rule all:
         expand("output/{sample}.{roi}_nodeletions.bam", sample=samples.split(' '), roi=roi.split(' ')),
         expand("output/{sample}.{roi}_deletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' ')),
         expand("output/{sample}.{roi}_nodeletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' '))
-        #"output/{sample}.{roi}.region.bam",
-        #"output/{sample}.{roi}.region.bam.bai",
-        #"output/{sample}.{roi}.meth_calls.tsv",
-        #"output/{sample}.{roi}_deletion_readids.txt",
-        #"output/{sample}.{roi}_deletions.bam",
-        #"output/{sample}.{roi}_nodeletions.bam",
-        #"output/{sample}.{roi}_deletion_meth_calls.tsv",
-        #"output/{sample}.{roi}_nodeletion_meth_calls.tsv"
 
 
 rule def_region:
@@ -81,7 +73,7 @@ rule split_bam:
         "output/{sample}.{roi}_nodeletions.bam"
     #params:
     shell:
-        "python3 split_bam.py -b {input.bam} -d {deletion} -o output/{sample}.{roi}"
+        "python3 split_bam.py -b {input.bam} -d {deletion} -o {sample}.{roi}"
 
 rule split_meth:
     input:
@@ -95,5 +87,4 @@ rule split_meth:
         "python3 split_meth.py -f {input.mc} -l {input.ids} -o {sample}.{roi}"
 
 #rule diff_meth_analysis:
-#Use pycometh here to do simple differential methylation analysis
- 
+#Use pycometh here to do differential methylation analysis
