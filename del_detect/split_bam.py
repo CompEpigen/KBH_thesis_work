@@ -75,12 +75,6 @@ def main ():
 
     #print(reads_w_deletion)
 
-    #reads_w_deletion = ', '.join(map(str, reads_w_deletion))
-
-    #print(reads_w_deletion)
-    #for id in reads_w_deletion:
-    #    print(type(id))
-
     '''
     2.5 Saving deletion read list as a txt file
     '''
@@ -94,12 +88,10 @@ def main ():
     3. Save new BAM files
     '''
     
-    #Current issue is that the reads_w_deletion is a string with '', but the read.query_name has no quotes
-
     outfile_del = pysam.AlignmentFile(args.output + '_deletions.bam', 'w', template=inbam)
     outfile_nodel = pysam.AlignmentFile(args.output + '_nodeletions.bam', 'w', template=inbam)
 
-    inbam = pysam.AlignmentFile(args.bam, "rb") #Ok so apparently this is necessary to include the inbam again, as the first invocation of it isnt global?
+    inbam = pysam.AlignmentFile(args.bam, "rb") #Necessary to read in the bam again (?)
 
     for read in inbam:
         if read.query_name in reads_w_deletion:
