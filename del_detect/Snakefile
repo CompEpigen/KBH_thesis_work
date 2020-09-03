@@ -27,8 +27,6 @@ rule all:
         expand("output/{sample}.{roi}_nodeletions.bam", sample=samples.split(' '), roi=roi.split(' ')),
         expand("output/{sample}.{roi}_deletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' ')),
         expand("output/{sample}.{roi}_nodeletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' ')) #,
-        #expand("output/{sample}.{roi}_clean_deletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' ')) #,
-        #expand("output/{sample}.{roi}_clean_nodeletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' '))
 
 
 rule def_region:
@@ -90,14 +88,32 @@ rule split_and_clean_meth:
 
 #rule cpg_agg:
 #    input:
+        #Will need ref genome, list of BOTH TSV files generated in previous step, path to write output bed & tsv files
 #    output:
+        #Save bed & tsv files into a new sub-folder in ouput/ called "pycometh/"
 #    params:
 #    shell:
         #Use pycometh's CpG_Aggregate function here
 
-#rule diff_meth_analysis:
+#Next step might not be necessary for what I want to do
+
+#rule int_agg:
 #    input:
 #    output:
 #    params:
 #    shell:
-        #I'll use pycometh's meth_comp function here
+        #Use pycometh's Interval_Aggregate function here
+
+#rule meth_comp:
+#    input:
+#    output:
+#    params:
+#    shell:
+        #I'll use pycometh's Meth_Comp function here
+
+#rule comp_report:
+#    input:
+#    output:
+#    params:
+#    shell:
+        #Use pycometh's Comp_Report function here     
