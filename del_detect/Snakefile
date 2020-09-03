@@ -73,7 +73,7 @@ rule split_bam:
         "output/{sample}.{roi}_nodeletions.bam"
     #params:
     shell:
-        "python3 split_bam.py -b {input.bam} -d {deletion} -o {sample}.{roi}"
+        "python3 split_bam.py -b {input.bam} -d {deletion} -o output/{wildcards.sample}.{wildcards.roi}"
 
 rule split_meth:
     input:
@@ -84,8 +84,25 @@ rule split_meth:
         "output/{sample}.{roi}_nodeletion_meth_calls.tsv"
     #params:
     shell:
-        "python3 split_meth.py -f {input.mc} -l {input.ids} -o {sample}.{roi}"
+        "python3 split_meth.py -f {input.mc} -l {input.ids} -o output/{wildcards.sample}.{wildcards.roi}"
+
+#rule clean_meth:
+#    input:
+#    output:
+    #params:
+#    shell:
+        #Use my python helper script here
+
+#rule cpg_agg:
+#    input:
+#    output:
+#    params:
+#    shell:
+        #Use pycometh's CpG_Aggregate function here
 
 #rule diff_meth_analysis:
-#Use pycometh here to do differential methylation analysis
-#Put pycometh in the same venv as snakemake
+#    input:
+#    output:
+#    params:
+#    shell:
+        #I'll use pycometh's meth_comp function here
