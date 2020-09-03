@@ -86,12 +86,18 @@ rule split_meth:
     shell:
         "python3 split_meth.py -f {input.mc} -l {input.ids} -o output/{wildcards.sample}.{wildcards.roi}"
 
-#rule clean_meth:
-#    input:
-#    output:
-    #params:
-#    shell:
-        #Use my python helper script here
+rule clean_meth:
+    input:
+        delmeth="output/{sample}.{roi}_deletion_meth_calls.tsv",
+        nodelmeth="output/{sample}.{roi}_nodeletion_meth_calls.tsv"
+    output:
+        "output/{sample}.{roi}_deletion_meth_calls.tsv",
+        "output/{sample}.{roi}_nodeletion_meth_calls.tsv"
+   #params:
+    shell:
+        "python3 change_meth_tsv.py -f {input.delmeth}"
+        "python3 change_meth_tsv.py -f {input.nodelmeth}"
+
 
 #rule cpg_agg:
 #    input:
