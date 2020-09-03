@@ -11,13 +11,19 @@ def main ():
 
     required = parser.add_argument_group(
         'Required',
-        'meth tsv')
+        'meth tsv, output location & prefix')
 
     required.add_argument(
         '-f',
         '--input',
         type=str,
         help='input methylation call tsv file')
+    
+    required.add_argument(
+        '-o',
+        '--output',
+        type=str,
+        help='output methylation call tsv file')
 
     args = parser.parse_args()
 
@@ -72,7 +78,7 @@ def main ():
 
     #print(meth.head())
 
-    meth.to_csv(args.input, index=False, sep='\t')
+    meth.to_csv(args.output, index=False, sep='\t') #Would ideally like to have it just overwrite the input file, but for right now it's easier to have the snakemake file have seperate input/output files
 
 
 if __name__ == '__main__':

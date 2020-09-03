@@ -26,7 +26,9 @@ rule all:
         expand("output/{sample}.{roi}_deletions.bam", sample=samples.split(' '), roi=roi.split(' ')),
         expand("output/{sample}.{roi}_nodeletions.bam", sample=samples.split(' '), roi=roi.split(' ')),
         expand("output/{sample}.{roi}_deletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' ')),
-        expand("output/{sample}.{roi}_nodeletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' '))
+        expand("output/{sample}.{roi}_nodeletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' ')) #,
+        #expand("output/{sample}.{roi}_clean_deletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' ')) #,
+        #expand("output/{sample}.{roi}_clean_nodeletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' '))
 
 
 rule def_region:
@@ -61,7 +63,7 @@ rule subset_meth:
         "output/{sample}.{roi}.meth_calls.tsv"
     #params:
     shell:
-        "python3 filter_meth.py -f {input.meth} -b {input.bam} -o {output}"
+        "python3 scripts/filter_meth.py -f {input.meth} -b {input.bam} -o {output}"
 
 rule split_bam:
     input:
@@ -73,9 +75,9 @@ rule split_bam:
         "output/{sample}.{roi}_nodeletions.bam"
     #params:
     shell:
-        "python3 split_bam.py -b {input.bam} -d {deletion} -o output/{wildcards.sample}.{wildcards.roi}"
+        "python3 scripts/split_bam.py -b {input.bam} -d {deletion} -o output/{wildcards.sample}.{wildcards.roi}"
 
-rule split_meth:
+rule split_and_clean_meth:
     input:
         mc="output/{sample}.{roi}.meth_calls.tsv",
         ids="output/{sample}.{roi}_deletion_readids.txt"
@@ -84,20 +86,7 @@ rule split_meth:
         "output/{sample}.{roi}_nodeletion_meth_calls.tsv"
     #params:
     shell:
-        "python3 split_meth.py -f {input.mc} -l {input.ids} -o output/{wildcards.sample}.{wildcards.roi}"
-
-rule clean_meth:
-    input:
-        delmeth="output/{sample}.{roi}_deletion_meth_calls.tsv",
-        nodelmeth="output/{sample}.{roi}_nodeletion_meth_calls.tsv"
-    output:
-        "output/{sample}.{roi}_deletion_meth_calls.tsv",
-        "output/{sample}.{roi}_nodeletion_meth_calls.tsv"
-   #params:
-    shell:
-        "python3 change_meth_tsv.py -f {input.delmeth}"
-        "python3 change_meth_tsv.py -f {input.nodelmeth}"
-
+        "python3 scripts/split_meth.py -f {input.mc} -l {input.ids} -o output/{wildcards.sample}.{wildcards.roi}"
 
 #rule cpg_agg:
 #    input:
