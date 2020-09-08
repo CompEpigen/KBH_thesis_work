@@ -1,0 +1,148 @@
+#configfile: "config.yaml"
+#Will need location of fast5 files, flowcell, kit, ref genome
+sample = 'TEST'
+flowcell = 'FLO-MIN106'
+kit = 'SQK-LSK109'
+
+import os
+
+def activate_environment():
+    os.system("module load samtools/1.9")
+    os.system("module load anaconda3/2019.07")
+    os.system("conda activate pycoqc")
+
+activate_environment()
+
+rule all:
+    input:
+        expand("data/{sample}.merged.fq", sample=sample.split(' ')),
+ 
+rule basecall:
+    input:
+        f5s="./data/{wildcard.sample}_guppy"
+    output:
+        fqs="fastqs",
+        sum="fastq/sequencing_summary.txt"
+    params:
+        jobname="guppy_basecall",
+        runtime="8:00",
+        memusage="5000",
+        slots="10",
+        misc=" "
+    shell:
+        "guppy_basecaller --input_path {input.f5s} --save_path {output.fqs} --flowcell {wildcard.flowcell} --kit {wildcard.kit} --num_callers {params.slots} --num_cpu_threads_per_caller {params.threads}"
+
+""" rule pycoqc:
+    input:
+        'sequencing summary txt file'
+    output:
+        'location to output summary html file'
+    params:
+    shell:
+
+rule index:
+    input:
+        'location of fast5 files',
+        'location of fasta file'
+    output:
+        'index',
+        'fai',
+        'gzi',
+        'readdb'
+    params:
+    shell:
+        "nanopolish index -d "
+
+rule compute_draft:
+    input:
+        ref="GCF_000001405.26_GRCh38_genomic.fna",
+        fq="data/{sample}.merged.fq"
+    output:
+        "output/1_draft/{sample}.draft.fa"
+    params:
+        jobname="index_reads",
+        runtime="8:00",
+        memusage="20000",
+        slots="10",
+        misc=" "
+    shell:
+        "canu -p {output} -d genomeSize=___XXXX____ -nanopore-raw {input.fq} "
+
+rule minimap2_align:
+    input:
+        ref="GCF_000001405.26_GRCh38_genomic.fna",
+        fq="data/{sample}.merged.fq"
+    output:
+        "output/2_mapped/{sample}.sorted.bam"
+    params:
+        jobname="index_reads",
+        runtime="8:00",
+        memusage="20000",
+        slots="10",
+        misc=" "
+    shell:
+        "minimap2 -ax -t | samtools sort -o "
+
+rule index_bams:
+    input:
+        "output/2_mapped/{sample}.sorted.bam"
+    output:
+        "output/2_mapped/{sample}.sorted.bam.bai"
+    params:
+        jobname="index_bams",
+        runtime="8:00",
+        memusage="20000",
+        slots="1",
+        misc=" "
+    shell:
+        "samtools index {input}"
+
+rule segment_genome:
+    input:
+    output:
+    params:
+        jobname="index_reads",
+        runtime="8:00",
+        memusage="20000",
+        slots="10",
+        misc=" "
+    shell:
+        "python3 /home/k001y/nanopolish/scripts/nanopolish_makerange.py  "
+
+rule vcf2fasta:
+    input:
+    output:
+    params:
+        jobname="index_reads",
+        runtime="8:00",
+        memusage="20000",
+        slots="10",
+        misc=" "
+    shell:
+        "/home/k001y/nanopolish/nanopolish vcf2fasta "
+
+rule concensus:
+    input:
+    output:
+    params:
+    shell:
+
+rule merge:
+    input:
+    output:
+    params:
+    shell: """
+
+#rule eval_assembly:
+#    input:
+#    output:
+#    params:
+#        jobname="index_reads",
+#        runtime="8:00",
+#        memusage="20000",
+#        slots="10",
+#        misc=" "
+#    shell:
+
+
+
