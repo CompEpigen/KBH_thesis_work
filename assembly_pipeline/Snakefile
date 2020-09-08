@@ -15,22 +15,24 @@ activate_environment()
 
 rule all:
     input:
-        expand("data/{sample}.merged.fq", sample=sample.split(' ')),
+        #expand("data/{sample}.merged.fq", sample=sample.split(' ')),
+        directory("fastq"),
+        "fastq/sequencing_summary.txt"
  
 rule basecall:
     input:
-        f5s="./data/{wildcard.sample}_guppy"
+        f5s="./data/guppy" #Will need to add in wildcard specification here
     output:
-        fqs="fastqs",
+        fqs=directory("fastq"),
         sum="fastq/sequencing_summary.txt"
     params:
         jobname="guppy_basecall",
-        runtime="8:00",
+        runtime="12:00",
         memusage="5000",
         slots="10",
         misc=" "
     shell:
-        "guppy_basecaller --input_path {input.f5s} --save_path {output.fqs} --flowcell {wildcard.flowcell} --kit {wildcard.kit} --num_callers {params.slots} --num_cpu_threads_per_caller {params.threads}"
+        "guppy_basecaller --input_path {input.f5s} --save_path {output.fqs} --flowcell {flowcell} --kit {kit} --num_callers {params.slots}"
 
 """ rule pycoqc:
     input:
@@ -109,6 +111,12 @@ rule segment_genome:
     shell:
         "python3 /home/k001y/nanopolish/scripts/nanopolish_makerange.py  "
 
+rule concensus:
+    input:
+    output:
+    params:
+    shell:
+
 rule vcf2fasta:
     input:
     output:
@@ -121,11 +129,7 @@ rule vcf2fasta:
     shell:
         "/home/k001y/nanopolish/nanopolish vcf2fasta "
 
-rule concensus:
-    input:
-    output:
-    params:
-    shell:
+
 
 rule merge:
     input:
