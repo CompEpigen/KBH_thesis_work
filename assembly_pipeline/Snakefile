@@ -36,11 +36,17 @@ rule basecall:
 
 """ rule pycoqc:
     input:
-        'sequencing summary txt file'
+        "./data/fastq/sequencing_summary.txt"
     output:
-        'location to output summary html file'
+        "./output/{sample}_pycoQC_output.html"
     params:
+        jobname="QC",
+        runtime="",
+        memusage="",
+        slots="",
+        misc=" "
     shell:
+        "pycoQC -f {input} -o {ouput}"
 
 rule index:
     input:
@@ -148,5 +154,5 @@ rule merge:
 #        misc=" "
 #    shell:
 
-
+/home/k001y/programs/mummer/bin
 
