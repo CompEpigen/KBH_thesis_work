@@ -71,7 +71,9 @@ rule ngmlr_align:
         slots="10",
         misc=" "
     shell:
-        "ngmlr -t 10 -r {input.ref} -q {input.fq} -x ont | samtools sort -T tmp -o {output}"
+        "ngmlr -t 10 -r {input.ref} -q {input.fq} -x ont | samtools sort -T {wildcards.sample}.tmp -o {output}"
+
+#Need to change samtools sort above so that temp files have different {sample} names!!
 
 rule index_bams:
     input:
@@ -121,7 +123,6 @@ rule calc_freq:
         misc=" "
     shell:
         "f5c meth-freq -i {input} -o {output} -s"
-
 
 
 
