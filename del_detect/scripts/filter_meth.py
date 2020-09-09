@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-#Need to activate pysam venv w/ "conda activate pysam-venv" before running this script
+#Need to activate pysam venv w/ "conda activate pycometh" before running this script
 
 import argparse
 import pysam

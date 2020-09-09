@@ -13,8 +13,6 @@ bams=`ls -1 $INP_DIR/*.bam`
 for bf in $bams
 do
 bn=`basename $bf`
-samtools view -h -b $bf NC_000017.11:64803882-66303882 > $OUT_DIR/del_chr17_64803882_66303882_${bn}
+samtools view -h -b $bf 17:64803882-66303882 > $OUT_DIR/del_chr17_64803882_66303882_${bn}
 samtools index $OUT_DIR/del_chr17_64803882_66303882_${bn}
-samtools merge all_del_merged.bam *.bam
-samtools index all_del_merged.bam
 done

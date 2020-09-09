@@ -1,31 +1,31 @@
 #configfile: "config.yaml"
-#samples = config["samples"]
-sample = 'FAB39075-4246400039_Multi_SQK-LSK108_WA01'
+#sample = config["samples"]
+SAMPLES = ["FAB39075-4246400039_Multi_SQK-LSK108_WA01", "FAB39088-288418386_Multi_SQK-LSK108_WA01", "FAB49164-4045668814_Multi_SQK-LSK108_WA01", "FAB42316-216722908_Multi_SQK-LSK108_WA01", "FAB42451-4239353418_Multi_SQK-LSK108_WA01", "FAB42473-4179682758_Multi_SQK-LSK108_WA01", "FAB44989-2567311907_Multi_SQK-LSK108_WA01", "FAB45271-152889212_Multi_SQK-LSK108_WA01", "FAB45277-86567043_Multi_SQK-LSK108_WA01", "FAB45332-551111640_Multi_SQK-LSK108_WA01", "FAB49712-622291475_Multi_SQK-LSK108_WA01", "FAB49908-481119249_Multi_SQK-LSK108_WA01", "FAB49914-3775529215_Multi_SQK-LSK108_WA01", "FAF01127-353303576_Multi_SQK-LSK108_WA01", "FAF01132-84868110_Multi_SQK-LSK108_WA01", "FAF01169-4245879798_Multi_SQK-LSK108_WA01", "FAF01253-83756522_Multi_SQK-LSK108_WA01", "FAF05869-87644245_Multi_SQK-LSK108_WA01", "FAF18554-4178920553_Multi_SQK-LSK108_WA01"]
 
 import os
 
 def activate_environment():
     os.system("module load samtools/1.9")
-    os.system("module load anaconda3/2019.07")
-    #os.system("source activate /home/k001y/miniconda3/envs/ngmlr-env") #need to change to pycometh env
+    #os.system("module load anaconda3/2019.07")
+    #os.system("conda activate pycometh") #need to change to pycometh env
 
 activate_environment()
 
 rule all:
     input:
-        expand("data/{sample}.merged.fq", sample=sample.split(' ')),
-        expand("data/{sample}.merged.fq.index", sample=sample.split(' ')),
-        expand("data/{sample}.merged.fq.index.gzi", sample=sample.split(' ')),
-        expand("data/{sample}.merged.fq.index.fai", sample=sample.split(' ')),
-        expand("data/{sample}.merged.fq.index.readdb", sample=sample.split(' ')),
-        expand("output/mapped/{sample}.sorted.bam", sample=sample.split(' ')),
-        expand("output/mapped/{sample}.sorted.bam.bai", sample=sample.split(' ')),
-        expand("output/meth/{sample}.meth_calls.tsv", sample=sample.split(' ')),
-        expand("output/meth/{sample}.meth_freq.tsv", sample=sample.split(' '))
+        expand("data/{sample}.merged.fq", sample=SAMPLES), #, sample=samples.split(', ')
+        expand("data/{sample}.merged.fq.index", sample=SAMPLES),
+        expand("data/{sample}.merged.fq.index.gzi", sample=SAMPLES),
+        expand("data/{sample}.merged.fq.index.fai", sample=SAMPLES),
+        expand("data/{sample}.merged.fq.index.readdb", sample=SAMPLES),
+        expand("output/mapped/{sample}.sorted.bam", sample=SAMPLES),
+        expand("output/mapped/{sample}.sorted.bam.bai", sample=SAMPLES),
+        expand("output/meth/{sample}.meth_calls.tsv", sample=SAMPLES),
+        expand("output/meth/{sample}.meth_freq.tsv", sample=SAMPLES)
 
 rule merge_fastqs:
     input:
-        "data/"
+        "/icgc/dkfzlsdf/analysis/C010/mayerma/methylation_analysis/fastq/"
     output:
         "data/{sample}.merged.fq"
     params:
@@ -35,13 +35,14 @@ rule merge_fastqs:
         slots="1",
         misc=" "
     shell:
-        "cat data/{sample}_*.fq > {output}"
+        "cat /icgc/dkfzlsdf/analysis/C010/mayerma/methylation_analysis/fastq/{wildcards.sample}_*.fq > {output}"
 
 #Note that below for the fast5s they are currently just in a folder called guppy. For future work I will need to change this to make it more general
 
 rule index_reads:
     input:
-        f5="data/guppy/",
+        #f5="data/{sample}_guppy/",
+        f5="/icgc/dkfzlsdf/analysis/C010/mayerma/methylation_analysis/raw/{sample}/guppy/",
         fq="data/{sample}.merged.fq"
     output:
         "data/{sample}.merged.fq.index",
@@ -51,7 +52,7 @@ rule index_reads:
     params:
         jobname="index_reads",
         runtime="8:00",
-        memusage="20000",
+        memusage="5000",
         slots="10",
         misc=" "
     shell:
@@ -80,7 +81,7 @@ rule index_bams:
     params:
         jobname="index_bams",
         runtime="8:00",
-        memusage="20000",
+        memusage="5000",
         slots="1",
         misc=" "
     shell:
@@ -101,7 +102,7 @@ rule call_meth:
     params:
         jobname="call_meth",
         runtime="24:00",
-        memusage="50000",
+        memusage="10000",
         slots="10",
         misc=" "
     shell:
@@ -115,7 +116,7 @@ rule calc_freq:
     params:
         jobname="calc_freq",
         runtime="8:00",
-        memusage="20000",
+        memusage="5000",
         slots="1",
         misc=" "
     shell:
