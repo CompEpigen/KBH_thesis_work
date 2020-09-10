@@ -71,6 +71,8 @@ def main ():
 
     meth['chromosome'] = meth['chromosome'].map(chr_dict)
 
+    #FOR THE SAMPLES I AM USING I DON'T NEED TO REMAP CHROMOSOMES, MIGHT NEED TO CHANGE LATER
+
     #print(meth.head())
 
     #reordering the columns, dropping unused ones

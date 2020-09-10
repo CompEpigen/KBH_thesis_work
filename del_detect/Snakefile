@@ -2,9 +2,9 @@
 #sample = config["samples"]
 #roi = config["roi"]
 #deletion = config["deletion"]
-samples = 'FAB39075'
-roi = 'chr17:64803882-66303882'
-deletion = '65792276-65792280'
+SAMPLES = ['', '', '']
+ROI = ['chr17:64803882-66303882']
+DELETION = ['65792276-65792280']
 
 #Note that this snakefile relies on my methylation calling pipeline to have been run beforehand
 
@@ -19,14 +19,14 @@ activate_environment()
 
 rule all:
     input:
-        expand("output/{sample}.{roi}.region.bam", sample=samples.split(' '), roi=roi.split(' ')),
-        expand("output/{sample}.{roi}.region.bam.bai", sample=samples.split(' '), roi=roi.split(' ')),
-        expand("output/{sample}.{roi}.meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' ')),
-        expand("output/{sample}.{roi}_deletion_readids.txt", sample=samples.split(' '), roi=roi.split(' ')),
-        expand("output/{sample}.{roi}_deletions.bam", sample=samples.split(' '), roi=roi.split(' ')),
-        expand("output/{sample}.{roi}_nodeletions.bam", sample=samples.split(' '), roi=roi.split(' ')),
-        expand("output/{sample}.{roi}_deletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' ')),
-        expand("output/{sample}.{roi}_nodeletion_meth_calls.tsv", sample=samples.split(' '), roi=roi.split(' ')) #,
+        expand("output/{sample}.{roi}.region.bam", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}.region.bam.bai", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}.meth_calls.tsv", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}_deletion_readids.txt", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}_deletions.bam", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}_nodeletions.bam", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}_deletion_meth_calls.tsv", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}_nodeletion_meth_calls.tsv", sample=SAMPLES, roi=ROI)
 
 
 rule def_region:
@@ -36,7 +36,7 @@ rule def_region:
         "output/{sample}.{roi}.region.bam"
     #params:
     shell:
-        "samtools view -b {input.bam} '{roi}' > {output}"
+        "samtools view -b {input.bam} '{wildcards.roi}' > {output}"
 
 rule index_bams:
     input:
@@ -103,6 +103,11 @@ rule split_and_clean_meth:
 #    params:
 #    shell:
         #Use pycometh's Interval_Aggregate function here
+
+pycoMeth CpG_Aggregate -i CLEAN_normal_chroms_meth_calls.tsv \
+-f /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/GCF_000001405.26_GRCh38_genomic.fna \
+-b TEST.bed \
+-t TEST.tsv \ 
 
 #rule meth_comp:
 #    input:

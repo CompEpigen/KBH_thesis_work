@@ -37,8 +37,6 @@ rule merge_fastqs:
     shell:
         "cat /icgc/dkfzlsdf/analysis/C010/mayerma/methylation_analysis/fastq/{wildcards.sample}_*.fq > {output}"
 
-#Note that below for the fast5s they are currently just in a folder called guppy. For future work I will need to change this to make it more general
-
 rule index_reads:
     input:
         #f5="data/{sample}_guppy/",
@@ -66,14 +64,14 @@ rule ngmlr_align:
         "output/mapped/{sample}.sorted.bam"
     params:
         jobname="index_reads",
-        runtime="8:00",
+        runtime="16:00",
         memusage="20000",
-        slots="10",
+        slots="15",
         misc=" "
     shell:
-        "ngmlr -t 10 -r {input.ref} -q {input.fq} -x ont | samtools sort -T {wildcards.sample}.tmp -o {output}"
+        "ngmlr -t 15 -r {input.ref} -q {input.fq} -x ont | samtools sort -T {wildcards.sample}.tmp -o {output}"
 
-#Need to change samtools sort above so that temp files have different {sample} names!!
+#Needed to up the time/slots for some of the samples for the above rule, so I may want to look at replacing NGMLR with minimap2
 
 rule index_bams:
     input:
