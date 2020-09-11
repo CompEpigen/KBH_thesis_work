@@ -1,6 +1,6 @@
 #configfile: "config.yaml"
 #Will need location of fast5 files, flowcell, kit, ref genome
-sample = 'TEST'
+SAMPLES = ['TEST']
 flowcell = 'FLO-MIN106'
 kit = 'SQK-LSK109'
 
@@ -9,73 +9,98 @@ import os
 def activate_environment():
     os.system("module load samtools/1.9")
     os.system("module load anaconda3/2019.07")
-    os.system("conda activate pycoqc")
+    os.system("source activate pycoqc")
 
 activate_environment()
 
 rule all:
     input:
-        #expand("data/{sample}.merged.fq", sample=sample.split(' ')),
-        directory("fastq"),
-        "fastq/sequencing_summary.txt"
+        "data/fastq/",
+        "data/fastq/sequencing_summary.txt",
+        expand("output/{sample}_pycoQC_output.html", sample=SAMPLES),
+        expand("output/{sample}.merged.fastq", sample=SAMPLES),
+        expand("output/{sample}.merged.fastq.index.gzi", sample=SAMPLES),
+        expand("output/{sample}.merged.fastq.index.fai", sample=SAMPLES),
+        expand("output/{sample}.merged.fastq.index.readdb", sample=SAMPLES)
+
  
 rule basecall:
     input:
-        f5s="./data/guppy" #Will need to add in wildcard specification here
+        f5s="data/guppy" #Will need to add in wildcard specification here
     output:
-        fqs=directory("fastq"),
-        sum="fastq/sequencing_summary.txt"
+        fqs=directory("data/fastq/"),
+        ss="data/fastq/sequencing_summary.txt"
     params:
         jobname="guppy_basecall",
-        runtime="12:00",
-        memusage="5000",
-        slots="10",
+        runtime="24:00",
+        memusage="10000",
+        slots="20",
         misc=" "
     shell:
         "guppy_basecaller --input_path {input.f5s} --save_path {output.fqs} --flowcell {flowcell} --kit {kit} --num_callers {params.slots}"
 
-""" rule pycoqc:
+rule pycoqc:
     input:
-        "./data/fastq/sequencing_summary.txt"
+        "data/fastq/sequencing_summary.txt"
     output:
-        "./output/{sample}_pycoQC_output.html"
+        "output/{sample}_pycoQC_output.html"
     params:
         jobname="QC",
-        runtime="",
-        memusage="",
-        slots="",
+        runtime="4:00",
+        memusage="10000",
+        slots="1",
         misc=" "
     shell:
-        "pycoQC -f {input} -o {ouput}"
+        "pycoQC -f {input} -o {output}"
+
+rule merge_fastqs:
+    input:
+        "data/fastq"
+    output:
+        "output/{sample}.merged.fastq"
+    params:
+        jobname="merge_fqs",
+        runtime="1:00",
+        memusage="5000",
+        slots="1",
+        misc=" "
+    shell:
+        "cat {input}/*.fastq > {output}"
 
 rule index:
     input:
-        'location of fast5 files',
-        'location of fasta file'
+        f5s="data/guppy/",
+        fq="output/{sample}.merged.fastq"
     output:
-        'index',
-        'fai',
-        'gzi',
-        'readdb'
-    params:
-    shell:
-        "nanopolish index -d "
-
-rule compute_draft:
-    input:
-        ref="GCF_000001405.26_GRCh38_genomic.fna",
-        fq="data/{sample}.merged.fq"
-    output:
-        "output/1_draft/{sample}.draft.fa"
+        "output/{sample}.merged.fastq.index",
+        "output/{sample}.merged.fastq.index.gzi",
+        "output/{sample}.merged.fastq.index.fai",
+        "output/{sample}.merged.fastq.index.readdb"
     params:
         jobname="index_reads",
         runtime="8:00",
+        memusage="5000",
+        slots="10",
+        misc=" "
+    shell:
+        "f5c index -d {input.f5s} {input.fq}"
+
+rule compute_draft:
+    input:
+        ref="/icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/GCF_000001405.26_GRCh38_genomic.fna",
+        fq="output/{sample}.merged.fq"
+    output:
+        "output/{sample}.draft1.fa"
+    params:
+        jobname="index_reads",
+        runtime="24:00",
         memusage="20000",
         slots="10",
         misc=" "
     shell:
-        "canu -p {output} -d genomeSize=___XXXX____ -nanopore-raw {input.fq} "
+        "canu -p {wildcards.SAMPLES} -d {output} genomeSize=XX -nanopore-raw {input.fq}"
 
+"""
 rule minimap2_align:
     input:
         ref="GCF_000001405.26_GRCh38_genomic.fna",
@@ -135,24 +160,21 @@ rule vcf2fasta:
     shell:
         "/home/k001y/nanopolish/nanopolish vcf2fasta "
 
-
-
 rule merge:
     input:
     output:
     params:
-    shell: """
+    shell:
 
-#rule eval_assembly:
-#    input:
-#    output:
-#    params:
-#        jobname="index_reads",
-#        runtime="8:00",
-#        memusage="20000",
-#        slots="10",
-#        misc=" "
-#    shell:
+rule eval_assembly:
+    input:
+    output:
+    params:
+        jobname="index_reads",
+        runtime="8:00",
+        memusage="20000",
+        slots="10",
+        misc=" "
+    shell:
 
-/home/k001y/programs/mummer/bin
-
+"""
