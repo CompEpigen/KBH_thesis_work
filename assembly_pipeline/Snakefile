@@ -3,6 +3,7 @@
 SAMPLES = ['TEST']
 flowcell = 'FLO-MIN106'
 kit = 'SQK-LSK109'
+genomeSize = '3100m'
 
 import os
 
@@ -21,7 +22,8 @@ rule all:
         expand("output/{sample}.merged.fastq", sample=SAMPLES),
         expand("output/{sample}.merged.fastq.index.gzi", sample=SAMPLES),
         expand("output/{sample}.merged.fastq.index.fai", sample=SAMPLES),
-        expand("output/{sample}.merged.fastq.index.readdb", sample=SAMPLES)
+        expand("output/{sample}.merged.fastq.index.readdb", sample=SAMPLES),
+        "output/draft/"
 
  
 rule basecall:
@@ -87,18 +89,18 @@ rule index:
 
 rule compute_draft:
     input:
-        ref="/icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/GCF_000001405.26_GRCh38_genomic.fna",
-        fq="output/{sample}.merged.fq"
+        fqs=expand("output/{sample}.merged.fastq", sample=SAMPLES) #,
+        #prefix=expand("{sample}", sample=SAMPLES)
     output:
-        "output/{sample}.draft1.fa"
+        directory("output/draft/")
     params:
-        jobname="index_reads",
+        jobname="compute_draft_genome",
         runtime="24:00",
         memusage="20000",
         slots="10",
         misc=" "
     shell:
-        "canu -p {wildcards.SAMPLES} -d {output} genomeSize=XX -nanopore-raw {input.fq}"
+        "canu -p {SAMPLES} -d {output} genomeSize={genomeSize} -nanopore-raw {input.fqs}"
 
 """
 rule minimap2_align:
