@@ -7,7 +7,7 @@ import os
 def activate_environment():
     os.system("module load samtools/1.9")
     #os.system("module load anaconda3/2019.07")
-    #os.system("conda activate pycometh") #need to change to pycometh env
+    #os.system("source activate pycometh") #need to change to pycometh env
 
 activate_environment()
 
