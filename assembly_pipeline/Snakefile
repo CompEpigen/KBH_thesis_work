@@ -116,7 +116,7 @@ rule minimap2_align:
         slots="10",
         misc=" "
     shell:
-        "minimap2 -ax -t | samtools sort -o "
+        "minimap2 -t {params.slots} -ax map-ont {input.ref} {input.fq} | samtools sort -o "
 
 rule index_bams:
     input:

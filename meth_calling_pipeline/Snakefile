@@ -69,7 +69,7 @@ rule ngmlr_align:
         slots="15",
         misc=" "
     shell:
-        "ngmlr -t 15 -r {input.ref} -q {input.fq} -x ont | samtools sort -T {wildcards.sample}.tmp -o {output}"
+        "minimap2 -t {params.slots} -ax map-ont {input.ref} {input.fq} | samtools sort -T {wildcards.sample}.tmp -o {output}"
 
 #Needed to up the time/slots for some of the samples for the above rule, so I may want to look at replacing NGMLR with minimap2
 
