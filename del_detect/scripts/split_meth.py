@@ -52,26 +52,15 @@ def main ():
     #print(readids)
 
     '''
-    3. Susbsetting methylation data and writing output to new TSV files
+    3. Susbsetting methylation data
     '''
 
     meth_dels = meth[meth.read_name.isin(read_ids)]
     meth_nodels = meth[~meth.read_name.isin(read_ids)]
 
     '''
-    4. Cleaning up data & formatting for PycoMeth:
-    - adding fake strand info
-    - remapping chromosomes
-    - reordering/dropping columns
+    4. Remapping chromosomes
     '''
-
-    #Adding fake strand info
-    meth_dels.insert(1, "strand", '+', True)
-    meth_nodels.insert(1, "strand", '+', True)
-
-    #renaming 'num_cpgs' column
-    meth_dels.rename(columns = {'num_cpgs':'num_motifs'}, inplace=True)
-    meth_nodels.rename(columns = {'num_cpgs':'num_motifs'}, inplace=True)
 
     #Remapping chromosomes 
     chr_dict={
@@ -107,13 +96,18 @@ def main ():
 
     #print(meth.head())
 
-    #reordering the columns, dropping unused ones
-    meth_dels = meth_dels[['chromosome', 'strand', 'start', 'end', 'read_name', 'log_lik_ratio', 'log_lik_methylated', 'log_lik_unmethylated']]
-    meth_nodels = meth_nodels[['chromosome', 'strand', 'start', 'end', 'read_name', 'log_lik_ratio', 'log_lik_methylated', 'log_lik_unmethylated']]
-
     #print(meth_dels.head())
     #print(meth_nodels.head())
 
+    #Getting rid of weird chromosomes that result in blank columns
+
+    #meth_dels = meth_dels[meth_dels.chromosome != '']
+    #meth_nodels = meth_nodels[meth_nodels.chromosome != '']
+
+    meth_dels = meth_dels.dropna(subset=['chromosome'])
+    meth_nodels = meth_nodels.dropna(subset=['chromosome'])
+
+    #Saving output
     meth_dels.to_csv(args.output + '_deletion_meth_calls.tsv', index=False, sep='\t')
     meth_nodels.to_csv(args.output + '_nodeletion_meth_calls.tsv', index=False, sep='\t')
     
