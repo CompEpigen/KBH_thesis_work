@@ -84,7 +84,7 @@ rule split_and_clean_meth:
         "output/{sample}.{roi}_nodeletion_meth_calls.tsv"
     #params:
     shell:
-        "python3 scripts/split_meth.py -f {input.mc} -l {input.ids} -o output/{wildcards.sample}.{wildcards.roi}"
+        "python3 scripts/split_clean_meth.py -f {input.mc} -l {input.ids} -o output/{wildcards.sample}.{wildcards.roi}"
 
 #rule cpg_agg:
 #    input:
