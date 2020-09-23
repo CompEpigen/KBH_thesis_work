@@ -1,9 +1,9 @@
 #configfile: "config.yaml"
 #Will need location of fast5 files, flowcell, kit, ref genome
 SAMPLES = ['TEST']
-flowcell = 'FLO-MIN106'
+flowcell = 'FLO-MIN106' #Might be a better idea to just provide the config file here instead of the flowcell/kit combo
 kit = 'SQK-LSK109'
-genomeSize = '3100m'
+genomeSize = '2g'
 
 import os
 
@@ -22,8 +22,8 @@ rule all:
         expand("output/{sample}.merged.fastq", sample=SAMPLES),
         expand("output/{sample}.merged.fastq.index.gzi", sample=SAMPLES),
         expand("output/{sample}.merged.fastq.index.fai", sample=SAMPLES),
-        expand("output/{sample}.merged.fastq.index.readdb", sample=SAMPLES),
-        "output/draft/"
+        expand("output/{sample}.merged.fastq.index.readdb", sample=SAMPLES) #,
+        #"output/draft/"
 
  
 rule basecall:
@@ -34,8 +34,8 @@ rule basecall:
         ss="data/fastq/sequencing_summary.txt"
     params:
         jobname="guppy_basecall",
-        runtime="24:00",
-        memusage="10000",
+        runtime="48:00",
+        memusage="20000",
         slots="20",
         misc=" "
     shell:
@@ -57,7 +57,7 @@ rule pycoqc:
 
 rule merge_fastqs:
     input:
-        "data/fastq"
+        "data/fastq/"
     output:
         "output/{sample}.merged.fastq"
     params:
@@ -87,6 +87,8 @@ rule index:
     shell:
         "f5c index -d {input.f5s} {input.fq}"
 
+"""
+
 rule compute_draft:
     input:
         fqs=expand("output/{sample}.merged.fastq", sample=SAMPLES) #,
@@ -102,7 +104,7 @@ rule compute_draft:
     shell:
         "canu -p {SAMPLES} -d {output} genomeSize={genomeSize} -nanopore-raw {input.fqs}"
 
-"""
+
 rule minimap2_align:
     input:
         ref="GCF_000001405.26_GRCh38_genomic.fna",
