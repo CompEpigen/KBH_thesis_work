@@ -25,7 +25,9 @@ rule all:
         expand("output/{sample}.merged.fastq.index.readdb", sample=SAMPLES) #,
         #"output/draft/"
 
- 
+#Might need rule here using rsync to move fast5 files from c010 over to /datasets on gpu node
+
+#Change basecall rule to be submitted to GPU cluster, will need to change specs, params, etc.
 rule basecall:
     input:
         f5s="data/guppy" #Will need to add in wildcard specification here
@@ -40,6 +42,8 @@ rule basecall:
         misc=" "
     shell:
         "guppy_basecaller --input_path {input.f5s} --save_path {output.fqs} --flowcell {flowcell} --kit {kit} --num_callers {params.slots}"
+
+#Will need to write rule here to rsync fast5 files back from GPU node to C010 
 
 rule pycoqc:
     input:
