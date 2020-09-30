@@ -1,8 +1,7 @@
 #configfile: "config.yaml"
 #Will need location of fast5 files, flowcell, kit, ref genome
 SAMPLES = ['TEST']
-flowcell = 'FLO-MIN106' #Might be a better idea to just provide the config file here instead of the flowcell/kit combo
-kit = 'SQK-LSK109'
+config_file = '/home/k001y/programs/ont-guppy-gpu/data/dna_r9.4.1_450bps_fast.cfg'
 genomeSize = '2g'
 
 import os
@@ -25,25 +24,62 @@ rule all:
         expand("output/{sample}.merged.fastq.index.readdb", sample=SAMPLES) #,
         #"output/draft/"
 
-#Might need rule here using rsync to move fast5 files from c010 over to /datasets on gpu node
-
-#Change basecall rule to be submitted to GPU cluster, will need to change specs, params, etc.
-rule basecall:
+rule move_and_basecall:
     input:
-        f5s="data/guppy" #Will need to add in wildcard specification here
+        f5s="fast5_files/" #Will need to add in wildcard specification here
     output:
-        fqs=directory("data/fastq/"),
-        ss="data/fastq/sequencing_summary.txt"
+        fqs=directory("fastq/"),
+        ss="fastq/sequencing_summary.txt"
     params:
-        jobname="guppy_basecall",
-        runtime="48:00",
-        memusage="20000",
-        slots="20",
-        misc=" "
+        jobname="move_and_basecall",
+        runtime="1:00",
+        memusage="5000",
+        slots="5",
+        misc="-gpu num=1:j_exclusive=yes:mode=exclusive_process:gmem=5G -q gputest"
     shell:
-        "guppy_basecaller --input_path {input.f5s} --save_path {output.fqs} --flowcell {flowcell} --kit {kit} --num_callers {params.slots}"
+        """
+        echo 'Moving fast5 files to /datasets...'
+        
+        rsync -rtu {input.f5s} /datasets/datasets_k001y/guppy_gpu/fast5_files/
 
-#Will need to write rule here to rsync fast5 files back from GPU node to C010 
+        echo 'Preparing files for basecalling...'
+
+        mkdir /datasets/datasets_k001y/guppy_gpu/basecalled/
+
+        DATASET_LOCATION=/datasets/datasets_k001y/guppy_gpu/fast5_files/
+        EXPERIMENT_LOCATION=/datasets/datasets_k001y/guppy_gpu/basecalled/           
+
+        tmp_dir=/ssd/k001y/${{LSB_JOBID}}
+
+        tmp_dir_data=${{tmp_dir}}/data # this is where I will store my dataset
+        mkdir $tmp_dir_data
+        tmp_dir_exp=${{tmp_dir}}/exp # here results are stored
+        mkdir $tmp_dir_exp
+
+        rsync -rtu ${{DATASET_LOCATION}}/ ${{tmp_dir_data}} # this copies the data to the SSD
+        rsync -rtu ${{EXPERIMENT_LOCATION}}/ ${{tmp_dir_exp}} # this copies (previous) experiment results to the SSD
+
+        DATASET_LOCATION_old=$DATASET_LOCATION
+        DATASET_LOCATION=$tmp_dir_data
+        export DATASET_LOCATION
+        EXPERIMENT_LOCATION_old=$EXPERIMENT_LOCATION
+        EXPERIMENT_LOCATION=$tmp_dir_exp
+        export EXPERIMENT_LOCATION
+
+        echo 'Basecalling...'
+
+        guppy_basecaller --input_path $DATASET_LOCATION \
+        --save_path $EXPERIMENT_LOCATION \
+        -c {config_file} \
+        --num_callers {params.slots} \
+        -x auto
+
+        rsync -rtu ${{EXPERIMENT_LOCATION}}/ ${{EXPERIMENT_LOCATION_old}}
+
+        echo 'Moving output back to C010...'
+
+        rsync -rtu ${{EXPERIMENT_LOCATION_old}}/ /icgc/dkfzlsdf/analysis/C010/brooks/testing/guppy_gpu/{output.fqs}
+        """
 
 rule pycoqc:
     input:
