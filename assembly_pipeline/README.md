@@ -6,7 +6,7 @@ Based on the [Nanopolish workflow](https://nanopolish.readthedocs.io/en/latest/q
 
 ## Workflow
 
-1. Sequence raw fast5 files using ONT's Guppy software
+1. Sequence raw fast5 files using ONT's Guppy software (Now using GPU version)
 2. Run QC on basecalled sample using [PycoQC](https://github.com/a-slide/pycoQC)
 3. Index fast5 files with fastq files using [Nanopolish](https://github.com/jts/nanopolish) 
 4. (TODO) Create a draft genome assembly using [Canu](https://github.com/marbl/canu)
