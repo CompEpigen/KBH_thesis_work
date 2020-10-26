@@ -1,0 +1,15 @@
+*.fna*
+/testing
+job_template
+/assembly_pipeline/data
+/assembly_pipeline/output
+/assembly_pipeline/*error*
+/del_detect/data
+/del_detect/output
+/del_detect/*error*
+/meth_calling_pipeline/data
+/meth_calling_pipeline/output
+/variant_calling/data
+/variant_calling/output
+/variant_calling/*error*
+/variant_calling/ont
