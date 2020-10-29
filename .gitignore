@@ -14,3 +14,4 @@ job_template
 /variant_calling/*error*
 /variant_calling/ont
 /nanopore_raw
+/nanopore_basecalled
