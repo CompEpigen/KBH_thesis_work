@@ -3,7 +3,7 @@
 job_template
 /assembly_pipeline/data
 /assembly_pipeline/output
-/assembly_pipeline/*error*
+/assembly_pipeline/errors
 /del_detect/data
 /del_detect/output
 /del_detect/*error*
