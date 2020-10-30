@@ -1,16 +1,16 @@
 #! /bin/bash
 
-#BSUB -gpu num=1:j_exclusive=yes:mode=exclusive_process:gmem=10G
+#BSUB -gpu num=1:j_exclusive=yes:mode=exclusive_process:gmem=8G
 #BSUB -q gputest
 #BSUB -W 48:00
 #BSUB -n 10
 #BSUB -e error_file%J
-#BSUB -J pdx661_hac_basecalling
+#BSUB -J skou3_hac_basecalling
 
 module load cudnn/7.6.1.34/cuda10.0
 
-DATASET_LOCATION=/datasets/datasets_k001y/PDX661/fast5_files/
-EXPERIMENT_LOCATION=/datasets/datasets_k001y/PDX661/basecalled_hac_cfg/        
+DATASET_LOCATION=/datasets/datasets_k001y/SKOU3/fast5_files/fast5/
+EXPERIMENT_LOCATION=/datasets/datasets_k001y/SKOU3/basecalled/        
 
 tmp_dir=/ssd/k001y/${LSB_JOBID}
 echo job is running at $tmp_dir
