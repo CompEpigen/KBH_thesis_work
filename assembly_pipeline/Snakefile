@@ -130,29 +130,29 @@ rule index:
     shell:
         "f5c index -d {input.f5s} {input.fq}"
 
-rule compute_draft:
-    input:
-        fqs=expand("output/{sample}.merged.fastq", sample=SAMPLES) #,
-        #prefix=expand("{sample}", sample=SAMPLES)
-    output:
-        directory("output/{sample}_draft/")
-    params:
-        jobname="compute_draft_genome",
-        runtime="24:00",
-        memusage="20000",
-        slots="10",
-        misc=" "
-    shell:
-        "canu -p {SAMPLES} -d {output} genomeSize={genomeSize} -nanopore-raw {input.fqs}"
+#rule compute_draft:
+#    input:
+#        fqs=expand("output/{sample}.merged.fastq", sample=SAMPLES) #,
+#        #prefix=expand("{sample}", sample=SAMPLES)
+#    output:
+#        directory("output/{sample}_draft/")
+#    params:
+#        jobname="compute_draft_genome",
+#        runtime="24:00",
+#        memusage="20000",
+#        slots="10",
+#        misc=" "
+#    shell:
+#        "canu -p {SAMPLES} -d {output} genomeSize={genomeSize} -nanopore-raw {input.fqs}"
 
-"""
+
 
 rule minimap2_align:
     input:
         ref="GCF_000001405.26_GRCh38_genomic.fna",
-        fq="data/{sample}.merged.fq"
+        fq="output/{sample}.merged.fq"
     output:
-        "output/2_mapped/{sample}.sorted.bam"
+        "output/{sample}.sorted.bam"
     params:
         jobname="index_reads",
         runtime="8:00",
@@ -164,9 +164,9 @@ rule minimap2_align:
 
 rule index_bams:
     input:
-        "output/2_mapped/{sample}.sorted.bam"
+        "output/{sample}.sorted.bam"
     output:
-        "output/2_mapped/{sample}.sorted.bam.bai"
+        "output/{sample}.sorted.bam.bai"
     params:
         jobname="index_bams",
         runtime="8:00",
@@ -175,6 +175,8 @@ rule index_bams:
         misc=" "
     shell:
         "samtools index {input}"
+
+"""
 
 rule segment_genome:
     input:

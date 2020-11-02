@@ -10,4 +10,5 @@ Email: k.henry@dkfz-heidelberg.de
  * del_detect: workflow to do comparative methylation analysis around deletions/regions of interest in long-read sequencing data. (work-in-progress)
  * meth_calling_pipeline: workflow to call methylation in long-read sequencing data. (work-in-progress)
  * variant_calling: exploration of tools to identify SNVs/SVs in long-read data (work-in-progress)
+ * master_pipeline: A comprehensive workflow to process basecalled files and call methylation & structural variants (work-in-progress)
  
