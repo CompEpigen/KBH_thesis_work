@@ -5,12 +5,12 @@
 #BSUB -W 48:00
 #BSUB -n 10
 #BSUB -e error_file%J
-#BSUB -J kuromochi_hac_basecalling
+#BSUB -J Ovise_hac_basecalling
 
 module load cudnn/7.6.1.34/cuda10.0
 
-DATASET_LOCATION=/datasets/datasets_k001y/Kuromochi/fast5_files/fast5/
-EXPERIMENT_LOCATION=/datasets/datasets_k001y/Kuromochi/basecalled/        
+DATASET_LOCATION=/datasets/datasets_k001y/Ovise/fast5_files/
+EXPERIMENT_LOCATION=/datasets/datasets_k001y/Ovise/basecalled/   
 
 tmp_dir=/ssd/k001y/${LSB_JOBID}
 echo job is running at $tmp_dir
