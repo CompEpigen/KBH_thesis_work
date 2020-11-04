@@ -31,7 +31,7 @@ rule pycoqc:
     params:
         jobname="QC",
         runtime="4:00",
-        memusage="10000",
+        memusage="5000",
         slots="1",
         misc=" "
     shell:
@@ -71,8 +71,8 @@ rule index:
 
 rule minimap2_align:
     input:
-        ref="GCF_000001405.26_GRCh38_genomic.fna",
-        fq="output/{sample}.merged.fq"
+        ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna",
+        fq="output/{sample}.merged.fastq"
     output:
         "output/{sample}.sorted.bam"
     params:
@@ -82,7 +82,7 @@ rule minimap2_align:
         slots="10",
         misc=" "
     shell:
-        "minimap2 -t {params.slots} -ax map-ont {input.ref} {input.fq} | samtools sort -o "
+        "minimap2 -t {params.slots} -ax map-ont {input.ref} {input.fq} | samtools sort -T {wildcards.sample} -o {output}"
 
 rule index_bams:
     input:
@@ -102,12 +102,12 @@ rule call_meth:
     input:
         bam="output/{sample}.sorted.bam",
         bai="output/{sample}.sorted.bam.bai",
-        ref="GCF_000001405.26_GRCh38_genomic.fna",
-        fq="output/{sample}.merged.fq",
-        index="output/{sample}.merged.fq.index",
-        fai="output/{sample}.merged.fq.index.fai",
-        gzi="output/{sample}.merged.fq.index.gzi",
-        readdb="output/{sample}.merged.fq.index.readdb"
+        ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna",
+        fq="output/{sample}.merged.fastq",
+        index="output/{sample}.merged.fastq.index",
+        fai="output/{sample}.merged.fastq.index.fai",
+        gzi="output/{sample}.merged.fastq.index.gzi",
+        readdb="output/{sample}.merged.fastq.index.readdb"
     output:
         "output/{sample}.meth_calls.tsv"
     params:
