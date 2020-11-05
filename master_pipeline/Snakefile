@@ -21,7 +21,8 @@ rule all:
         expand("output/{sample}.sorted.bam", sample=SAMPLES),
         expand("output/{sample}.sorted.bam.bai", sample=SAMPLES),
         expand("output/{sample}.meth_calls.tsv", sample=SAMPLES),
-        expand("output/{sample}.meth_freq.tsv", sample=SAMPLES)
+        expand("output/{sample}.meth_freq.tsv", sample=SAMPLES),
+        expand("output/{sample}.vcf", sample=SAMPLES)
 
 rule pycoqc:
     input:
@@ -133,28 +134,22 @@ rule calc_freq:
     shell:
         "f5c meth-freq -i {input} -o {output} -s"
 
-#Add in variant calling rule here!
-#rule call_vars:
-#    input:
-#    output:
-#    params:
-#    shell:
-#    """
-#    source activate /icgc/dkfzlsdf/analysis/C010/brooks/variant_calling/clair-env
-#    CLAIR='/icgc/dkfzlsdf/analysis/C010/brooks/variant_calling/clair-env/bin/clair.py'
-#    MODEL="/icgc/dkfzlsdf/analysis/C010/brooks/variant_calling/ont/model"                                     # e.g. [PATH_TO_CLAIR_MODEL]/ont/model
-#    BAM_FILE_PATH="/icgc/dkfzlsdf/analysis/C010/brooks/del_detect/bam_slicing/all_del_merged.bam"                          # e.g. chr21.bam
-#    REFERENCE_FASTA_FILE_PATH="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna"  # e.g. chr21.fa
-#    VARIANT_CALLING_OUTPUT_PATH="/icgc/dkfzlsdf/analysis/C010/brooks/variant_calling/output/chr17.vcf"
-#
-#    CONTIG_NAME="NC_000017.11"          # e.g. chr21
-#    SAMPLE_NAME="chr17_test"
-#    
-#    python3 $CLAIR callVarBam \
-#    --chkpnt_fn "$MODEL" \
-#    --ref_fn "$REFERENCE_FASTA_FILE_PATH" \
-#    --bam_fn "$BAM_FILE_PATH" \
-#    --ctgName "$CONTIG_NAME" \
-#    --sampleName "$SAMPLE_NAME" \
-#    --call_fn "$VARIANT_CALLING_OUTPUT_PATH"
-#    """
+rule call_vars
+    input:
+        bam="output/{sample}.sorted.bam",
+        ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna",
+        wd="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline"
+    output:
+        "/output/{sample}.vcf"
+    params:
+        jobname="call_vars",
+        runtime="8:00",
+        memusage="5000",
+        slots="5",
+        misc=" "
+    shell:
+        """
+        module load anaconda3/2019.07
+        source activate cutesv-env
+        cuteSV {input.bam} {input.ref} {output} {input.wd} --threads {params.slots}
+        """

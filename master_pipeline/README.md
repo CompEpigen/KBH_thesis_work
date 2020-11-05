@@ -11,7 +11,7 @@ A [Snakemake](https://snakemake.readthedocs.io/en/stable/index.html) workflow fo
 5. Index bam files using samtools
 6. Call methylation using [f5c](https://github.com/hasindu2008/f5c) 
 7. Convert methylation log-liklihood ratios to frequency values (f5c)
-8. Call SVs/SNVs using [CLAIR](https://github.com/HKU-BAL/Clair)
+8. Call SVs/SNVs using [CuteSV](https://github.com/tjiangHIT/cuteSV)
 
 
 A work in progress...
