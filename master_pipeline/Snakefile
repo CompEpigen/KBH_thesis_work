@@ -144,12 +144,13 @@ rule call_vars
     params:
         jobname="call_vars",
         runtime="8:00",
-        memusage="5000",
-        slots="5",
+        memusage="10000",
+        slots="20",
         misc=" "
     shell:
         """
         module load anaconda3/2019.07
         source activate cutesv-env
-        cuteSV {input.bam} {input.ref} {output} {input.wd} --threads {params.slots}
+        cuteSV {input.bam} {input.ref} {output} {input.wd} \
+        --threads {params.slots} --max_cluster_bias_INS 100 --diff_ratio_merging_INS 0.3 --max_cluster_bias_DEL 100 --diff_ratio_merging_DEL 0.3
         """
