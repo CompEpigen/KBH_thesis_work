@@ -113,7 +113,7 @@ rule call_meth:
         "output/{sample}.meth_calls.tsv"
     params:
         jobname="call_meth",
-        runtime="24:00",
+        runtime="48:00",
         memusage="10000",
         slots="10",
         misc=" "
@@ -134,13 +134,13 @@ rule calc_freq:
     shell:
         "f5c meth-freq -i {input} -o {output} -s"
 
-rule call_vars
+rule call_vars:
     input:
         bam="output/{sample}.sorted.bam",
         ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna",
         wd="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline"
     output:
-        "/output/{sample}.vcf"
+        "output/{sample}.vcf"
     params:
         jobname="call_vars",
         runtime="8:00",
