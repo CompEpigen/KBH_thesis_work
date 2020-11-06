@@ -7,7 +7,7 @@ import os
 def activate_environment():
     os.system("module load samtools/1.9")
     os.system("module load anaconda3/2019.07")
-    os.system("source activate pycoqc")
+    os.system("source activate master-env")
 
 activate_environment()
 
@@ -138,7 +138,7 @@ rule call_vars:
     input:
         bam="output/{sample}.sorted.bam",
         ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna",
-        wd="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline"
+        wd="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{sample}"
     output:
         "output/{sample}.vcf"
     params:
@@ -149,8 +149,7 @@ rule call_vars:
         misc=" "
     shell:
         """
-        module load anaconda3/2019.07
-        source activate cutesv-env
+        mkdir /icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{wildcars.sample}
         cuteSV {input.bam} {input.ref} {output} {input.wd} \
         --threads {params.slots} --max_cluster_bias_INS 100 --diff_ratio_merging_INS 0.3 --max_cluster_bias_DEL 100 --diff_ratio_merging_DEL 0.3
         """
