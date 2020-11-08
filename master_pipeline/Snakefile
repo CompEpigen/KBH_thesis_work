@@ -137,8 +137,8 @@ rule calc_freq:
 rule call_vars:
     input:
         bam="output/{sample}.sorted.bam",
-        ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna",
-        wd="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{sample}"
+        ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna" #,
+        #wd="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{sample}"
     output:
         "output/{sample}.vcf"
     params:
@@ -149,7 +149,7 @@ rule call_vars:
         misc=" "
     shell:
         """
-        mkdir /icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{wildcars.sample}
-        cuteSV {input.bam} {input.ref} {output} {input.wd} \
+        mkdir /icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{wildcards.sample}
+        cuteSV {input.bam} {input.ref} {output} /icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{wildcards.sample} \
         --threads {params.slots} --max_cluster_bias_INS 100 --diff_ratio_merging_INS 0.3 --max_cluster_bias_DEL 100 --diff_ratio_merging_DEL 0.3
         """
