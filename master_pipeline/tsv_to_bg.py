@@ -75,7 +75,7 @@ def main ():
 
     meth['chromosome'] = meth['chromosome'].map(chr_dict)
 
-    meth.to_csv(args.output + '.bedGraph', index=False, sep='\t')
+    meth.to_csv(args.output, index=False, sep='\t')
     
 
 if __name__ == '__main__':
