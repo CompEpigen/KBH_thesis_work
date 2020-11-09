@@ -12,6 +12,7 @@ A [Snakemake](https://snakemake.readthedocs.io/en/stable/index.html) workflow fo
 6. Call methylation using [f5c](https://github.com/hasindu2008/f5c) 
 7. Convert methylation log-liklihood ratios to frequency values (f5c)
 8. Call SVs/SNVs using [CuteSV](https://github.com/tjiangHIT/cuteSV)
+9. Convert meth_freq.tsv files to bedGraph format for use with [Methrix](https://github.com/CompEpigen/methrix)
 
 
 A work in progress...
