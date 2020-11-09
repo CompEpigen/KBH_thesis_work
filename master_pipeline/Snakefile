@@ -22,7 +22,8 @@ rule all:
         expand("output/{sample}.sorted.bam.bai", sample=SAMPLES),
         expand("output/{sample}.meth_calls.tsv", sample=SAMPLES),
         expand("output/{sample}.meth_freq.tsv", sample=SAMPLES),
-        expand("output/{sample}.vcf", sample=SAMPLES)
+        expand("output/{sample}.vcf", sample=SAMPLES),
+        expand("output/{sample}.methrix.bedGraph", sample=SAMPLES)
 
 rule pycoqc:
     input:
@@ -152,4 +153,20 @@ rule call_vars:
         mkdir /icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{wildcards.sample}
         cuteSV {input.bam} {input.ref} {output} /icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{wildcards.sample} \
         --threads {params.slots} --max_cluster_bias_INS 100 --diff_ratio_merging_INS 0.3 --max_cluster_bias_DEL 100 --diff_ratio_merging_DEL 0.3
+        
         """
+#Might want to add in rm -r part to rule above to get rid of empty folders 
+
+rule tsv_to_bg:
+    input:
+        "output/{sample}.meth_freq.tsv"
+    output:
+        "output/{sample}.methrix.bedGraph"
+    params:
+        jobname='frequency_to_methrix',
+        runtime='30:00',
+        memusage='10000',
+        slots='2',
+        misc=''
+    shell:
+        "python3 tsv_to_bg.py -f {input} -o {output}"
