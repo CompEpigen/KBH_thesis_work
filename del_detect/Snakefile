@@ -2,7 +2,7 @@
 #sample = config["samples"]
 #roi = config["roi"]
 #deletion = config["deletion"]
-SAMPLES = ['', '', '']
+SAMPLES = ['PDX661']
 ROI = ['chr17:64803882-66303882']
 DELETION = ['65792276-65792280']
 
@@ -13,7 +13,7 @@ import os
 def activate_environment():
     os.system("module load samtools/1.9")
     os.system("module load anaconda3/2019.07")
-    os.system("source activate pycometh")
+    os.system("source activate master-env")
 
 activate_environment()
 
@@ -31,18 +31,18 @@ rule all:
 
 rule def_region:
     input:
-        bam="data/{sample}.bam"
+        bam="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{sample}.sorted.bam"
     output:
         "output/{sample}.{roi}.region.bam"
     #params:
     shell:
         "samtools view -b {input.bam} '{wildcards.roi}' > {output}"
 
-rule index_bams:
-    input:
-        "output/{sample}.{roi}.region.bam"
-    output:
-        "output/{sample}.{roi}.region.bam.bai"
+#rule index_bams:
+#    input:
+#        "output/{sample}.{roi}.region.bam"
+#    output:
+#        "output/{sample}.{roi}.region.bam.bai"
     #params:
     #    jobname="index_bams",
     #    runtime="8:00",
@@ -55,7 +55,7 @@ rule index_bams:
 rule subset_meth:
     input:
         meth="data/{sample}.meth_calls.tsv",
-        bam="output/{sample}.{roi}.region.bam",
+        bam="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{sample}.sorted.bam",
         bai="output/{sample}.{roi}.region.bam.bai"
     output:
         "output/{sample}.{roi}.meth_calls.tsv"
