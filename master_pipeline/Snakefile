@@ -1,8 +1,14 @@
-#configfile: "config.yaml"
-#Will need location of fast5 files, flowcell, kit, ref genome
-SAMPLES = ['PDX661', 'Kuromochi', 'SKOU3', 'Ovise', '0AW42']
+
+#SAMPLES = ['PDX661', 'Kuromochi', 'SKOU3', 'Ovise', '0AW42']
 
 import os
+
+
+configfile: "config.yaml"
+
+
+SAMPLES = config['SAMPLES']
+REF = config['REF']
 
 def activate_environment():
     os.system("module load samtools/1.9")
@@ -73,7 +79,7 @@ rule index:
 
 rule minimap2_align:
     input:
-        ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna",
+        ref="{REF}",
         fq="output/{sample}.merged.fastq"
     output:
         "output/{sample}.sorted.bam"
@@ -104,7 +110,7 @@ rule call_meth:
     input:
         bam="output/{sample}.sorted.bam",
         bai="output/{sample}.sorted.bam.bai",
-        ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna",
+        ref="{REF}",
         fq="output/{sample}.merged.fastq",
         index="output/{sample}.merged.fastq.index",
         fai="output/{sample}.merged.fastq.index.fai",
@@ -138,7 +144,7 @@ rule calc_freq:
 rule call_vars:
     input:
         bam="output/{sample}.sorted.bam",
-        ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna" #,
+        ref="{REF}" #,
         #wd="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{sample}"
     output:
         "output/{sample}.vcf"

@@ -37,7 +37,7 @@ def main ():
         chromosome | position | methylated_reads | all_reads
     '''
 
-    meth = meth[['chromosome', 'start', 'end', 'methylated_frequency']]
+    meth = meth[['chromosome', 'start', 'end', 'methylated_frequency', 'called_sites', 'called_sites_methylated']]
     
     #renaming 'num_cpgs' column
     #meth.rename(columns = {'start':'position'}, inplace=True)
