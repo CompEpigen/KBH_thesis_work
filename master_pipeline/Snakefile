@@ -175,4 +175,4 @@ rule tsv_to_bg:
         slots='2',
         misc=''
     shell:
-        "python3 tsv_to_bg.py -f {input} -o {output}"
+        "python3 reformat_tsv.py -f {input} -o {output}"

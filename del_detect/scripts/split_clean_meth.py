@@ -52,7 +52,7 @@ def main ():
     #print(readids)
 
     '''
-    3. Susbsetting methylation data and writing output to new TSV files
+    3. Subsetting methylation data and writing output to new TSV files
     '''
 
     meth_dels = meth[meth.read_name.isin(read_ids)]
