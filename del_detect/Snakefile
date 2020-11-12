@@ -3,8 +3,8 @@
 #roi = config["roi"]
 #deletion = config["deletion"]
 SAMPLES = ['PDX661']
-ROI = ['chr17:64803882-66303882']
-DELETION = ['65792276-65792280']
+ROI = ['chr7:90,816,248-93,892,905']
+DELETION = ['92263572-92445580']
 
 #Note that this snakefile relies on my methylation calling pipeline to have been run beforehand
 
