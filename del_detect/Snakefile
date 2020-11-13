@@ -121,8 +121,8 @@ rule split_and_clean_meth:
         #Use pycometh's Comp_Report function here  
 
 
-pycoMeth CpG_Aggregate -i CLEAN_normal_chroms_meth_calls.tsv \
--f /icgc/dkfzlsdf/analysis/C010/Data/Genomes/Hg38/seq/hg38.fa \
--b TEST.bed \
--t TEST.tsv \
+#pycoMeth CpG_Aggregate -i CLEAN_normal_chroms_meth_calls.tsv \
+#-f /icgc/dkfzlsdf/analysis/C010/Data/Genomes/Hg38/seq/hg38.fa \
+#-b TEST.bed \
+#-t TEST.tsv \
    

@@ -1,11 +1,14 @@
+setwd("/icgc/dkfzlsdf/analysis/C010/brooks/downstream/PDX661")
 
+library(base, lib.loc = "/software/r/3.5.1/lib64/R/library")
+library(Rcpp, lib.loc = "/software/r/3.5.1/lib64/R/library")
+library(plyr, lib.loc = "/home/k001y/R/x86_64-pc-linux-gnu-library/3.5/")
+library(crayon, lib.loc = "/software/r/3.5.1/lib64/R/library")
+library(backports, lib.loc = "/software/r/3.5.1/lib64/R/library")
+library(vctrs, lib.loc = "/software/r/3.5.1/lib64/R/library")
+library(dplyr, lib.loc = "/software/r/3.5.1/lib64/R/library")
+library(data.table, lib.loc = "/home/k001y/R/x86_64-pc-linux-gnu-library/3.5/")
 
-library(ggplot2)
-library(RColorBrewer)
-library(dplyr)
-library(rtracklayer)
-library(data.table)
-library(OneR)
 
 #Here I am binning methylation values for chromosome 7, and then visualizing them using ggplot
 
@@ -38,20 +41,19 @@ binData <- function(sample, bins) {
   return(sample)
 }
 
-PDX661$bins <- NA
+
 PDX661.bins <- createBins(PDX661$start, PDX661$end, 1000)
 PDX661 <- binData(PDX661, PDX661.bins)
 
 PDX661.binned <- setDT(PDX661)[, mean(methylated_frequency), by = bin]
 
+PDX661.bed <- PDX661.binned[match(PDX661.bins$bin, PDX661.binned$bin), 2, drop=F]
 
-ggplot(all.binned, aes(x=pos, y=V1, color=sample)) +
-  geom_point(size=.25) +
-  geom_line() +
-  scale_y_continuous(name='Methylated Frequency') +
-  scale_x_continuous(name='Position', breaks = c(65560000, 65564174, 65569000), limits =c(65560000, 65569000)) 
+PDX661.bins$meth <- PDX661.bed$V1
 
+PDX661.bins$chromosome <- 'NC_000007.14'
 
+PDX661.bins <- PDX661.bins[ ,c(5, 2, 3, 4)]
 
-
+write.csv(PDX661.bins, "./pdx661_chr7_meth.bedGraph", row.names = FALSE, sep = '\t')
 
