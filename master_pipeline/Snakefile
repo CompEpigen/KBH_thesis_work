@@ -1,14 +1,15 @@
 
-#SAMPLES = ['PDX661', 'Kuromochi', 'SKOU3', 'Ovise', '0AW42']
+SAMPLES = ['PDX661', 'Kuromochi', 'SKOU3', 'Ovise', '0AW42']
+INDEX = "/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish"
 
 import os
 
 
-configfile: "config.yaml"
+#configfile: "config.yaml"
 
 
-SAMPLES = config['SAMPLES']
-REF = config['REF']
+#SAMPLES = config['SAMPLES']
+#REF = config['REF']
 
 def activate_environment():
     os.system("module load samtools/1.9")
@@ -19,23 +20,23 @@ activate_environment()
 
 rule all:
     input:
-        expand("output/{sample}_pycoQC_output.html", sample=SAMPLES),
-        expand("output/{sample}.merged.fastq", sample=SAMPLES),
-        expand("output/{sample}.merged.fastq.index.gzi", sample=SAMPLES),
-        expand("output/{sample}.merged.fastq.index.fai", sample=SAMPLES),
-        expand("output/{sample}.merged.fastq.index.readdb", sample=SAMPLES),
-        expand("output/{sample}.sorted.bam", sample=SAMPLES),
-        expand("output/{sample}.sorted.bam.bai", sample=SAMPLES),
-        expand("output/{sample}.meth_calls.tsv", sample=SAMPLES),
-        expand("output/{sample}.meth_freq.tsv", sample=SAMPLES),
-        expand("output/{sample}.vcf", sample=SAMPLES),
-        expand("output/{sample}.methrix.bedGraph", sample=SAMPLES)
+        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}_pycoQC_output.html", sample=SAMPLES),
+        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq", sample=SAMPLES),
+        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq.index.gzi", sample=SAMPLES),
+        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq.index.fai", sample=SAMPLES),
+        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq.index.readdb", sample=SAMPLES),
+        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.sorted.bam", sample=SAMPLES),
+        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.sorted.bam.bai", sample=SAMPLES),
+        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.meth_calls.tsv", sample=SAMPLES),
+        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.meth_freq.tsv", sample=SAMPLES),
+        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.vcf", sample=SAMPLES),
+        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.methrix.bedGraph", sample=SAMPLES)
 
 rule pycoqc:
     input:
         "/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_basecalled/{sample}/hac_cfg/sequencing_summary.txt"
     output:
-        "output/{sample}_pycoQC_output.html"
+        "/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}_pycoQC_output.html"
     params:
         jobname="QC",
         runtime="4:00",
@@ -49,7 +50,7 @@ rule merge_fastqs:
     input:
         "/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_basecalled/{sample}/hac_cfg/"
     output:
-        "output/{sample}.merged.fastq"
+        "/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq"
     params:
         jobname="merge_fqs",
         runtime="5:00",
@@ -61,8 +62,8 @@ rule merge_fastqs:
 
 rule index:
     input:
-        f5s="/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_raw/{sample}/fast5/", #need to change this, might be an issue when working with PDX661 sample
-        fq="output/{sample}.merged.fastq"
+        f5s="/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_raw/{sample}/fast5/", 
+        fq="/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq"
     output:
         "output/{sample}.merged.fastq.index",
         "output/{sample}.merged.fastq.index.gzi",
@@ -80,7 +81,7 @@ rule index:
 rule minimap2_align:
     input:
         ref="{REF}",
-        fq="output/{sample}.merged.fastq"
+        fq="/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq"
     output:
         "output/{sample}.sorted.bam"
     params:

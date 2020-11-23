@@ -19,3 +19,5 @@ job_template
 /master_pipeline/output
 /master_pipeline/errors
 /ashish_analysis
+/output
+/data
