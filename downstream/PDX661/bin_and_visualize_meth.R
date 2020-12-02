@@ -177,14 +177,17 @@ meth.end.bed <- meth.end.binned[match(end.bins$bin, meth.end.binned$bin), 2, dro
 start.bins$meth <- meth.start.bed$V1
 end.bins$meth <- meth.end.bed$V1
 
-#Adding chromosome info
+#Adding chromosome info + head/tail info
 start.bins$chromosome <- CHROMOSOME
 end.bins$chromosome <- CHROMOSOME
+
+start.bins$pos <- 'pter'
+end.bins$pos <- 'qter'
 
 #Finally merging back together, reordering columns, dropping bin label
 merged <- rbind(start.bins, end.bins)
 
-merged <- merged[ ,c(5, 2, 3, 4)]
+merged.bed <- merged[ ,c(5, 2, 3, 4)]
 
 #Saving bedGraph file for later visualization
 
@@ -194,6 +197,14 @@ write.table(merged, OUTBG, row.names = FALSE, sep = '\t', quote = FALSE)
 
 #Saving summary txt file so you know what is what
 
+parameters <- c("chromosome", "alt_chromosome_name", "telomere_size", "bin_size", "output_directory", "methylation_values_in_pter", "methylation_values_in_qter")
+values <- c(T.CHROM, CHROMOSOME, TELOMERE.SIZE, BIN.SIZE, OUTPUT.LOC, PTER.METH, QTER.METH)
+
+analysis.summary <- data.frame(parameters, values)
+
+OUTSUM = paste0(OUTPUT.LOC, CHROMOSOME, '_analysis_summary.txt')
+
+write.table(analysis.summary, OUTSUM, row.names = FALSE, sep = '\t', quote = FALSE)
 
 #Cleaning things up
 
@@ -201,17 +212,18 @@ rm(end.bins, meth.chrom.ends, meth.chrom.starts, meth.end.bed, meth.end.binned, 
 
 ####Plotting methylation#### 
 
+OUTJPG = paste0(OUTPUT.LOC, CHROMOSOME, '_telomeric_methylation.jpg')
 
+jpeg(filename = OUTJPG, width = 350, height = 350)
 
-ggplot(PDX661.telomeres, aes(x=start, y=methylated_frequency)) +
-  geom_point() +
-  facet_wrap(~pos, scales = 'free_x')
+ggplot(merged, aes(x=bin, y=meth)) +
+                    geom_line() +
+                    facet_wrap(~pos, scales = 'free_x') +
+                    xlab("Position") +
+                    ylab("Methylation Frequency") +
+                    ggtitle(paste0(T.CHROM, " ", "Telomeric Methylation"))
 
-
-
-
-
-
+dev.off()
 
 
 
