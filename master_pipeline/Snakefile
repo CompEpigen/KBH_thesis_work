@@ -1,7 +1,8 @@
 
-SAMPLES = ['PDX661', 'Kuromochi', 'SKOU3', 'Ovise', '0AW42']
-INDEX = "/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish"
+SAMPLES = ['AR']
+#INDEX = "/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish"
 
+#Imports
 import os
 
 
@@ -11,6 +12,7 @@ import os
 #SAMPLES = config['SAMPLES']
 #REF = config['REF']
 
+#Activating virtual environment, loading needed tools
 def activate_environment():
     os.system("module load samtools/1.9")
     os.system("module load anaconda3/2019.07")
@@ -18,72 +20,73 @@ def activate_environment():
 
 activate_environment()
 
+#Expected output
 rule all:
     input:
-        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}_pycoQC_output.html", sample=SAMPLES),
-        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq", sample=SAMPLES),
-        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq.index.gzi", sample=SAMPLES),
-        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq.index.fai", sample=SAMPLES),
-        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq.index.readdb", sample=SAMPLES),
-        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.sorted.bam", sample=SAMPLES),
-        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.sorted.bam.bai", sample=SAMPLES),
-        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.meth_calls.tsv", sample=SAMPLES),
-        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.meth_freq.tsv", sample=SAMPLES),
-        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.vcf", sample=SAMPLES),
-        expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.methrix.bedGraph", sample=SAMPLES)
+        #expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/GCTB/{sample}_pycoQC_output.html", sample=SAMPLES),
+        #expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/GCTB/{sample}.merged.fastq", sample=SAMPLES),
+        #expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/GCTB/{sample}.merged.fastq.index.gzi", sample=SAMPLES),
+        #expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/GCTB/{sample}.merged.fastq.index.fai", sample=SAMPLES),
+        #expand("/icgc/dkfzlsdf/analysis/C010/brooks/output/GCTB/{sample}.merged.fastq.index.readdb", sample=SAMPLES),
+        expand("output/GCTB/{sample}.sorted.bam", sample=SAMPLES),
+        expand("output/GCTB/{sample}.sorted.bam.bai", sample=SAMPLES),
+        expand("output/GCTB/{sample}.meth_calls.tsv", sample=SAMPLES),
+        expand("output/GCTB/{sample}.meth_freq.tsv", sample=SAMPLES),
+        expand("output/GCTB/{sample}.vcf", sample=SAMPLES),
+        expand("output/GCTB/{sample}.methrix.bedGraph", sample=SAMPLES)
 
-rule pycoqc:
-    input:
-        "/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_basecalled/{sample}/hac_cfg/sequencing_summary.txt"
-    output:
-        "/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}_pycoQC_output.html"
-    params:
-        jobname="QC",
-        runtime="4:00",
-        memusage="5000",
-        slots="1",
-        misc=" "
-    shell:
-        "pycoQC -f {input} -o {output}"
+#rule pycoqc:
+#    input:
+#        "/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_basecalled/{sample}/hac_cfg/sequencing_summary.txt"
+#    output:
+#        "/icgc/dkfzlsdf/analysis/C010/brooks/output/GCTB/{sample}_pycoQC_output.html"
+#    params:
+#        jobname="QC",
+#        runtime="4:00",
+#        memusage="5000",
+#        slots="1",
+#        misc=" "
+#    shell:
+#        "pycoQC -f {input} -o {output}"
 
-rule merge_fastqs:
-    input:
-        "/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_basecalled/{sample}/hac_cfg/"
-    output:
-        "/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq"
-    params:
-        jobname="merge_fqs",
-        runtime="5:00",
-        memusage="5000",
-        slots="1",
-        misc=" "
-    shell:
-        "cat {input}/*.fastq > {output}"
+#rule merge_fastqs:
+#    input:
+#        "/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_basecalled/{sample}/hac_cfg/"
+#    output:
+#        "/icgc/dkfzlsdf/analysis/C010/brooks/output/GCTB/{sample}.merged.fastq"
+#    params:
+#        jobname="merge_fqs",
+#        runtime="5:00",
+#        memusage="5000",
+#        slots="1",
+#        misc=" "
+#    shell:
+#        "cat {input}/*.fastq > {output}"
 
-rule index:
-    input:
-        f5s="/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_raw/{sample}/fast5/", 
-        fq="/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq"
-    output:
-        "output/{sample}.merged.fastq.index",
-        "output/{sample}.merged.fastq.index.gzi",
-        "output/{sample}.merged.fastq.index.fai",
-        "output/{sample}.merged.fastq.index.readdb"
-    params:
-        jobname="index_reads",
-        runtime="12:00",
-        memusage="5000",
-        slots="10",
-        misc=" "
-    shell:
-        "f5c index -d {input.f5s} {input.fq}"
+#rule index:
+#    input:
+#        f5s="/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_raw/{sample}/fast5/", 
+#        fq="/icgc/dkfzlsdf/analysis/C010/brooks/output/GCTB/{sample}.merged.fastq"
+#    output:
+#        "output/GCTB/{sample}.merged.fastq.index",
+#        "output/GCTB/{sample}.merged.fastq.index.gzi",
+#        "output/GCTB/{sample}.merged.fastq.index.fai",
+#        "output/GCTB/{sample}.merged.fastq.index.readdb"
+#    params:
+#        jobname="index_reads",
+#        runtime="12:00",
+#        memusage="5000",
+#        slots="10",
+#        misc=" "
+#    shell:
+#        "f5c index -d {input.f5s} {input.fq}"
 
 rule minimap2_align:
     input:
-        ref="{REF}",
-        fq="/icgc/dkfzlsdf/analysis/C010/brooks/output/ashish/{sample}.merged.fastq"
+        ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna",
+        fq="output/GCTB/{sample}.merged.fastq"
     output:
-        "output/{sample}.sorted.bam"
+        "output/GCTB/{sample}.sorted.bam"
     params:
         jobname="index_reads",
         runtime="8:00",
@@ -95,9 +98,9 @@ rule minimap2_align:
 
 rule index_bams:
     input:
-        "output/{sample}.sorted.bam"
+        "output/GCTB/{sample}.sorted.bam"
     output:
-        "output/{sample}.sorted.bam.bai"
+        "output/GCTB/{sample}.sorted.bam.bai"
     params:
         jobname="index_bams",
         runtime="8:00",
@@ -109,16 +112,16 @@ rule index_bams:
 
 rule call_meth:
     input:
-        bam="output/{sample}.sorted.bam",
-        bai="output/{sample}.sorted.bam.bai",
-        ref="{REF}",
-        fq="output/{sample}.merged.fastq",
-        index="output/{sample}.merged.fastq.index",
-        fai="output/{sample}.merged.fastq.index.fai",
-        gzi="output/{sample}.merged.fastq.index.gzi",
-        readdb="output/{sample}.merged.fastq.index.readdb"
+        bam="output/GCTB/{sample}.sorted.bam",
+        bai="output/GCTB/{sample}.sorted.bam.bai",
+        ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna",
+        fq="output/GCTB/{sample}.merged.fastq",
+        index="output/GCTB/{sample}.merged.fastq.index",
+        fai="output/GCTB/{sample}.merged.fastq.index.fai",
+        gzi="output/GCTB/{sample}.merged.fastq.index.gzi",
+        readdb="output/GCTB/{sample}.merged.fastq.index.readdb"
     output:
-        "output/{sample}.meth_calls.tsv"
+        "output/GCTB/{sample}.meth_calls.tsv"
     params:
         jobname="call_meth",
         runtime="48:00",
@@ -130,9 +133,9 @@ rule call_meth:
 
 rule calc_freq:
     input:
-        "output/{sample}.meth_calls.tsv"
+        "output/GCTB/{sample}.meth_calls.tsv"
     output:
-        "output/{sample}.meth_freq.tsv"
+        "output/GCTB/{sample}.meth_freq.tsv"
     params:
         jobname="calc_freq",
         runtime="8:00",
@@ -144,11 +147,11 @@ rule calc_freq:
 
 rule call_vars:
     input:
-        bam="output/{sample}.sorted.bam",
-        ref="{REF}" #,
+        bam="output/GCTB/{sample}.sorted.bam",
+        ref="/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna" #,
         #wd="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{sample}"
     output:
-        "output/{sample}.vcf"
+        "output/GCTB/{sample}.vcf"
     params:
         jobname="call_vars",
         runtime="8:00",
@@ -157,8 +160,8 @@ rule call_vars:
         misc=" "
     shell:
         """
-        mkdir /icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{wildcards.sample}
-        cuteSV {input.bam} {input.ref} {output} /icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{wildcards.sample} \
+        mkdir /icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/GCTB/{wildcards.sample}
+        cuteSV {input.bam} {input.ref} {output} /icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/GCTB/{wildcards.sample} \
         --threads {params.slots} --max_cluster_bias_INS 100 --diff_ratio_merging_INS 0.3 --max_cluster_bias_DEL 100 --diff_ratio_merging_DEL 0.3
         
         """
@@ -166,9 +169,9 @@ rule call_vars:
 
 rule tsv_to_bg:
     input:
-        "output/{sample}.meth_freq.tsv"
+        "output/GCTB/{sample}.meth_freq.tsv"
     output:
-        "output/{sample}.methrix.bedGraph"
+        "output/GCTB/{sample}.methrix.bedGraph"
     params:
         jobname='frequency_to_methrix',
         runtime='30:00',
