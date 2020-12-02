@@ -1,5 +1,5 @@
 #Setting wd
-setwd("/icgc/dkfzlsdf/analysis/C010/brooks/downstream/PDX661")
+setwd("/icgc/dkfzlsdf/analysis/C010/brooks/downstream/")
 
 #Loading libraries
 library(base, lib.loc = "/software/r/3.5.1/lib64/R/library")
@@ -56,7 +56,7 @@ TELOMERE.SIZE = 100000
 #Bin size for tiling methylation values
 BIN.SIZE = 1000
 #Location to write output files 
-OUTPUT.LOC = "./"
+OUTPUT.LOC = "./PDX661/"
 
 ####Loading the data & formatting####
 
@@ -109,6 +109,10 @@ meth.chrom.ends <- subset(meth.chrom, meth.chrom$start > telomeres.chrom.end$sta
 meth.chrom.starts$pos <- "start"
 meth.chrom.ends$pos <- "end"
 
+#Getting number of positions for summary file
+PTER.METH <- as.numeric(nrow(meth.chrom.starts))
+QTER.METH <- as.numeric(nrow(meth.chrom.ends))
+
 #Merging the above data frames back into one and cleaning things up !!Decided not to do this, as keeping starts and ends seperate works much quicker in the subsequent steps, will merge later
 
 #meth.telomeres <- rbind(meth.chrom.starts, meth.chrom.ends)
@@ -152,6 +156,10 @@ binData <- function(sample, bins) {
 
 start.bins <- createBins(meth.chrom.starts$start, meth.chrom.starts$end, BIN.SIZE)
 end.bins <- createBins(meth.chrom.ends$start, meth.chrom.ends$end, BIN.SIZE)
+
+#Extracting number of bins for summary file
+PTER.BINS <- as.numeric(max(start.bins$bin))
+QTER.BINS <- as.numeric(max(end.bins$bin))
 
 #Binning the methylation data
 
@@ -197,8 +205,8 @@ write.table(merged, OUTBG, row.names = FALSE, sep = '\t', quote = FALSE)
 
 #Saving summary txt file so you know what is what
 
-parameters <- c("chromosome", "alt_chromosome_name", "telomere_size", "bin_size", "output_directory", "methylation_values_in_pter", "methylation_values_in_qter")
-values <- c(T.CHROM, CHROMOSOME, TELOMERE.SIZE, BIN.SIZE, OUTPUT.LOC, PTER.METH, QTER.METH)
+parameters <- c("chromosome", "alt_chromosome_name", "telomere_size", "bin_size", "output_directory", "methylation_values_in_pter", "methylation_values_in_qter", "bins_in_pter", "bins_in_qter")
+values <- c(T.CHROM, CHROMOSOME, TELOMERE.SIZE, BIN.SIZE, OUTPUT.LOC, PTER.METH, QTER.METH, PTER.BINS, QTER.BINS)
 
 analysis.summary <- data.frame(parameters, values)
 
