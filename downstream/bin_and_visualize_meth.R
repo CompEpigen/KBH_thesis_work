@@ -48,15 +48,15 @@ SAMPLE = '/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/PDX661/PDX6
 #Telomere bed file
 TELOMERES = '/icgc/dkfzlsdf/analysis/C010/brooks/hg38_telomere_annots.bed'
 #Chromosome of interest, in "NC_000001.11" format
-CHROMOSOME = "NC_000007.14"
+CHROMOSOME = "NC_000009.12"
 #Chromosome of interest, in "chr1" format
-T.CHROM = "chr7"
+T.CHROM = "chr9"
 #Desired Telomere size
 TELOMERE.SIZE = 100000
 #Bin size for tiling methylation values
 BIN.SIZE = 1000
 #Location to write output files 
-OUTPUT.LOC = "./PDX661/"
+OUTPUT.LOC = "./PDX661/methylation_analysis/"
 
 ####Loading the data & formatting####
 
@@ -105,6 +105,12 @@ telomeres.chrom.end <- telomeres.chrom[2, ]
 
 meth.chrom.starts <- subset(meth.chrom, meth.chrom$start > telomeres.chrom.start$start & meth.chrom$end < telomeres.chrom.start$end)
 meth.chrom.ends <- subset(meth.chrom, meth.chrom$start > telomeres.chrom.end$start & meth.chrom$end < telomeres.chrom.end$end)
+
+
+if (nrow(meth.chrom.starts) == 0 & nrow(meth.chrom.ends) == 0) {
+  print('pter or qter has no positions! Stopping run. ')
+} else {
+
 
 meth.chrom.starts$pos <- "start"
 meth.chrom.ends$pos <- "end"
@@ -233,6 +239,6 @@ ggplot(merged, aes(x=bin, y=meth)) +
 
 dev.off()
 
-
+}
 
 
