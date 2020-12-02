@@ -1,5 +1,7 @@
+#Setting wd
 setwd("/icgc/dkfzlsdf/analysis/C010/brooks/downstream/PDX661")
 
+#Loading libraries
 library(base, lib.loc = "/software/r/3.5.1/lib64/R/library")
 library(Rcpp, lib.loc = "/software/r/3.5.1/lib64/R/library")
 library(plyr, lib.loc = "/home/k001y/R/x86_64-pc-linux-gnu-library/3.5/")
@@ -54,8 +56,9 @@ TELOMERE.SIZE = 100000
 #Bin size for tiling methylation values
 BIN.SIZE = 1000
 #Location to write output files 
-#OUTPUT.LOC = 
+OUTPUT.LOC = "./"
 
+####Loading the data & formatting####
 
 #Loading telomere locations
 
@@ -106,13 +109,15 @@ meth.chrom.ends <- subset(meth.chrom, meth.chrom$start > telomeres.chrom.end$sta
 meth.chrom.starts$pos <- "start"
 meth.chrom.ends$pos <- "end"
 
-#Merging the above data frames back into one and cleaning things up
+#Merging the above data frames back into one and cleaning things up !!Decided not to do this, as keeping starts and ends seperate works much quicker in the subsequent steps, will merge later
 
-meth.telomeres <- rbind(meth.chrom.starts, meth.chrom.ends)
+#meth.telomeres <- rbind(meth.chrom.starts, meth.chrom.ends)
 
 #Cleaning things up
 
-rm(telomeres, telomeres.chrom, telomeres.chrom.end, telomeres.chrom.start, meth.chrom.ends, meth.chrom.starts)
+rm(telomeres, telomeres.chrom, telomeres.chrom.end, telomeres.chrom.start)
+
+####Binning the methylation####
 
 #The next two functions help me bin the methylation by a desired window size, this will allow me to group positions to get "average" methylation in 1kb, 10kb, ect. tiles
 
@@ -141,31 +146,60 @@ binData <- function(sample, bins) {
   return(sample)
 }
 
-#Creating the bins within the data
+#Creating the bins within the data - doing this seperately for both the starts and ends as it speeds up computation time/reduces resource use
 
-meth.chrom.bins <- createBins(meth.telomeres$start, meth.telomeres$end, BIN.SIZE)
+#meth.chrom.bins <- createBins(meth.telomeres$start, meth.telomeres$end, BIN.SIZE)
+
+start.bins <- createBins(meth.chrom.starts$start, meth.chrom.starts$end, BIN.SIZE)
+end.bins <- createBins(meth.chrom.ends$start, meth.chrom.ends$end, BIN.SIZE)
 
 #Binning the methylation data
 
-meth.prebin <- binData(meth.telomeres, meth.chrom.bins)
+#meth.prebin <- binData(meth.telomeres, meth.chrom.bins)
+
+meth.start.prebin <- binData(meth.chrom.starts, start.bins)
+meth.end.prebin <- binData(meth.chrom.ends, end.bins)
 
 #Getting average methylation across each bin
 
-meth.binned <- setDT(meth.telomeres)[, mean(methylated_frequency), by = bin]
+#meth.binned <- setDT(meth.telomeres)[, mean(methylated_frequency), by = bin]
 
-#Formatting the binned data into a bedgraph
+meth.start.binned <- setDT(meth.start.prebin)[, mean(methylated_frequency), by = bin]
+meth.end.binned <- setDT(meth.end.prebin)[, mean(methylated_frequency), by = bin]
 
-meth.bed <- meth.binned[match(meth.chrom.bins$bin, meth.binned$bin), 2, drop=F]
+####Formatting the data####
 
-PDX661.bins$meth <- PDX661.bed$V1
+#Translating the binned data back into ranges
 
-PDX661.bins$chromosome <- 'NC_000007.14'
+meth.start.bed <- meth.start.binned[match(start.bins$bin, meth.start.binned$bin), 2, drop=F]
+meth.end.bed <- meth.end.binned[match(end.bins$bin, meth.end.binned$bin), 2, drop=F]
 
-PDX661.bins <- PDX661.bins[ ,c(5, 2, 3, 4)]
+start.bins$meth <- meth.start.bed$V1
+end.bins$meth <- meth.end.bed$V1
 
-write.csv(PDX661.bins, "./pdx661_chr7_meth.bedGraph", row.names = FALSE, sep = '\t')
+#Adding chromosome info
+start.bins$chromosome <- CHROMOSOME
+end.bins$chromosome <- CHROMOSOME
 
-#Plotting methylation 
+#Finally merging back together, reordering columns, dropping bin label
+merged <- rbind(start.bins, end.bins)
+
+merged <- merged[ ,c(5, 2, 3, 4)]
+
+#Saving bedGraph file for later visualization
+
+OUTBG = paste0(OUTPUT.LOC,CHROMOSOME,'_binned_methylation.bedGraph')
+
+write.table(merged, OUTBG, row.names = FALSE, sep = '\t', quote = FALSE)
+
+#Saving summary txt file so you know what is what
+
+
+#Cleaning things up
+
+rm(end.bins, meth.chrom.ends, meth.chrom.starts, meth.end.bed, meth.end.binned, meth.end.prebin, meth.start.bed, meth.start.binned, meth.start.prebin, start.bins)
+
+####Plotting methylation#### 
 
 
 
