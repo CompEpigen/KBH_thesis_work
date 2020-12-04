@@ -42,21 +42,24 @@ library(ggplot2)
 #"NC_000023.11" : "chrX",
 #"NC_000024.10" : "chrY"
 
+#!!Add sample prefix variable for making saved files easier to identify!!
 
 #Loacation of the meth_freq file
-SAMPLE = '/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/PDX661/PDX661.meth_freq.tsv'
+SAMPLE = '/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/GCTB/AR.meth_freq.tsv'
+#Sample Name
+SAMPLE.NAME = "AR"
 #Telomere bed file
 TELOMERES = '/icgc/dkfzlsdf/analysis/C010/brooks/hg38_telomere_annots.bed'
 #Chromosome of interest, in "NC_000001.11" format
-CHROMOSOME = "NC_000009.12"
+CHROMOSOME = "NC_000001.11"
 #Chromosome of interest, in "chr1" format
-T.CHROM = "chr9"
+T.CHROM = "chr1"
 #Desired Telomere size
 TELOMERE.SIZE = 100000
 #Bin size for tiling methylation values
-BIN.SIZE = 1000
+BIN.SIZE = 5000
 #Location to write output files 
-OUTPUT.LOC = "./PDX661/methylation_analysis/"
+OUTPUT.LOC = "./GCTB/methylation_analysis/"
 
 ####Loading the data & formatting####
 
@@ -87,6 +90,8 @@ if (TELOMERE.SIZE != 100000) {
 
 telomeres <- rbind(telomere.start, telomere.ends)
 
+#Cleaning things up
+
 rm(telomere.ends, telomere.start)
 
 #Loading methylation data
@@ -101,16 +106,23 @@ telomeres.chrom <- subset(telomeres, telomeres$chromosome == T.CHROM)
 telomeres.chrom.start <- telomeres.chrom[1, ]
 telomeres.chrom.end <- telomeres.chrom[2, ]
 
+
+#Preserving telomere coords for figure
+PTER.START <- as.numeric(telomeres.chrom.start[,2])
+PTER.END <- as.numeric(telomeres.chrom.start[,3])
+QTER.START <- as.numeric(telomeres.chrom.end[,2])
+QTER.END <- as.numeric(telomeres.chrom.end[,3])
+
+
 #Pulling out telomeric positions
 
 meth.chrom.starts <- subset(meth.chrom, meth.chrom$start > telomeres.chrom.start$start & meth.chrom$end < telomeres.chrom.start$end)
 meth.chrom.ends <- subset(meth.chrom, meth.chrom$start > telomeres.chrom.end$start & meth.chrom$end < telomeres.chrom.end$end)
 
 
-if (nrow(meth.chrom.starts) == 0 & nrow(meth.chrom.ends) == 0) {
-  print('pter or qter has no positions! Stopping run. ')
-} else {
-
+if (nrow(meth.chrom.starts) == 0 | nrow(meth.chrom.ends) == 0) {
+  print('pter or qter has no positions! Stopping run.')
+} 
 
 meth.chrom.starts$pos <- "start"
 meth.chrom.ends$pos <- "end"
@@ -174,40 +186,71 @@ QTER.BINS <- as.numeric(max(end.bins$bin))
 meth.start.prebin <- binData(meth.chrom.starts, start.bins)
 meth.end.prebin <- binData(meth.chrom.ends, end.bins)
 
+#Getting number of values for each bin, important for knowing how many data points support each methylation call, and useful for plotting
+start.bin.sum <- group_by(meth.start.prebin, bin) %>% dplyr::summarise(count = n())
+end.bin.sum <- group_by(meth.end.prebin, bin) %>% dplyr::summarise(count = n())
+
 #Getting average methylation across each bin
 
 #meth.binned <- setDT(meth.telomeres)[, mean(methylated_frequency), by = bin]
 
-meth.start.binned <- setDT(meth.start.prebin)[, mean(methylated_frequency), by = bin]
-meth.end.binned <- setDT(meth.end.prebin)[, mean(methylated_frequency), by = bin]
+meth.start.mean.binned <- setDT(meth.start.prebin)[, mean(methylated_frequency), by = bin]
+meth.end.mean.binned <- setDT(meth.end.prebin)[, mean(methylated_frequency), by = bin]
+
+#Also getting sd for plots
+
+meth.start.sd.binned <- setDT(meth.start.prebin)[, sd(methylated_frequency), by = bin]
+meth.end.sd.binned <- setDT(meth.end.prebin)[, sd(methylated_frequency), by = bin]
 
 ####Formatting the data####
 
 #Translating the binned data back into ranges
 
-meth.start.bed <- meth.start.binned[match(start.bins$bin, meth.start.binned$bin), 2, drop=F]
-meth.end.bed <- meth.end.binned[match(end.bins$bin, meth.end.binned$bin), 2, drop=F]
+meth.start.mean.bed <- meth.start.mean.binned[match(start.bins$bin, meth.start.mean.binned$bin), 2, drop=F]
+meth.end.mean.bed <- meth.end.mean.binned[match(end.bins$bin, meth.end.mean.binned$bin), 2, drop=F]
 
-start.bins$meth <- meth.start.bed$V1
-end.bins$meth <- meth.end.bed$V1
+start.bins$meth <- meth.start.mean.bed$V1
+end.bins$meth <- meth.end.mean.bed$V1
+
+meth.start.sd.bed <- meth.start.sd.binned[match(start.bins$bin, meth.start.sd.binned$bin), 2, drop=F]
+meth.end.sd.bed <- meth.end.sd.binned[match(end.bins$bin, meth.end.sd.binned$bin), 2, drop=F]
+
+start.bins$sd <- meth.start.sd.bed$V1
+end.bins$sd <- meth.end.sd.bed$V1
 
 #Adding chromosome info + head/tail info
 start.bins$chromosome <- CHROMOSOME
 end.bins$chromosome <- CHROMOSOME
 
+#Adding number of samples per bin
+
+start.bins$n <- start.bin.sum$count
+end.bins$n <- end.bin.sum$count
+
+#Adding proper position notation
+
 start.bins$pos <- 'pter'
 end.bins$pos <- 'qter'
 
+#Getting pter & qter min/max coords for plots
+PTER.MIN <- min(start.bins$start)
+PTER.MAX <- max(start.bins$end)
+QTER.MIN <- min(end.bins$start)
+QTER.MAX <- max(end.bins$end)
+
 #Finally merging back together, reordering columns, dropping bin label
 merged <- rbind(start.bins, end.bins)
+
+#Calculated SEM
+merged$sem <- merged$sd / sqrt(merged$n)
 
 merged.bed <- merged[ ,c(5, 2, 3, 4)]
 
 #Saving bedGraph file for later visualization
 
-OUTBG = paste0(OUTPUT.LOC,CHROMOSOME,'_binned_methylation.bedGraph')
+OUTBG = paste0(OUTPUT.LOC,SAMPLE.NAME,"_",T.CHROM,'_binned_methylation.bedGraph')
 
-write.table(merged, OUTBG, row.names = FALSE, sep = '\t', quote = FALSE)
+write.table(merged.bed, OUTBG, row.names = FALSE, sep = '\t', quote = FALSE)
 
 #Saving summary txt file so you know what is what
 
@@ -216,29 +259,62 @@ values <- c(T.CHROM, CHROMOSOME, TELOMERE.SIZE, BIN.SIZE, OUTPUT.LOC, PTER.METH,
 
 analysis.summary <- data.frame(parameters, values)
 
-OUTSUM = paste0(OUTPUT.LOC, CHROMOSOME, '_analysis_summary.txt')
+OUTSUM = paste0(OUTPUT.LOC, SAMPLE.NAME, "_", T.CHROM, '_parameter_summary.txt')
 
 write.table(analysis.summary, OUTSUM, row.names = FALSE, sep = '\t', quote = FALSE)
 
+#Also saving the merged df for easier reference:
+
+OUTMERGE = paste0(OUTPUT.LOC, SAMPLE.NAME, "_", T.CHROM, "_sample_summary.tsv")
+
+write.table(merged, OUTMERGE, row.names = FALSE, sep = '\t', quote = FALSE)
+
 #Cleaning things up
 
-rm(end.bins, meth.chrom.ends, meth.chrom.starts, meth.end.bed, meth.end.binned, meth.end.prebin, meth.start.bed, meth.start.binned, meth.start.prebin, start.bins)
+rm(end.bins, meth.chrom.ends, meth.chrom.starts, meth.end.mean.bed, meth.end.sd.bed, meth.end.mean.binned, meth.end.sd.binned, meth.end.prebin, meth.start.mean.bed, meth.start.sd.bed, meth.start.mean.binned, meth.start.sd.binned, meth.start.prebin, start.bins, start.bin.sum, end.bin.sum)
 
 ####Plotting methylation#### 
 
-OUTJPG = paste0(OUTPUT.LOC, CHROMOSOME, '_telomeric_methylation.jpg')
+#X_SCALE = TELOMERE.SIZE / BIN.SIZE
 
-jpeg(filename = OUTJPG, width = 350, height = 350)
+OUTPNG = paste0(OUTPUT.LOC, SAMPLE.NAME,"_", T.CHROM, '_telomeric_methylation.png')
 
-ggplot(merged, aes(x=bin, y=meth)) +
-                    geom_line() +
-                    facet_wrap(~pos, scales = 'free_x') +
-                    xlab("Position") +
-                    ylab("Methylation Frequency") +
-                    ggtitle(paste0(T.CHROM, " ", "Telomeric Methylation"))
+#jpeg(filename = OUTJPG, width = 948, height = 522)
+png(OUTPNG, pointsize=10, width=948, height=522)
+
+ggplot(merged, aes(x=bin, y=meth, size = n)) +
+  geom_point() +
+  geom_line(size = .75) + 
+  geom_errorbar(data=merged, mapping=aes(x=bin, ymin=(meth-sem), ymax=(meth+sem)), width=0.2, size=.5, color="black") +
+  facet_wrap(~pos, scales = 'fixed') +
+  xlab(paste0("Bin","\n", "Sample: ", "pter coords: ", PTER.MIN, "-", PTER.MAX, ", ", "qter coords: ", QTER.MIN, "-", QTER.MAX, "\n", "Actual: pter coords: ", PTER.START, "-", PTER.END, ", ", "qter coords: ", QTER.START, "-", QTER.END)) +
+  ylab("Methylation Frequency") +
+  ggtitle(paste0(SAMPLE.NAME, " ", T.CHROM, " ", "telomeric mean methylation", ", ","bin size = ", BIN.SIZE, "bp"))
+
 
 dev.off()
 
-}
+
+#To remove everything but the meth df:
+rm(list=setdiff(ls(), "meth"))
+
+##########################################
+
+
+#Playground
+
+#ggplot(merged, aes(x=bin, y=meth, size = n)) +
+#  geom_point() +
+#  geom_line(size = .75) + 
+#  geom_errorbar(data=merged, mapping=aes(x=bin, ymin=(meth-sem), ymax=(meth+sem)), width=0.2, size=.5, color="black") +
+#  facet_wrap(~pos, scales = 'fixed') +
+#  xlab(paste0("Bin","\n", "Sample: ", "pter coords: ", PTER.MIN, "-", PTER.MAX, ", ", "qter coords: ", QTER.MIN, "-", QTER.MAX, "\n", "Actual: pter coords: ", PTER.START, "-", PTER.END, ", ", "qter coords: ", QTER.START, "-", QTER.END)) +
+#  ylab("Methylation Frequency") +
+#  ggtitle(paste0(SAMPLE.NAME, " ", T.CHROM, " ", "telomeric mean methylation", ", ","bin size = ", BIN.SIZE, "bp"))
+
+
+
+
+
 
 
