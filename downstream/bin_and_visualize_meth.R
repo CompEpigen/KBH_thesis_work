@@ -23,7 +23,7 @@ TELOMERES = '/icgc/dkfzlsdf/analysis/C010/brooks/hg38_telomere_annots.bed'
 #Chromosome of interest, in "NC_000001.11" format <- now automated
 #CHROMOSOME = "NC_000016.10"
 #Chromosome of interest, in "chr1" format
-T.CHROM = "chr5"
+T.CHROM = "chr12"
 #Desired Telomere size
 TELOMERE.SIZE = 100000
 #Bin size for tiling methylation values
@@ -172,18 +172,15 @@ if (nrow(meth.chrom.starts) > 0 & nrow(meth.chrom.ends) > 0) {
   
   #Binning the methylation data
   
-  #meth.prebin <- binData(meth.telomeres, meth.chrom.bins)
-  
   meth.start.prebin <- binData(meth.chrom.starts, start.bins)
   meth.end.prebin <- binData(meth.chrom.ends, end.bins)
   
   #Getting number of values for each bin, important for knowing how many data points support each methylation call, and useful for plotting
-  start.bin.sum <- group_by(meth.start.prebin, bin) %>% dplyr::summarise(count = n())
-  end.bin.sum <- group_by(meth.end.prebin, bin) %>% dplyr::summarise(count = n())
+  
+  start.bin.sum <- group_by(meth.start.prebin, bin, .drop = FALSE) %>% dplyr::summarise(count = n())
+  end.bin.sum <- group_by(meth.end.prebin, bin, .drop = FALSE) %>% dplyr::summarise(count = n())
   
   #Getting average methylation across each bin
-  
-  #meth.binned <- setDT(meth.telomeres)[, mean(methylated_frequency), by = bin]
   
   meth.start.mean.binned <- setDT(meth.start.prebin)[, mean(methylated_frequency), by = bin]
   meth.end.mean.binned <- setDT(meth.end.prebin)[, mean(methylated_frequency), by = bin]
@@ -213,7 +210,19 @@ if (nrow(meth.chrom.starts) > 0 & nrow(meth.chrom.ends) > 0) {
   start.bins$chromosome <- CHROMOSOME
   end.bins$chromosome <- CHROMOSOME
   
-  #Adding number of samples per bin
+  #Adding number of samples per bin 
+  #Have to account for the fact that some bins might not have any values
+ !!!!! Have to figure this out!!!
+    
+    
+  for (i in seq_len(nrow(start.bins))) {
+    if (start.bins$bin %in% start.bin.sum$bin & start.bins$bin[i] == start.bin.sum$bin[i]) {
+      start.bins$n[i] <- start.bin.sum$count[i]
+    } else
+      start.bins$n[i] <- 0
+      i + 1
+  }
+  
   
   start.bins$n <- start.bin.sum$count
   end.bins$n <- end.bin.sum$count
@@ -608,7 +617,7 @@ rm(list=setdiff(ls(), "meth"))
 ##########################################
 
 
-#Playground
+#Testing
 
 #ggplot(merged, aes(x=bin, y=meth, size = n)) +
 #  geom_point() +
@@ -621,6 +630,106 @@ rm(list=setdiff(ls(), "meth"))
 
 
 
+#Playing around with adding centromere info
+
+#CytoBand txt file containing the centromere coords
+CENTROMERES <- "/icgc/dkfzlsdf/analysis/C010/brooks/hg38_cytoband.txt"
+
+#Loading the cytoband file that will be used to extract centromere locations
+centromeres <- read.csv(file = CENTROMERES, sep = '\t', header = FALSE)
+
+#Renaming centromere data columns
+colnames(centromeres) <- c("chromosome", "start", "end", "loc", "type")
+
+#Subsetting for chromosome of interest
+centromere.chrom <- subset(centromeres, centromeres$chromosome == T.CHROM & centromeres$type == "acen")
+
+#From the above subsetting you get 2 different ranges, so in this next step I am merging them together to get 1 centromere range
+centromere.chrom <- data.frame("chromosome" = T.CHROM,
+                               "start" = min(centromere.chrom$start),
+                               "end" = max(centromere.chrom$end))
+
+meth.chrom <- subset(meth, meth$chromosome == CHROMOSOME)
+
+#Subsetting methylation data to only pull out centromeric positions
+meth.cent <- subset(meth.chrom, meth.chrom$start > centromere.chrom$start & meth.chrom$end < centromere.chrom$end)
+
+#Creating centromere bins
+cent.bins <- createBins(meth.cent$start, meth.cent$end, BIN.SIZE)
+
+#Extracting number of bins for summary file
+CENT.BINS <- as.numeric(max(cent.bins$bin))
+
+#A bit of a hacky workaround, but filling in the last bins as they will be missed in the next part
+#meth.cent$bin <- max(cent.bins$bin)
+
+
+binData <- function(sample, bin_size) {
+  sample$bin <- 1+floor((sample$start-sample$start[1])/bin_size)
+  return (sample)
+}
+
+test <- binData(meth.chrom.starts, BIN.SIZE)
+
+test.bins <- createBins(meth.chrom.starts$start, meth.chrom.starts$end, BIN.SIZE)
+test2 <- cut(meth.chrom.starts$end, test.bins$start, labels = FALSE, include.lowest = TRUE, right = TRUE)
+
+
+#Binning the methylation data
+meth.cent.prebin <- cut(meth.cent$end, cent.bins$start, labels = FALSE, include.lowest = TRUE, right = TRUE)
+
+#Adding bin info to methylation data
+meth.cent$bin <- meth.cent.prebin
+
+#Replacing tail NA values with actual bin number
+meth.cent$bin[is.na(meth.cent$bin)] <- as.numeric(max(cent.bins$bin))
+
+#Getting number of values for each bin, important for knowing how many data points support each methylation call, and useful for plotting
+cent.bin.sum <- group_by(meth.cent, bin) %>% dplyr::summarise(count = n())
+
+#Getting average methylation across each bin
+meth.cent.mean.binned <- setDT(meth.cent)[, mean(methylated_frequency), by = bin]
+
+#Also getting sd for plots
+meth.cent.sd.binned <- setDT(meth.cent)[, sd(methylated_frequency), by = bin]
+
+#Translating the binned data back into ranges
+
+meth.cent.mean.bed <- meth.cent.mean.binned[match(cent.bins$bin, meth.cent.mean.binned$bin), 2, drop=F]
+
+cent.bins$meth <- meth.cent.mean.bed$V1
+
+meth.cent.sd.bed <- meth.cent.sd.binned[match(cent.bins$bin, meth.cent.sd.binned$bin), 2, drop=F]
+
+cent.bins$sd <- meth.cent.sd.bed$V1
+
+#Adding chromosome info + head/tail info
+
+cent.bins$chromosome <- CHROMOSOME
+
+#Adding number of samples per bin, have to map it again first and then can add it in
+cent.bin.count <- cent.bin.sum[match(cent.bins$bin, cent.bin.sum$bin), 2, drop=F]
+
+cent.bins$n <- cent.bin.count$count
+
+#Getting min & max coords for plot
+CENT.MIN <- min(cent.bins$start)
+CENT.MAX <- min(cent.bins$end)
+
+#Calculating SEM
+cent.bins$sem <- cent.bins$sd / sqrt(cent.bins$n)
+
+#Formatting for BED file
+cent.bed <- cent.bins[, c("chromosome", "start", "end", "meth")]
+
+ggplot(cent.bins, aes(x=bin, y=meth, size = n)) +
+  geom_point() +
+  geom_line(size = .75) + 
+  geom_errorbar(data=cent.bins, mapping=aes(x=bin, ymin=(meth-sem), ymax=(meth+sem)), width=0.2, size=.5, color="black") #+
+  #facet_wrap(~pos, scales = 'fixed') +
+  #xlab(paste0("Bin","\n", "Sample: ", "pter coords: ", PTER.MIN, "-", PTER.MAX, ", ", "qter coords: ", QTER.MIN, "-", QTER.MAX, "\n", "Actual: pter coords: ", PTER.START, "-", PTER.END, ", ", "qter coords: ", QTER.START, "-", QTER.END)) +
+  #ylab("Methylation Frequency") +
+  #ggtitle(paste0(SAMPLE.NAME, " ", T.CHROM, " ", "telomeric mean methylation", ", ","bin size = ", BIN.SIZE, "bp"))
 #############################################
 
 
