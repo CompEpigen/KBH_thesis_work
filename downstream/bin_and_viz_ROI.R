@@ -36,7 +36,7 @@ CENTROMERES <- "/icgc/dkfzlsdf/analysis/C010/brooks/hg38_cytoband.txt"
 #Desired Telomere size
 TELOMERE.SIZE = 100000
 #Bin size for tiling methylation values
-BIN.SIZE = 1000
+BIN.SIZE = 10000
 #Centromere bin size
 C.BIN.SIZE = 50000
 #Location to write output files 
@@ -507,8 +507,7 @@ OUTPNG = paste0(OUTPUT.LOC, SAMPLE.NAME,"_",CHROMOSOME,"_",ROI,'_binned_methylat
 #jpeg(filename = OUTJPG, width = 948, height = 522)
 png(OUTPNG, pointsize=10, width=948, height=522)
 
-if (exists("cent.bins"))
-  
+
   
 if (exists("roi.bins")) {
   TITLE <- paste0(SAMPLE.NAME, " ", CHROMOSOME, " ", ROI, " mean methylation", ", ","bin size = ", BIN.SIZE, "bp")
