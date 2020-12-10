@@ -7,6 +7,7 @@ library(base, lib.loc = "/software/r/3.5.1/lib64/R/library")
 #library(vcfR)
 #library(ape)
 library(Gviz)
+library(genomation, lib.loc = "/home/k001y/R/x86_64-pc-linux-gnu-library/4.0/")
 #library(Rcpp, lib.loc = "/software/r/3.5.1/lib64/R/library")
 #library(plyr, lib.loc = "/home/k001y/R/x86_64-pc-linux-gnu-library/3.5/")
 #library(crayon, lib.loc = "/software/r/3.5.1/lib64/R/library")
@@ -100,14 +101,15 @@ meth.track <- AnnotationTrack(name = paste(CHROMOSOME, ROI, "Methylation"),
                               start = meth.roi$start,
                               end = meth.roi$end,
                               chromosome = CHROMOSOME,
-                              feature = meth.roi$methylated_frequency)
+                              feature = meth.roi$methylated_frequency,
+                              stacking = "squish")
 
 
 track.list <- c(gene.track, meth.track)
 
 
 
-plotTracks(track.list,from=roi.start,to=roi.end,chromsome=CHROMOSOME)
+plotTracks(track.list,from=roi.start,to=roi.end,chromsome=CHROMOSOME, stacking = 'squish')
 
 
 #To remove everything but the meth df:

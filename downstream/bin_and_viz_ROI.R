@@ -23,11 +23,11 @@ setwd(WD)
 #Loacation of the meth_freq file
 SAMPLE = '/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/PDX661/PDX661.meth_freq.tsv'
 #Sample Name
-SAMPLE.NAME = "PDX661"
+SAMPLE.NAME = "PDX661_MNX1"
 #Chromosome of interest, in "chr1" format
 CHROMOSOME = "chr7"
 #Region of interest, either "T, C, B, or roi in format of start-end"
-ROI = "92263392-156795444"
+ROI = "157002854-157012663"
 #Path to reference files
 #Telomere bed file
 TELOMERES = '/icgc/dkfzlsdf/analysis/C010/brooks/hg38_telomere_annots.bed'
@@ -36,7 +36,7 @@ CENTROMERES <- "/icgc/dkfzlsdf/analysis/C010/brooks/hg38_cytoband.txt"
 #Desired Telomere size
 TELOMERE.SIZE = 100000
 #Bin size for tiling methylation values
-BIN.SIZE = 10000
+BIN.SIZE = 500
 #Centromere bin size
 C.BIN.SIZE = 50000
 #Location to write output files 
@@ -83,7 +83,7 @@ createBins <- function(start, end, bin_size){
 ####Loading files####
 
 #Loading methylation file
-meth <- read.csv(file = SAMPLE, sep = '\t')
+#meth <- read.csv(file = SAMPLE, sep = '\t')
 
 #Here I am parsing the user's input in ROI to determine what files need to be loaded
 
@@ -507,12 +507,11 @@ OUTPNG = paste0(OUTPUT.LOC, SAMPLE.NAME,"_",CHROMOSOME,"_",ROI,'_binned_methylat
 #jpeg(filename = OUTJPG, width = 948, height = 522)
 png(OUTPNG, pointsize=10, width=948, height=522)
 
-
   
 if (exists("roi.bins")) {
   TITLE <- paste0(SAMPLE.NAME, " ", CHROMOSOME, " ", ROI, " mean methylation", ", ","bin size = ", BIN.SIZE, "bp")
 } else {
-  TITLE <- paste0(SAMPLE.NAME, " ", CHROMOSOME, " ", ROI, " mean methylation", ", ","bin size = ", BIN.SIZE, "bp", " ","centromere bin size = ", C.BIN.SIZE, "bp")
+  TITLE <- paste0(SAMPLE.NAME, " ", CHROMOSOME, " ", ROI, " mean methylation", ", ","bin size = ", BIN.SIZE, "bp", ", ","centromere bin size = ", C.BIN.SIZE, "bp")
 }
 
 ggplot(samples, aes(x=bin, y=meth, size = n)) +
@@ -534,10 +533,21 @@ dev.off()
 
 #########################################
 
+#labs <- as.character(c(PTER.MIN, PTER.MAX, CENT.MIN, CENT.MAX, QTER.MIN, QTER.MAX))
 
+#lims <- c(1, PTER.BINS, 1, CENT.BINS, 1, QTER.BINS)
 
-
-
+#ggplot(samples, aes(x=bin, y=meth, size = n)) +
+#  geom_point() +
+#  geom_line(size = .75) + 
+#  facet_wrap(~pos, scales = 'free_x') +
+#  scale_x_continuous(name = "pos",
+#                   limits = lims,
+#                   labels = labs) +
+#  geom_errorbar(data=samples, mapping=aes(x=bin, ymin=(meth-sem), ymax=(meth+sem)), width=0.2, size=.5, color="black") +
+#  xlab("Bin") +
+#  ylab("Methylation Frequency") +
+#  ggtitle(TITLE)
 
 
 
