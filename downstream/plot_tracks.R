@@ -8,6 +8,10 @@ library(base, lib.loc = "/software/r/3.5.1/lib64/R/library")
 #library(ape)
 library(Gviz)
 library(genomation, lib.loc = "/home/k001y/R/x86_64-pc-linux-gnu-library/4.0/")
+library(GenomicRanges)
+library(annotatr)
+library(TxDb.Hsapiens.UCSC.hg38.knownGene)
+library(org.Hs.eg.db)
 #library(Rcpp, lib.loc = "/software/r/3.5.1/lib64/R/library")
 #library(plyr, lib.loc = "/home/k001y/R/x86_64-pc-linux-gnu-library/3.5/")
 #library(crayon, lib.loc = "/software/r/3.5.1/lib64/R/library")
@@ -104,8 +108,15 @@ meth.track <- AnnotationTrack(name = paste(CHROMOSOME, ROI, "Methylation"),
                               feature = meth.roi$methylated_frequency,
                               stacking = "squish")
 
+#Loading and formatting hg38 annotations
+annots <- c('hg38_basicgenes', 'hg38_genes_intergenic', 'hg38_cpg_islands', 'hg38_cpg_inter', 'hg38_cpgs', 'hg38_enhancers_fantom')
 
-track.list <- c(gene.track, meth.track)
+annotations = build_annotations(genome = GENOME, annotations = annots)
+
+annots.track <- AnnotationTrack(annotations, name = "Annotations")
+
+
+track.list <- c(gene.track, meth.track, annots.track)
 
 
 

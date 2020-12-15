@@ -1,9 +1,9 @@
-SAMPLES:
-  SKOV3
-  Kuramochi
-  Ovise
-  OAW42
-INDEX:
-  /icgc/dkfzlsdf/analysis/C010/brooks/ashish_analysis/
-REF:
-  /icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna
+samples: [dummy]
+index: [/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline]
+ref: [/icgc/dkfzlsdf/analysis/C010/brooks/GCF_000001405.26_GRCh38_genomic.fna]
+in_fast5: [/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/dummy_in]
+in_fastq: [/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/dummy]
+out_dir: [/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline]
+
+
+
