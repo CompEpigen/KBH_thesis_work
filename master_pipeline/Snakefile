@@ -35,10 +35,13 @@ rule all:
         expand("{OUT_DIR}/{sample}.vcf", OUT_DIR=OUT_DIR, sample=samples),
         expand("{OUT_DIR}/{sample}.methrix.bedGraph", OUT_DIR=OUT_DIR, sample=samples)
 
+#Add in rule here to check and make sure file hierarchy is met before proceeding
+
+
 #Running QC on the basecalled reads
 rule pycoqc:
     input:
-        expand("{IN_FASTQ}/{samples}/hac_cfg/sequencing_summary.txt", IN_FASTQ=IN_FASTQ, samples=samples)
+        expand("{IN_FASTQ}/sequencing_summary.txt", IN_FASTQ=IN_FASTQ)
     output:
         "{OUT_DIR}/{samples}_pycoQC_output.html"
     params:
@@ -68,7 +71,7 @@ rule merge_fastqs:
 #Indexing raw reads with basecalled, merged fastq file
 rule index:
     input:
-        f5s=expand("{IN_FAST5}/{samples}/fast5/", IN_FAST5=IN_FAST5, samples=samples), 
+        f5s=expand("{IN_FAST5}/", IN_FAST5=IN_FAST5), 
         fq="{OUT_DIR}/{samples}.merged.fastq"
     output:
         "{OUT_DIR}/{samples}.merged.fastq.index",

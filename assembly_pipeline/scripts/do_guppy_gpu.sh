@@ -5,7 +5,7 @@
 #BSUB -W 48:00
 #BSUB -n 10
 #BSUB -e error_file%J
-#BSUB -J AR_hac_basecalling
+#BSUB -J AS_hac_basecalling
 
 module load cudnn/7.6.1.34/cuda10.0
 
@@ -30,7 +30,7 @@ module load cudnn/7.6.1.34/cuda10.0
 #EXPERIMENT_LOCATION=$tmp_dir_exp
 #export EXPERIMENT_LOCATION
 
-guppy_basecaller --input_path /gpu/data/OE0287/k001y/nanopore_raw/fast5/ \
+guppy_basecaller --input_path /gpu/data/OE0287/k001y/nanopore_raw/AS/ \
 --save_path /gpu/checkpoints/OE0287/k001y/nanopore_basecalled/ \
 -c /home/k001y/programs/ont-guppy-gpu/data/dna_r9.4.1_450bps_hac.cfg \
 --num_callers 10 \
