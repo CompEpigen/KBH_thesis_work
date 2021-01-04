@@ -12,7 +12,7 @@ def main ():
 
     required = parser.add_argument_group(
         'Required',
-        'Bam, deletion, and output location')
+        'Bam, deletion, output location, and flags to filter on')
 
     required.add_argument(
         '-b',
@@ -31,7 +31,7 @@ def main ():
         '-o',
         '--output',
         type=str,
-        help='output location and name')
+        help='output location and prefix')
 
     required.add_argument(
         '-f',
@@ -40,6 +40,15 @@ def main ():
         help='flag(s) to filter bam file on. delimited list, default 256,2046,2304',
         default='256,2048,2304') 
 
+    optional = parser.add_argument_group(
+            'Optional',
+            'methylation call tsv file (from f5c)')
+
+    optional.add_argument(
+            '-m',
+            '--meth',
+            type=str,
+            help='Methylation calls tsv file to filter (from f5c)')
 
     args = parser.parse_args()
 
@@ -111,6 +120,18 @@ def main ():
         if read.query_name in big_clip:
             #print(read)
             outfile.write(read)
+
+    '''
+    5. Optional Methylation filtering
+    '''
+
+    if args.meth is not None:
+
+        meth = pd.read_csv(args.meth, sep='\t')
+
+        meth = meth[meth.read_name.isin(big_clip)]
+
+        meth.to_csv(args.output + '_clipped_meth.tsv', index=False, sep='\t')
 
 
 
