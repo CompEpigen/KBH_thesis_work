@@ -10,7 +10,7 @@ module load samtools/1.9
 module load anaconda3/2019.07
 source activate master-env
 
-python3 parse_bam.py -b ./GCTB/AR.ngmlr.hg38.sorted.bam -o ./AR_TEST2 -m /icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/GCTB/AR.meth_calls.tsv
+python3 parse_bam.py -b ./PDX661/PDX661.ngmlr.hg38.sorted.bam -o ./PDX661/PDX661_hg38_ngmlr_1000bp_clipped -m /icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/GCTB/AR.meth_calls.tsv
 
 #samtools sort ./GCTB/AR_hg38_ngmlr_1000bp_clipped.bam -o ./GCTB/AR_hg38_ngmlr_1000bp_clipped.sorted.bam
 
