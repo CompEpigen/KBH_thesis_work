@@ -3,8 +3,9 @@
 import argparse
 import pysam
 from cigar import Cigar
-from collections import defaultdict
+from collections import defaultdict, Counter
 import pandas as pd
+import numpy as np
 
 def main ():
 
@@ -12,7 +13,7 @@ def main ():
 
     required = parser.add_argument_group(
         'Required',
-        'Bam, deletion, output location, and flags to filter on')
+        'Bam, deletion, output location, flags to filter on, and splits to filter on')
 
     required.add_argument(
         '-b',
@@ -39,6 +40,13 @@ def main ():
         type=str,
         help='flag(s) to filter bam file on. delimited list, default 256,2046,2304',
         default='256,2048,2304') 
+    
+    required.add_argument(
+        '-s',
+        '--splits',
+        type=int,
+        help='Number of splits read aligns to to filter on for bedpe file [2]',
+        default=2)
 
     optional = parser.add_argument_group(
             'Optional',
@@ -122,7 +130,102 @@ def main ():
             outfile.write(read)
 
     '''
-    5. Optional Methylation filtering
+    5. Creating bedpe file 
+    BEDPE format:
+    chrom1, start1, end1, chrom2, start2, end2
+    Right now this will only return reads that map to 2 places in the genome, obviously this is not ideal but it is at my limit in terms of complexity
+    '''
+
+    test_list = []
+
+    inbam = pysam.AlignmentFile(args.bam, "rb")
+
+    for read in inbam:
+        if read.query_name in big_clip:
+            test_list.append(read.query_name)
+            counts = Counter(test_list)
+    
+    unique_reads = []
+
+    N = args.splits
+
+    for key, value in counts.items():
+        #print(key, value)
+        if value == N:
+            unique_reads.append(key)
+
+
+    inbam = pysam.AlignmentFile(args.bam, "rb")
+
+    #print(len(unique_reads))
+
+    splits = defaultdict(dict)
+
+    for read in inbam:
+        if read.query_name in unique_reads:
+            #print(read.query_name)
+            if read.query_name not in splits.keys():
+                splits[read.query_name]["chromosome"] = read.reference_name
+                splits[read.query_name]["start"] = str(read.reference_start)
+                splits[read.query_name]["end"] = str(read.reference_end)
+
+            else:
+                splits[read.query_name]["chromosome"] += ","+read.reference_name
+                splits[read.query_name]["start"] += ","+str(read.reference_start)
+                splits[read.query_name]["end"] += ","+str(read.reference_end)
+                #print(splits)
+        #print(splits)
+    
+     #Ok so the print statement above returns the right results except for the last line, so that is where something is going wrong!
+    print(splits)
+
+
+    bedpe = pd.DataFrame.from_dict(splits, orient='index')
+
+    #print(bedpe)
+
+    bedpe[['chrom1', 'chrom2']] = bedpe['chromosome'].str.split(',', expand = True,)
+    bedpe[['start1', 'start2']] = bedpe['start'].str.split(',', expand = True, )
+    bedpe[['end1', 'end2']] = bedpe['end'].str.split(',', expand = True, )
+
+    bedpe = bedpe[["chrom1", "start1", "end1", "chrom2", "start2", "end2"]]
+
+    chr_dict={
+        "NC_000001.11" : "chr1",
+        "NC_000002.12" : "chr2",
+        "NC_000003.12" : "chr3",
+        "NC_000004.12" : "chr4",
+        "NC_000005.10" : "chr5",
+        "NC_000006.12" : "chr6",
+        "NC_000007.14" : "chr7",
+        "NC_000008.11" : "chr8",
+        "NC_000009.12" : "chr9",
+        "NC_000010.11" : "chr10",
+        "NC_000011.10" : "chr11",
+        "NC_000012.12" : "chr12",
+        "NC_000013.11" : "chr13",
+        "NC_000014.9" : "chr14",
+        "NC_000015.10" : "chr15",
+        "NC_000016.10" : "chr16",
+        "NC_000017.11" : "chr17",
+        "NC_000018.10" : "chr18",
+        "NC_000019.10" : "chr19",
+        "NC_000020.11" : "chr20",
+        "NC_000021.9" : "chr21",
+        "NC_000022.11" : "chr22",
+        "NC_000023.11" : "chrX",
+        "NC_000024.10" : "chrY"
+        }
+
+    bedpe['chrom1'] = bedpe['chrom1'].map(chr_dict)
+    bedpe['chrom2'] = bedpe['chrom2'].map(chr_dict)
+
+    #print(bedpe.head())
+
+    bedpe.to_csv(args.output + "_split_reads.bedpe", index=False, sep='\t')
+
+    '''
+    6. Optional Methylation filtering
     '''
 
     if args.meth is not None:
