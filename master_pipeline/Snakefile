@@ -112,7 +112,7 @@ rule ngmlr_align:
         "{OUT_DIR}/{samples}.sorted.bam"
     params:
         jobname="ngmlr_align",
-        runtime="80:00",
+        runtime="150:00",
         memusage="20000",
         slots="20",
         misc=" "
@@ -197,7 +197,8 @@ rule calc_freq:
 #Calling SVs
 rule call_vars:
     input:
-        bam="{OUT_DIR}/{samples}.sorted.bam"
+        bam="{OUT_DIR}/{samples}.sorted.bam",
+        bai="{OUT_DIR}/{samples}.sorted.bam.bai"
     output:
         "{OUT_DIR}/{samples}.vcf"
     params:

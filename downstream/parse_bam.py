@@ -177,7 +177,7 @@ def main ():
         #print(splits)
     
      #Ok so the print statement above returns the right results except for the last line, so that is where something is going wrong!
-    print(splits)
+    #print(splits)
 
 
     bedpe = pd.DataFrame.from_dict(splits, orient='index')

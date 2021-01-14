@@ -21,26 +21,26 @@ library(ggplot2)
 WD = "/icgc/dkfzlsdf/analysis/C010/brooks/downstream/"
 setwd(WD)
 #Loacation of the meth_freq file
-SAMPLE = '/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/PDX661/PDX661.meth_freq.tsv'
+SAMPLE = '/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/GCTB/AR.meth_freq.tsv'
 #Sample Name
-SAMPLE.NAME = "PDX661_MNX1"
+SAMPLE.NAME = "AR"
 #Chromosome of interest, in "chr1" format
-CHROMOSOME = "chr7"
+CHROMOSOME = "chr1"
 #Region of interest, either "T, C, B, or roi in format of start-end"
-ROI = "157002854-157012663"
+ROI = "T"
 #Path to reference files
 #Telomere bed file
 TELOMERES = '/icgc/dkfzlsdf/analysis/C010/brooks/hg38_telomere_annots.bed'
 #CytoBand txt file containing the centromere coords
 CENTROMERES <- "/icgc/dkfzlsdf/analysis/C010/brooks/hg38_cytoband.txt"
 #Desired Telomere size
-TELOMERE.SIZE = 100000
+TELOMERE.SIZE = 2500000
 #Bin size for tiling methylation values
-BIN.SIZE = 500
+BIN.SIZE = 100000
 #Centromere bin size
 C.BIN.SIZE = 50000
 #Location to write output files 
-OUTPUT.LOC = "./PDX661/methylation_analysis/"
+OUTPUT.LOC = "./GCTB/methylation_analysis/"
 
 #Getting alternative chromosome name and setting "CHROMOSOME.ALT" variable
 
@@ -83,7 +83,7 @@ createBins <- function(start, end, bin_size){
 ####Loading files####
 
 #Loading methylation file
-#meth <- read.csv(file = SAMPLE, sep = '\t')
+meth <- read.csv(file = SAMPLE, sep = '\t')
 
 #Here I am parsing the user's input in ROI to determine what files need to be loaded
 
