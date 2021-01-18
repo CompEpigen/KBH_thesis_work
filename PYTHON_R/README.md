@@ -1,6 +1,6 @@
 # Python and R scripts
 
-Python and R code (Code directly used in project highlighted) from the project
+Python and R code (Code directly used in project in green) from the project
 
 For help email: k.henry@dkfz-heidelberg.de or brookshenry3@gmail.com
 
@@ -18,7 +18,7 @@ For help email: k.henry@dkfz-heidelberg.de or brookshenry3@gmail.com
  * plot_alignment_corr.R 
  * plot_del7q_meth.R
  * plot_tracks.R
- * <span style="background-color: #FFFF00">plots_for_report.R: R script that was directly used to generate plots for report</span>
+ * + plots_for_report.R: R script that was directly used to generate plots for report
  * 
  * 
 
