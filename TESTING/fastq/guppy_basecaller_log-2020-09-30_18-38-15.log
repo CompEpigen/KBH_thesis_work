@@ -1,0 +1,363 @@
+2020-09-30 18:38:15.273778 [guppy/message] ONT Guppy basecalling software version 4.0.15+5694074, client-server API version 2.1.0
+config file:        /home/k001y/programs/ont-guppy-gpu/data/dna_r9.4.1_450bps_fast.cfg
+model file:         /home/k001y/programs/ont-guppy-gpu/data/template_r9.4.1_450bps_fast.jsn
+input path:         /ssd/k001y/4153606/data
+save path:          /ssd/k001y/4153606/exp
+chunk size:         2000
+chunks per runner:  160
+records per file:   4000
+num basecallers:    5
+gpu device:         auto
+kernel path:        
+runners per device: 8
+
+2020-09-30 18:38:15.275734 [guppy/info] crashpad_handler not supported on this platform.
+2020-09-30 18:38:15.501202 [guppy/info] CUDA device 0 (compute 7.5) initialised, memory limit 11554717696B (11391139840B free)
+
+2020-09-30 18:38:16.015752 [guppy/message] Found 112 fast5 files to process.
+2020-09-30 18:38:16.015825 [guppy/message] Init time: 740 ms
+2020-09-30 18:38:16.181376 [guppy/info] Read '56b8515b-fc38-4531-bb1e-757449205298' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch505_read3234_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181447 [guppy/info] Read '8b55f8dd-3fcb-478c-8384-6df32ed6400b' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch196_read2318_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181499 [guppy/info] Read '5c46f248-1989-4a1e-bdf7-265af033510b' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch98_read2298_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181565 [guppy/info] Read 'dbe28df8-d40f-4a1a-9666-9e8bc64c6204' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch497_read3630_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181604 [guppy/info] Read 'cc70a582-d0ee-47f5-890d-9d097df3619a' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch66_read4851_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181627 [guppy/info] Read 'bd76fe67-db4b-4d72-95df-e23f07aea51a' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read4280_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181727 [guppy/info] Read '3048e786-5b3d-4587-b5d0-714b40192268' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch95_read114_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181754 [guppy/info] Read 'cdf5b34b-6170-45bb-9691-6fcdaadb4713' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch179_read1009_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181782 [guppy/info] Read 'eaa48d4e-1945-4011-8bae-ded748af1fca' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch407_read2873_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181796 [guppy/info] Read '237f1f8e-b267-437b-b8d0-464a8f838fc0' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch302_read1093_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181642 [guppy/info] Read '95ff70e7-2b87-42d1-a957-21f9f276595c' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch481_read715_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181845 [guppy/info] Read 'e109fef1-6ea0-4bf1-b293-2d5d5a6ed906' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch8_read1768_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181860 [guppy/info] Read 'ce4d48fa-9112-4aa8-b655-10c5064129db' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch483_read811_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181886 [guppy/info] Read 'c39789a3-7c1c-4b1e-bc6d-dc0df49e969c' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch57_read3088_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181900 [guppy/info] Read 'd57afb7d-903e-46cf-a43d-0e17fb0949d8' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read5665_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181636 [guppy/info] Read 'bec0a1f3-2776-4ace-b372-0a76a9cbed6b' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch505_read1993_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181953 [guppy/info] Read 'c2ba4328-d217-4343-a959-874cf5addce4' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch290_read1002_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181967 [guppy/info] Read '77635ef8-3824-401c-8442-7fdec33235a8' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch95_read4662_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181924 [guppy/info] Read '2c468ad4-194a-4af0-93d4-3fcbe17a9be7' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch442_read5435_strand.fast5" has been loaded.
+2020-09-30 18:38:16.181817 [guppy/info] Read '84c0329b-2fe2-4fd8-ae10-f17ed9b2e0f9' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch47_read924_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182019 [guppy/info] Read '88b1797f-3a41-442f-bab4-cdfedf7ec597' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read1483_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182044 [guppy/info] Read 'f51c19c0-2613-48a7-a9a1-ec59658cbd2d' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch361_read1047_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182061 [guppy/info] Read '2c469631-125c-4046-b1c0-677322b0f3a3' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read929_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182028 [guppy/info] Read 'b098b785-7ccd-41af-8980-f2894d700284' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch403_read4689_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182000 [guppy/info] Read '6a470b8f-d316-4d8c-b93f-ea7bd154775d' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch280_read2154_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182081 [guppy/info] Read 'fb405411-031d-4447-8096-b603693b1fe7' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch460_read2860_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182105 [guppy/info] Read '7f343574-f2bc-4388-91b9-84b99e39256a' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch481_read1935_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182120 [guppy/info] Read '9388888e-4344-4e51-a44c-54c3b3c62b8b' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch302_read6122_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182146 [guppy/info] Read 'f58173f7-dbfb-4c47-92c1-0124626bf4c2' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch57_read3412_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182138 [guppy/info] Read 'bc5615d7-dc94-4315-9cf1-5112555c19d5' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch7_read2760_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182156 [guppy/info] Read '4dbe677b-04b0-4738-8777-a15ee6cd652b' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch442_read1231_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182196 [guppy/info] Read '44442ba9-9951-4bac-90ab-2acc8d1c4015' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch85_read498_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182212 [guppy/info] Read 'b1594985-30ce-4f59-9230-dff6ec966710' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch139_read6216_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182245 [guppy/info] Read 'a403a23e-20e7-43f7-a5fa-dae8ebc59a01' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch361_read4057_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182176 [guppy/info] Read '60664444-cccc-41e7-b7a6-5c4c14343658' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch111_read5041_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182226 [guppy/info] Read 'd7bbdb5c-225f-4910-a264-6444e1ace544' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch158_read5484_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182301 [guppy/info] Read '5e348aa0-252a-4ba2-b659-f460207d0f86' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch383_read6112_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182265 [guppy/info] Read '0e56d03e-268c-42cc-a0f3-90d688115d07' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch433_read1144_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182289 [guppy/info] Read 'f20007a8-a22e-47c3-87d7-7c0f9744f792' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch177_read1452_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182353 [guppy/info] Read '8d9d3bb4-cec7-4960-a3c6-9c3e59aab4a7' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch289_read2189_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182322 [guppy/info] Read '1896c369-b7d0-4e98-aa23-830f7a9f001f' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch64_read6087_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182360 [guppy/info] Read '98eef8ef-3499-4c27-9191-9420b864869c' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch467_read81_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182378 [guppy/info] Read '280af896-8e53-4427-89d3-a554c87269fd' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch292_read1173_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182413 [guppy/info] Read 'd69c6ac9-3c79-4ee4-a3d2-92762f8b7433' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch40_read4532_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182403 [guppy/info] Read '1c935ec4-4503-44ea-be57-7201fc03eeb6' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch57_read1147_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182468 [guppy/info] Read 'be16c798-0278-462a-b65b-6e77e03c7432' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch41_read2892_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182460 [guppy/info] Read '70a6e1ac-2b52-46e4-83ac-0a49cdc637d4' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch316_read4806_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182491 [guppy/info] Read 'fea3d3b3-af6c-451a-b862-6043d17ec775' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch144_read1044_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182513 [guppy/info] Read '40aac17d-56a6-44db-934d-c0dbb853e2cd' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch123_read2477_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182544 [guppy/info] Read 'c7937d7b-d85f-433b-9327-7eb293974905' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch118_read886_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182558 [guppy/info] Read 'c0789440-f511-4522-8231-d4d179a7a487' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch80_read1993_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182582 [guppy/info] Read 'c2cfeb47-1930-4486-ba44-fb1f43519806' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch316_read5270_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182601 [guppy/info] Read '3fa4862f-bf61-4f3d-a13e-18b24be3b2a2' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch481_read1028_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182566 [guppy/info] Read '44b26523-eaf0-4f28-87ad-4cca044fabc8' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch460_read2786_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182624 [guppy/info] Read 'e744ac28-518e-4933-b2a9-e59adecd6512' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch353_read1369_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182608 [guppy/info] Read '10df3a9d-60a4-4cb5-ab3d-46483be7bb59' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch200_read6055_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182646 [guppy/info] Read '458e15d1-ec66-4e53-a4c8-97593504bf11' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch170_read4483_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182685 [guppy/info] Read '8f548fb1-92c4-43a0-a032-74593f3988d4' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch109_read2202_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182706 [guppy/info] Read '38f657d9-0701-44bb-8c13-d9446f8fe441' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch427_read1086_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182654 [guppy/info] Read 'c30b48fc-11eb-4d3d-9c89-58ad29b2631d' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch123_read955_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182747 [guppy/info] Read 'bbe44e2d-c0b1-4a30-997b-7a077a66c189' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch493_read2488_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182763 [guppy/info] Read 'd4402dd6-1f80-4d82-9ce1-f4e7326e5054' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch47_read328_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182756 [guppy/info] Read '723b3ed8-ede7-42bd-89c3-d269619eea3d' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch54_read3907_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182697 [guppy/info] Read 'f432cb50-8c47-4c54-825f-ab04a38b5225' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch482_read758_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182823 [guppy/info] Read '8a553dac-a603-4a38-ab2b-4c9cc41bd7ac' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read4310_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182834 [guppy/info] Read 'baeacbab-db71-4be4-a4ac-c2fe5e26570d' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch483_read1308_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182859 [guppy/info] Read 'bdfab7a9-1792-4c9a-9428-261e109cdfae' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch107_read4268_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182878 [guppy/info] Read '463d6152-c15a-4ad9-b4b6-a85be09d62c3' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch174_read3654_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182843 [guppy/info] Read '912e1555-f5ff-4eee-8431-e133aad618c5' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch91_read2127_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182905 [guppy/info] Read '1d5ccec9-296a-4afd-ad74-010ebd3732ec' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch391_read3493_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182921 [guppy/info] Read '9a1776fd-9328-408e-9d54-e16535cbe064' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read4497_strand1.fast5" has been loaded.
+2020-09-30 18:38:16.182947 [guppy/info] Read '7caaf6c8-af5c-484f-ad5f-981112218eb0' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch355_read2033_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182958 [guppy/info] Read '9b070b44-f197-4952-8863-7e27e04ff558' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch471_read263_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182888 [guppy/info] Read 'c65d1bb9-c11b-4d4e-bba5-c821e0eb7758' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch44_read3066_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182978 [guppy/info] Read 'f3bfcfc6-b5f3-4573-a280-2718d104f8d4' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch418_read2596_strand.fast5" has been loaded.
+2020-09-30 18:38:16.182964 [guppy/info] Read '3221ccdb-0395-4983-8a44-e5558664096f' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch420_read357_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183031 [guppy/info] Read 'fa215e11-ce27-464d-9a53-f0186fea1dc9' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch250_read878_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183046 [guppy/info] Read 'f1b306de-8038-46af-b38f-7cf0d4c292ad' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch491_read3080_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183038 [guppy/info] Read '71408c92-f605-49e0-9230-1809837ae8c8' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch84_read564_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183073 [guppy/info] Read 'fb54982a-a9ad-4aeb-82e8-a4eea0e527a1' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch506_read899_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183091 [guppy/info] Read 'c75c8f96-eb4b-4465-9d43-024209a6a35a' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch485_read77_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183114 [guppy/info] Read 'a46ed4fe-5181-4a9d-ad1a-9e7ac83a0f95' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch54_read3215_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183139 [guppy/info] Read 'f163818d-019b-4937-b07d-023528a6cbea' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch486_read3631_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183148 [guppy/info] Read 'd5943c57-7a5d-4b70-9db0-78c47b331a56' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch24_read2302_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183120 [guppy/info] Read 'c1709263-8322-4cbd-86de-5f40eb0457c1' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch84_read4752_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183177 [guppy/info] Read 'a724164e-c45d-4870-8cc1-b5973253fe9c' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read394_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183056 [guppy/info] Read '29fcf315-e502-472c-8e1f-80e65e5b4972' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch432_read393_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183199 [guppy/info] Read '480b21b8-8901-4db2-939d-ed2eb1fb0a64' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch326_read4256_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183234 [guppy/info] Read '7baacba0-bf17-4cee-98b8-2d382f7eb308' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch381_read3165_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183245 [guppy/info] Read '690186f5-a384-40a4-8aae-9a99ad2322f5' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch493_read5399_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183257 [guppy/info] Read 'ead9981c-1001-491b-8db1-e0c05553899a' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch294_read1069_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183266 [guppy/info] Read 'ac1527fd-d73e-4721-95f5-b7d270cae783' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read1894_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183280 [guppy/info] Read 'ff281c20-4a4b-4775-9b8a-552530cf0b30' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch289_read1687_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183308 [guppy/info] Read '4205dba9-c9b2-4574-a9e3-25b8f7bfc601' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch290_read2497_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183317 [guppy/info] Read '0eb7ac67-e215-4aa1-958a-7cd320d229a4' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read3275_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183347 [guppy/info] Read '756abc44-d69f-46e2-8464-2f309b147a27' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch21_read1037_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183284 [guppy/info] Read 'fa9ad683-35c5-4dad-a3af-de7a86b1ffa8' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch85_read2098_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183338 [guppy/info] Read '2a021335-d1c5-4881-93fc-a673d8960075' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch280_read913_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183374 [guppy/info] Read '0a238451-b9ed-446d-a152-badd074006c4' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch281_read4019_strand.fast5" has been loaded.
+2020-09-30 18:38:16.183453 [guppy/info] Read '380cc868-0f9e-478b-b1df-70cbe6602339' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch98_read2551_strand.fast5" has been loaded.
+2020-09-30 18:38:16.193546 [guppy/info] Read 'ae3ab29f-07ae-4476-85eb-b212d69ce732' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch501_read29_strand.fast5" has been loaded.
+2020-09-30 18:38:16.193574 [guppy/info] Read 'a6ec2107-dc02-44f1-96cc-704dfe885902' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read2386_strand.fast5" has been loaded.
+2020-09-30 18:38:16.193556 [guppy/info] Read '0d624d4b-671f-40b8-9798-84f2ccc4d7fc' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch391_read2287_strand.fast5" has been loaded.
+2020-09-30 18:38:16.203693 [guppy/info] Read '745b1774-6cd3-42d6-b574-a26fb2065d9c' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch309_read4050_strand.fast5" has been loaded.
+2020-09-30 18:38:16.203806 [guppy/info] Read '6ffbbdea-7881-4ec3-b14a-e5a0c37c056d' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch69_read998_strand.fast5" has been loaded.
+2020-09-30 18:38:16.203850 [guppy/info] Read '4b09492e-1e14-4c2a-9719-4cd4f1434703' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch64_read1905_strand.fast5" has been loaded.
+2020-09-30 18:38:16.203826 [guppy/info] Read 'd1ecaa6c-a911-4cd4-86ab-f16ed29ddfde' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch342_read2347_strand.fast5" has been loaded.
+2020-09-30 18:38:16.208356 [guppy/info] Read 'adeedf44-dbc5-401b-8b3c-07c944e12deb' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch28_read503_strand.fast5" has been loaded.
+2020-09-30 18:38:16.208726 [guppy/info] Read '4148f43d-5b21-441b-a6cf-d4044e318987' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch350_read270_strand.fast5" has been loaded.
+2020-09-30 18:38:16.209161 [guppy/info] Read '3ecfda3a-811b-4250-b282-811bffe581d5' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch490_read814_strand.fast5" has been loaded.
+2020-09-30 18:38:16.209995 [guppy/info] Read 'b070b35d-1771-4ec6-9fde-9d52b973d2d5' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch111_read2109_strand.fast5" has been loaded.
+2020-09-30 18:38:16.212444 [guppy/info] Read '67ee25a0-86c1-44be-9b64-5a0db853eaf2' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch477_read112_strand.fast5" has been loaded.
+2020-09-30 18:38:16.212522 [guppy/info] Dispatched batch 0 containing 112 inputs:
+2020-09-30 18:38:16.212561 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch505_read3234_strand.fast5
+2020-09-30 18:38:16.212571 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch196_read2318_strand.fast5
+2020-09-30 18:38:16.212577 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch98_read2298_strand.fast5
+2020-09-30 18:38:16.212589 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch497_read3630_strand.fast5
+2020-09-30 18:38:16.212595 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch481_read715_strand.fast5
+2020-09-30 18:38:16.212600 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch66_read4851_strand.fast5
+2020-09-30 18:38:16.212606 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch505_read1993_strand.fast5
+2020-09-30 18:38:16.212611 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read4280_strand.fast5
+2020-09-30 18:38:16.212616 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch95_read114_strand.fast5
+2020-09-30 18:38:16.212622 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch179_read1009_strand.fast5
+2020-09-30 18:38:16.212627 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch407_read2873_strand.fast5
+2020-09-30 18:38:16.212632 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch302_read1093_strand.fast5
+2020-09-30 18:38:16.212637 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch47_read924_strand.fast5
+2020-09-30 18:38:16.212642 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch8_read1768_strand.fast5
+2020-09-30 18:38:16.212648 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch483_read811_strand.fast5
+2020-09-30 18:38:16.212653 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch57_read3088_strand.fast5
+2020-09-30 18:38:16.212658 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read5665_strand.fast5
+2020-09-30 18:38:16.212663 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch442_read5435_strand.fast5
+2020-09-30 18:38:16.212669 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch290_read1002_strand.fast5
+2020-09-30 18:38:16.212674 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch95_read4662_strand.fast5
+2020-09-30 18:38:16.212680 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch280_read2154_strand.fast5
+2020-09-30 18:38:16.212685 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch403_read4689_strand.fast5
+2020-09-30 18:38:16.212690 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read1483_strand.fast5
+2020-09-30 18:38:16.212696 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch361_read1047_strand.fast5
+2020-09-30 18:38:16.212702 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read929_strand.fast5
+2020-09-30 18:38:16.212707 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch460_read2860_strand.fast5
+2020-09-30 18:38:16.212712 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch481_read1935_strand.fast5
+2020-09-30 18:38:16.212723 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch302_read6122_strand.fast5
+2020-09-30 18:38:16.212728 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch7_read2760_strand.fast5
+2020-09-30 18:38:16.212735 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch57_read3412_strand.fast5
+2020-09-30 18:38:16.212744 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch442_read1231_strand.fast5
+2020-09-30 18:38:16.212749 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch111_read5041_strand.fast5
+2020-09-30 18:38:16.212755 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch85_read498_strand.fast5
+2020-09-30 18:38:16.212760 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch139_read6216_strand.fast5
+2020-09-30 18:38:16.212765 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch158_read5484_strand.fast5
+2020-09-30 18:38:16.212770 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch361_read4057_strand.fast5
+2020-09-30 18:38:16.212775 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch433_read1144_strand.fast5
+2020-09-30 18:38:16.212781 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch177_read1452_strand.fast5
+2020-09-30 18:38:16.212786 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch383_read6112_strand.fast5
+2020-09-30 18:38:16.212792 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch64_read6087_strand.fast5
+2020-09-30 18:38:16.212798 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch289_read2189_strand.fast5
+2020-09-30 18:38:16.212803 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch467_read81_strand.fast5
+2020-09-30 18:38:16.212808 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch292_read1173_strand.fast5
+2020-09-30 18:38:16.212813 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch57_read1147_strand.fast5
+2020-09-30 18:38:16.212819 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch40_read4532_strand.fast5
+2020-09-30 18:38:16.212824 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch316_read4806_strand.fast5
+2020-09-30 18:38:16.212829 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch41_read2892_strand.fast5
+2020-09-30 18:38:16.212834 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch144_read1044_strand.fast5
+2020-09-30 18:38:16.212840 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch123_read2477_strand.fast5
+2020-09-30 18:38:16.212845 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch118_read886_strand.fast5
+2020-09-30 18:38:16.212854 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch80_read1993_strand.fast5
+2020-09-30 18:38:16.212859 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch460_read2786_strand.fast5
+2020-09-30 18:38:16.212864 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch316_read5270_strand.fast5
+2020-09-30 18:38:16.212870 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch481_read1028_strand.fast5
+2020-09-30 18:38:16.212875 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch200_read6055_strand.fast5
+2020-09-30 18:38:16.212880 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch353_read1369_strand.fast5
+2020-09-30 18:38:16.212885 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch170_read4483_strand.fast5
+2020-09-30 18:38:16.212891 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch123_read955_strand.fast5
+2020-09-30 18:38:16.212896 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch109_read2202_strand.fast5
+2020-09-30 18:38:16.212901 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch482_read758_strand.fast5
+2020-09-30 18:38:16.212906 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch427_read1086_strand.fast5
+2020-09-30 18:38:16.212911 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch493_read2488_strand.fast5
+2020-09-30 18:38:16.212918 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch54_read3907_strand.fast5
+2020-09-30 18:38:16.212923 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch47_read328_strand.fast5
+2020-09-30 18:38:16.212929 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read4310_strand.fast5
+2020-09-30 18:38:16.212934 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch91_read2127_strand.fast5
+2020-09-30 18:38:16.212939 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch483_read1308_strand.fast5
+2020-09-30 18:38:16.212945 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch174_read3654_strand.fast5
+2020-09-30 18:38:16.212951 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch107_read4268_strand.fast5
+2020-09-30 18:38:16.212956 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch44_read3066_strand.fast5
+2020-09-30 18:38:16.212961 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch391_read3493_strand.fast5
+2020-09-30 18:38:16.212966 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read4497_strand1.fast5
+2020-09-30 18:38:16.212972 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch355_read2033_strand.fast5
+2020-09-30 18:38:16.212977 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch471_read263_strand.fast5
+2020-09-30 18:38:16.212985 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch420_read357_strand.fast5
+2020-09-30 18:38:16.212991 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch418_read2596_strand.fast5
+2020-09-30 18:38:16.212997 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch250_read878_strand.fast5
+2020-09-30 18:38:16.213002 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch84_read564_strand.fast5
+2020-09-30 18:38:16.213007 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch491_read3080_strand.fast5
+2020-09-30 18:38:16.213012 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch432_read393_strand.fast5
+2020-09-30 18:38:16.213018 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch506_read899_strand.fast5
+2020-09-30 18:38:16.213023 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch485_read77_strand.fast5
+2020-09-30 18:38:16.213028 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch54_read3215_strand.fast5
+2020-09-30 18:38:16.213033 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch84_read4752_strand.fast5
+2020-09-30 18:38:16.213039 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch486_read3631_strand.fast5
+2020-09-30 18:38:16.213044 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch24_read2302_strand.fast5
+2020-09-30 18:38:16.213050 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read394_strand.fast5
+2020-09-30 18:38:16.213055 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch326_read4256_strand.fast5
+2020-09-30 18:38:16.213060 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch381_read3165_strand.fast5
+2020-09-30 18:38:16.213065 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch493_read5399_strand.fast5
+2020-09-30 18:38:16.213070 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch294_read1069_strand.fast5
+2020-09-30 18:38:16.213076 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read1894_strand.fast5
+2020-09-30 18:38:16.213081 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch289_read1687_strand.fast5
+2020-09-30 18:38:16.213086 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch85_read2098_strand.fast5
+2020-09-30 18:38:16.213092 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch290_read2497_strand.fast5
+2020-09-30 18:38:16.213097 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read3275_strand.fast5
+2020-09-30 18:38:16.213102 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch280_read913_strand.fast5
+2020-09-30 18:38:16.213107 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch21_read1037_strand.fast5
+2020-09-30 18:38:16.213116 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch281_read4019_strand.fast5
+2020-09-30 18:38:16.213121 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch98_read2551_strand.fast5
+2020-09-30 18:38:16.213126 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch501_read29_strand.fast5
+2020-09-30 18:38:16.213132 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch391_read2287_strand.fast5
+2020-09-30 18:38:16.213137 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read2386_strand.fast5
+2020-09-30 18:38:16.213142 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch309_read4050_strand.fast5
+2020-09-30 18:38:16.213147 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch69_read998_strand.fast5
+2020-09-30 18:38:16.213153 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch64_read1905_strand.fast5
+2020-09-30 18:38:16.213159 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch342_read2347_strand.fast5
+2020-09-30 18:38:16.213164 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch28_read503_strand.fast5
+2020-09-30 18:38:16.213170 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch350_read270_strand.fast5
+2020-09-30 18:38:16.213175 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch490_read814_strand.fast5
+2020-09-30 18:38:16.213180 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch111_read2109_strand.fast5
+2020-09-30 18:38:16.213185 [guppy/info] Batch input 0 : /ssd/k001y/4153606/data/odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch477_read112_strand.fast5
+2020-09-30 18:38:16.436075 [guppy/info] Read '84c0329b-2fe2-4fd8-ae10-f17ed9b2e0f9' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch47_read924_strand.fast5" completed.
+2020-09-30 18:38:16.436295 [guppy/info] Read '70a6e1ac-2b52-46e4-83ac-0a49cdc637d4' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch316_read4806_strand.fast5" completed.
+2020-09-30 18:38:16.436455 [guppy/info] Read 'fa215e11-ce27-464d-9a53-f0186fea1dc9' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch250_read878_strand.fast5" completed.
+2020-09-30 18:38:16.436505 [guppy/info] Read 'd4402dd6-1f80-4d82-9ce1-f4e7326e5054' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch47_read328_strand.fast5" completed.
+2020-09-30 18:38:16.436728 [guppy/info] Read '2c468ad4-194a-4af0-93d4-3fcbe17a9be7' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch442_read5435_strand.fast5" completed.
+2020-09-30 18:38:16.436960 [guppy/info] Read '40aac17d-56a6-44db-934d-c0dbb853e2cd' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch123_read2477_strand.fast5" completed.
+2020-09-30 18:38:16.437113 [guppy/info] Read 'bdfab7a9-1792-4c9a-9428-261e109cdfae' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch107_read4268_strand.fast5" completed.
+2020-09-30 18:38:16.437265 [guppy/info] Read '7f343574-f2bc-4388-91b9-84b99e39256a' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch481_read1935_strand.fast5" completed.
+2020-09-30 18:38:16.437356 [guppy/info] Stats for model /home/k001y/programs/ont-guppy-gpu/data/template_r9.4.1_450bps_fast.jsn, 8 runners/device, 160 chunks/run, 2000 blocks/chunk, lifetime 0.756 s
+CUDA device 0: 5 runs with 751 chunks (93.875%), 5550991 samples (86.734%), avg max size 7975.4, avg size 7391.5 (92.678% of max), 7.3426e+06 samples/s
+2020-09-30 18:38:16.437407 [guppy/info] Read '77635ef8-3824-401c-8442-7fdec33235a8' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch95_read4662_strand.fast5" completed.
+2020-09-30 18:38:16.437569 [guppy/info] Read 'fea3d3b3-af6c-451a-b862-6043d17ec775' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch144_read1044_strand.fast5" completed.
+2020-09-30 18:38:16.437714 [guppy/info] Read 'baeacbab-db71-4be4-a4ac-c2fe5e26570d' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch483_read1308_strand.fast5" completed.
+2020-09-30 18:38:16.437852 [guppy/info] Read 'bbe44e2d-c0b1-4a30-997b-7a077a66c189' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch493_read2488_strand.fast5" completed.
+2020-09-30 18:38:16.437970 [guppy/info] Read 'be16c798-0278-462a-b65b-6e77e03c7432' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch41_read2892_strand.fast5" completed.
+2020-09-30 18:38:16.438118 [guppy/info] Read 'c2ba4328-d217-4343-a959-874cf5addce4' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch290_read1002_strand.fast5" completed.
+2020-09-30 18:38:16.438245 [guppy/info] Read '8a553dac-a603-4a38-ab2b-4c9cc41bd7ac' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read4310_strand.fast5" completed.
+2020-09-30 18:38:16.438357 [guppy/info] Read 'fb405411-031d-4447-8096-b603693b1fe7' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch460_read2860_strand.fast5" completed.
+2020-09-30 18:38:16.438507 [guppy/info] Read '1c935ec4-4503-44ea-be57-7201fc03eeb6' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch57_read1147_strand.fast5" completed.
+2020-09-30 18:38:16.438764 [guppy/info] Read 'c30b48fc-11eb-4d3d-9c89-58ad29b2631d' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch123_read955_strand.fast5" completed.
+2020-09-30 18:38:16.438802 [guppy/info] Read 'a724164e-c45d-4870-8cc1-b5973253fe9c' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read394_strand.fast5" completed.
+2020-09-30 18:38:16.438876 [guppy/info] Read '44442ba9-9951-4bac-90ab-2acc8d1c4015' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch85_read498_strand.fast5" completed.
+2020-09-30 18:38:16.438995 [guppy/info] Read 'a46ed4fe-5181-4a9d-ad1a-9e7ac83a0f95' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch54_read3215_strand.fast5" completed.
+2020-09-30 18:38:16.439102 [guppy/info] Read '690186f5-a384-40a4-8aae-9a99ad2322f5' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch493_read5399_strand.fast5" completed.
+2020-09-30 18:38:16.439231 [guppy/info] Read '67ee25a0-86c1-44be-9b64-5a0db853eaf2' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch477_read112_strand.fast5" completed.
+2020-09-30 18:38:16.439342 [guppy/info] Read 'e109fef1-6ea0-4bf1-b293-2d5d5a6ed906' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch8_read1768_strand.fast5" completed.
+2020-09-30 18:38:16.439469 [guppy/info] Read 'c75c8f96-eb4b-4465-9d43-024209a6a35a' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch485_read77_strand.fast5" completed.
+2020-09-30 18:38:16.440677 [guppy/info] Read '38f657d9-0701-44bb-8c13-d9446f8fe441' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch427_read1086_strand.fast5" completed.
+2020-09-30 18:38:16.440809 [guppy/info] Read 'c1709263-8322-4cbd-86de-5f40eb0457c1' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch84_read4752_strand.fast5" completed.
+2020-09-30 18:38:16.440917 [guppy/info] Read '95ff70e7-2b87-42d1-a957-21f9f276595c' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch481_read715_strand.fast5" completed.
+2020-09-30 18:38:16.441031 [guppy/info] Read 'fb54982a-a9ad-4aeb-82e8-a4eea0e527a1' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch506_read899_strand.fast5" completed.
+2020-09-30 18:38:16.441134 [guppy/info] Read '7baacba0-bf17-4cee-98b8-2d382f7eb308' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch381_read3165_strand.fast5" completed.
+2020-09-30 18:38:16.441277 [guppy/info] Read 'b070b35d-1771-4ec6-9fde-9d52b973d2d5' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch111_read2109_strand.fast5" completed.
+2020-09-30 18:38:16.441472 [guppy/info] Read '4dbe677b-04b0-4738-8777-a15ee6cd652b' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch442_read1231_strand.fast5" completed.
+2020-09-30 18:38:16.441590 [guppy/info] Read '71408c92-f605-49e0-9230-1809837ae8c8' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch84_read564_strand.fast5" completed.
+2020-09-30 18:38:16.441694 [guppy/info] Read '8f548fb1-92c4-43a0-a032-74593f3988d4' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch109_read2202_strand.fast5" completed.
+2020-09-30 18:38:16.441815 [guppy/info] Read 'd5943c57-7a5d-4b70-9db0-78c47b331a56' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch24_read2302_strand.fast5" completed.
+2020-09-30 18:38:16.441921 [guppy/info] Read '237f1f8e-b267-437b-b8d0-464a8f838fc0' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch302_read1093_strand.fast5" completed.
+2020-09-30 18:38:16.442035 [guppy/info] Read 'f1b306de-8038-46af-b38f-7cf0d4c292ad' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch491_read3080_strand.fast5" completed.
+2020-09-30 18:38:16.442145 [guppy/info] Read '480b21b8-8901-4db2-939d-ed2eb1fb0a64' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch326_read4256_strand.fast5" completed.
+2020-09-30 18:38:16.442234 [guppy/info] Read 'bc5615d7-dc94-4315-9cf1-5112555c19d5' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch7_read2760_strand.fast5" completed.
+2020-09-30 18:38:16.442360 [guppy/info] Read '3ecfda3a-811b-4250-b282-811bffe581d5' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch490_read814_strand.fast5" completed.
+2020-09-30 18:38:16.442618 [guppy/info] Read '458e15d1-ec66-4e53-a4c8-97593504bf11' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch170_read4483_strand.fast5" completed.
+2020-09-30 18:38:16.442715 [guppy/info] Read 'f432cb50-8c47-4c54-825f-ab04a38b5225' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch482_read758_strand.fast5" completed.
+2020-09-30 18:38:16.442905 [guppy/info] Read 'f163818d-019b-4937-b07d-023528a6cbea' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch486_read3631_strand.fast5" completed.
+2020-09-30 18:38:16.442929 [guppy/info] Read 'bd76fe67-db4b-4d72-95df-e23f07aea51a' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read4280_strand.fast5" completed.
+2020-09-30 18:38:16.442967 [guppy/info] Read 'f58173f7-dbfb-4c47-92c1-0124626bf4c2' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch57_read3412_strand.fast5" completed.
+2020-09-30 18:38:16.443058 [guppy/info] Read '29fcf315-e502-472c-8e1f-80e65e5b4972' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch432_read393_strand.fast5" completed.
+2020-09-30 18:38:16.443235 [guppy/info] Read '4148f43d-5b21-441b-a6cf-d4044e318987' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch350_read270_strand.fast5" completed.
+2020-09-30 18:38:16.444033 [guppy/info] Read '723b3ed8-ede7-42bd-89c3-d269619eea3d' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch54_read3907_strand.fast5" completed.
+2020-09-30 18:38:16.444467 [guppy/info] Read 'd1ecaa6c-a911-4cd4-86ab-f16ed29ddfde' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch342_read2347_strand.fast5" completed.
+2020-09-30 18:38:16.444561 [guppy/info] Read '9388888e-4344-4e51-a44c-54c3b3c62b8b' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch302_read6122_strand.fast5" completed.
+2020-09-30 18:38:16.444671 [guppy/info] Read '3048e786-5b3d-4587-b5d0-714b40192268' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch95_read114_strand.fast5" completed.
+2020-09-30 18:38:16.444803 [guppy/info] Read '10df3a9d-60a4-4cb5-ab3d-46483be7bb59' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch200_read6055_strand.fast5" completed.
+2020-09-30 18:38:16.444902 [guppy/info] Read '4b09492e-1e14-4c2a-9719-4cd4f1434703' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch64_read1905_strand.fast5" completed.
+2020-09-30 18:38:16.445129 [guppy/info] Read 'adeedf44-dbc5-401b-8b3c-07c944e12deb' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch28_read503_strand.fast5" completed.
+2020-09-30 18:38:16.445324 [guppy/info] Read '6ffbbdea-7881-4ec3-b14a-e5a0c37c056d' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch69_read998_strand.fast5" completed.
+2020-09-30 18:38:16.445727 [guppy/info] Read '745b1774-6cd3-42d6-b574-a26fb2065d9c' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch309_read4050_strand.fast5" completed.
+2020-09-30 18:38:16.445774 [guppy/info] Read 'bec0a1f3-2776-4ace-b372-0a76a9cbed6b' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch505_read1993_strand.fast5" completed.
+2020-09-30 18:38:16.446030 [guppy/info] Read '0d624d4b-671f-40b8-9798-84f2ccc4d7fc' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch391_read2287_strand.fast5" completed.
+2020-09-30 18:38:16.446182 [guppy/info] Read '9a1776fd-9328-408e-9d54-e16535cbe064' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read4497_strand1.fast5" completed.
+2020-09-30 18:38:16.446272 [guppy/info] Read '463d6152-c15a-4ad9-b4b6-a85be09d62c3' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch174_read3654_strand.fast5" completed.
+2020-09-30 18:38:16.446301 [guppy/info] Read '1896c369-b7d0-4e98-aa23-830f7a9f001f' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch64_read6087_strand.fast5" completed.
+2020-09-30 18:38:16.447314 [guppy/info] Read 'ae3ab29f-07ae-4476-85eb-b212d69ce732' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch501_read29_strand.fast5" completed.
+2020-09-30 18:38:16.447414 [guppy/info] Read 'b1594985-30ce-4f59-9230-dff6ec966710' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch139_read6216_strand.fast5" completed.
+2020-09-30 18:38:16.447561 [guppy/info] Read 'd69c6ac9-3c79-4ee4-a3d2-92762f8b7433' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch40_read4532_strand.fast5" completed.
+2020-09-30 18:38:16.447677 [guppy/info] Read 'd57afb7d-903e-46cf-a43d-0e17fb0949d8' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read5665_strand.fast5" completed.
+2020-09-30 18:38:16.447784 [guppy/info] Read 'a6ec2107-dc02-44f1-96cc-704dfe885902' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read2386_strand.fast5" completed.
+2020-09-30 18:38:16.447897 [guppy/info] Read '60664444-cccc-41e7-b7a6-5c4c14343658' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch111_read5041_strand.fast5" completed.
+2020-09-30 18:38:16.448004 [guppy/info] Read '8d9d3bb4-cec7-4960-a3c6-9c3e59aab4a7' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch289_read2189_strand.fast5" completed.
+2020-09-30 18:38:16.448099 [guppy/info] Read '1d5ccec9-296a-4afd-ad74-010ebd3732ec' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch391_read3493_strand.fast5" completed.
+2020-09-30 18:38:16.448298 [guppy/info] Read '280af896-8e53-4427-89d3-a554c87269fd' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch292_read1173_strand.fast5" completed.
+2020-09-30 18:38:16.448411 [guppy/info] Read 'cc70a582-d0ee-47f5-890d-9d097df3619a' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch66_read4851_strand.fast5" completed.
+2020-09-30 18:38:16.448518 [guppy/info] Read 'f20007a8-a22e-47c3-87d7-7c0f9744f792' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch177_read1452_strand.fast5" completed.
+2020-09-30 18:38:16.448542 [guppy/info] Read 'c39789a3-7c1c-4b1e-bc6d-dc0df49e969c' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch57_read3088_strand.fast5" completed.
+2020-09-30 18:38:16.448641 [guppy/info] Read 'a403a23e-20e7-43f7-a5fa-dae8ebc59a01' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch361_read4057_strand.fast5" completed.
+2020-09-30 18:38:16.448854 [guppy/info] Read 'dbe28df8-d40f-4a1a-9666-9e8bc64c6204' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch497_read3630_strand.fast5" completed.
+2020-09-30 18:38:16.448920 [guppy/info] Read '5c46f248-1989-4a1e-bdf7-265af033510b' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch98_read2298_strand.fast5" completed.
+2020-09-30 18:38:16.448970 [guppy/info] Read '912e1555-f5ff-4eee-8431-e133aad618c5' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch91_read2127_strand.fast5" completed.
+2020-09-30 18:38:16.449168 [guppy/info] Read '0e56d03e-268c-42cc-a0f3-90d688115d07' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch433_read1144_strand.fast5" completed.
+2020-09-30 18:38:16.449242 [guppy/info] Read '56b8515b-fc38-4531-bb1e-757449205298' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch505_read3234_strand.fast5" completed.
+2020-09-30 18:38:16.449278 [guppy/info] Read '8b55f8dd-3fcb-478c-8384-6df32ed6400b' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch196_read2318_strand.fast5" completed.
+2020-09-30 18:38:16.449373 [guppy/info] Read 'ce4d48fa-9112-4aa8-b655-10c5064129db' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch483_read811_strand.fast5" completed.
+2020-09-30 18:38:16.449653 [guppy/info] Read '3221ccdb-0395-4983-8a44-e5558664096f' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch420_read357_strand.fast5" completed.
+2020-09-30 18:38:16.449672 [guppy/info] Read 'd7bbdb5c-225f-4910-a264-6444e1ace544' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch158_read5484_strand.fast5" completed.
+2020-09-30 18:38:16.450655 [guppy/info] Read '5e348aa0-252a-4ba2-b659-f460207d0f86' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch383_read6112_strand.fast5" completed.
+2020-09-30 18:38:16.451012 [guppy/info] Read 'f3bfcfc6-b5f3-4573-a280-2718d104f8d4' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch418_read2596_strand.fast5" completed.
+2020-09-30 18:38:16.451035 [guppy/info] Read '9b070b44-f197-4952-8863-7e27e04ff558' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch471_read263_strand.fast5" completed.
+2020-09-30 18:38:16.451057 [guppy/info] Read 'c65d1bb9-c11b-4d4e-bba5-c821e0eb7758' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch44_read3066_strand.fast5" completed.
+2020-09-30 18:38:16.451259 [guppy/info] Read '7caaf6c8-af5c-484f-ad5f-981112218eb0' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch355_read2033_strand.fast5" completed.
+2020-09-30 18:38:16.451456 [guppy/info] Read 'eaa48d4e-1945-4011-8bae-ded748af1fca' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch407_read2873_strand.fast5" completed.
+2020-09-30 18:38:16.451516 [guppy/info] Read 'cdf5b34b-6170-45bb-9691-6fcdaadb4713' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch179_read1009_strand.fast5" completed.
+2020-09-30 18:38:16.477953 [guppy/info] Read '6a470b8f-d316-4d8c-b93f-ea7bd154775d' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch280_read2154_strand.fast5" completed.
+2020-09-30 18:38:16.478532 [guppy/info] Read 'b098b785-7ccd-41af-8980-f2894d700284' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch403_read4689_strand.fast5" completed.
+2020-09-30 18:38:16.478836 [guppy/info] Read '2c469631-125c-4046-b1c0-677322b0f3a3' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch378_read929_strand.fast5" completed.
+2020-09-30 18:38:16.479082 [guppy/info] Read 'f51c19c0-2613-48a7-a9a1-ec59658cbd2d' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch361_read1047_strand.fast5" completed.
+2020-09-30 18:38:16.479381 [guppy/info] Read '88b1797f-3a41-442f-bab4-cdfedf7ec597' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read1483_strand.fast5" completed.
+2020-09-30 18:38:16.479939 [guppy/info] Read 'e744ac28-518e-4933-b2a9-e59adecd6512' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch353_read1369_strand.fast5" completed.
+2020-09-30 18:38:16.480276 [guppy/info] Read '44b26523-eaf0-4f28-87ad-4cca044fabc8' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch460_read2786_strand.fast5" completed.
+2020-09-30 18:38:16.480628 [guppy/info] Read '3fa4862f-bf61-4f3d-a13e-18b24be3b2a2' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch481_read1028_strand.fast5" completed.
+2020-09-30 18:38:16.480883 [guppy/info] Read 'c2cfeb47-1930-4486-ba44-fb1f43519806' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch316_read5270_strand.fast5" completed.
+2020-09-30 18:38:16.481249 [guppy/info] Read 'c0789440-f511-4522-8231-d4d179a7a487' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch80_read1993_strand.fast5" completed.
+2020-09-30 18:38:16.481553 [guppy/info] Read '98eef8ef-3499-4c27-9191-9420b864869c' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch467_read81_strand.fast5" completed.
+2020-09-30 18:38:16.481853 [guppy/info] Read 'c7937d7b-d85f-433b-9327-7eb293974905' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch118_read886_strand.fast5" completed.
+2020-09-30 18:38:16.482288 [guppy/info] Read '380cc868-0f9e-478b-b1df-70cbe6602339' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch98_read2551_strand.fast5" completed.
+2020-09-30 18:38:16.482666 [guppy/info] Read '0a238451-b9ed-446d-a152-badd074006c4' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch281_read4019_strand.fast5" completed.
+2020-09-30 18:38:16.483109 [guppy/info] Read '2a021335-d1c5-4881-93fc-a673d8960075' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch280_read913_strand.fast5" completed.
+2020-09-30 18:38:16.483462 [guppy/info] Read '756abc44-d69f-46e2-8464-2f309b147a27' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch21_read1037_strand.fast5" completed.
+2020-09-30 18:38:16.483777 [guppy/info] Read 'fa9ad683-35c5-4dad-a3af-de7a86b1ffa8' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch85_read2098_strand.fast5" completed.
+2020-09-30 18:38:16.484032 [guppy/info] Read '0eb7ac67-e215-4aa1-958a-7cd320d229a4' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read3275_strand.fast5" completed.
+2020-09-30 18:38:16.484331 [guppy/info] Read '4205dba9-c9b2-4574-a9e3-25b8f7bfc601' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch290_read2497_strand.fast5" completed.
+2020-09-30 18:38:16.484641 [guppy/info] Read 'ff281c20-4a4b-4775-9b8a-552530cf0b30' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch289_read1687_strand.fast5" completed.
+2020-09-30 18:38:16.484897 [guppy/info] Read 'ac1527fd-d73e-4721-95f5-b7d270cae783' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch43_read1894_strand.fast5" completed.
+2020-09-30 18:38:16.485217 [guppy/info] Read 'ead9981c-1001-491b-8db1-e0c05553899a' from file "odw_genlab4209_20161213_FN_MN16303_sequencing_run_sample_id_32395_ch294_read1069_strand.fast5" completed.
+2020-09-30 18:38:16.490852 [guppy/info] Completed batch 0
+2020-09-30 18:38:16.783559 [guppy/message] Caller time: 768 ms, Samples called: 5425601, samples/s: 7.06458e+06
+2020-09-30 18:38:16.783698 [guppy/message] Finishing up any open output files.
+2020-09-30 18:38:17.697644 [guppy/info] Stats for model /home/k001y/programs/ont-guppy-gpu/data/adapter_scaling_dna_r9.4.1_min.jsn, 2 runners/device, 32 chunks/run, 1 blocks/chunk, lifetime 1.52 s
+CUDA device 0: 4 runs with 112 chunks (87.5%), 168000 samples (87.5%), avg max size 1500, avg size 1500 (100% of max), 1.1053e+05 samples/s
+2020-09-30 18:38:17.706543 [guppy/message] Basecalling completed successfully.

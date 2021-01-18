@@ -1,14 +1,17 @@
 # Thesis project of KBH
 
-This repo contains the projects K. Brooks Henry did during his master thesis with the Computational Cancer Epigenomics group at the German Cancer Research Center (DKFZ). Done from 01/08/2020 to XXXX
+This repo contains the projects K. Brooks Henry did during his master thesis with the Computational Cancer Epigenomics group at the German Cancer Research Center (DKFZ). Done from 01/08/2020 to 15/02/2021
 
-Email: k.henry@dkfz-heidelberg.de
+Email: k.henry@dkfz-heidelberg.de or brookshenry3@gmail.com
 
-## Projects:
+## Description of files/directories:
 
- * assembly_pipeline: workflow to basecall/assemble/polish ONT sequencing data (work-in-progress)
- * del_detect: workflow to do comparative methylation analysis around deletions/regions of interest in long-read sequencing data. (work-in-progress)
- * meth_calling_pipeline: workflow to call methylation in long-read sequencing data. (work-in-progress)
- * variant_calling: exploration of tools to identify SNVs/SVs in long-read data (work-in-progress)
- * master_pipeline: A comprehensive workflow to process basecalled files and call methylation & structural variants (work-in-progress)
+ * SNAKEMAKE: Snakemake workflow to process basecalled Nanopore sequencing data, align to reference genome, call methylation/SVs (Formerly master_pipeline)
+ * DOWNSTREAM: Scripts used primarily in the plotting and downstream handling of data, see DOWNSTREAM/README for more info on the individual files
+ * SUB_SCRIPTS: submission shell scripts used on the DKFZ's cluster for a wide range of Nanopore-related tools
+ * TESTING: small Nanopore fast5/fastq files that can be used for testing
+ * UNUSED: Dead-end snakemake pipelines and other misc. scripts that were ultimately not used in the thesis project but are still being preserved
+ * master_env.yaml: config file for the Conda virtual environment used with all (minus Flye) python scripts/Conda-installed tools
+ * flye_env.yaml: config file for the Conda virtual environment used with the Flye de novo assembler
+
  
