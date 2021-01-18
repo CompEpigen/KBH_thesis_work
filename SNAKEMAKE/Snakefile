@@ -1,0 +1,228 @@
+#Loading config file
+configfile: "/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/config.yaml"
+
+#Extracting variables from config file
+samples = config["samples"]
+INDEX = config["index"]
+REF = config["ref"]
+IN_FAST5 = config["in_fast5"]
+IN_FASTQ = config["in_fastq"]
+OUT_DIR = config["out_dir"]
+
+#Imports
+import os
+
+#Activating virtual environment, loading needed modules
+def activate_environment():
+    os.system("module load samtools/1.9")
+    os.system("module load anaconda3/2019.07")
+    os.system("source activate master-env")
+
+activate_environment()
+
+#Expected output
+rule all:
+    input:
+        expand("{OUT_DIR}/{sample}_pycoQC_output.html", OUT_DIR=OUT_DIR, sample=samples),
+        expand("{OUT_DIR}/{sample}.merged.fastq", OUT_DIR=OUT_DIR, sample=samples),
+        expand("{OUT_DIR}/{sample}.merged.fastq.index.gzi", OUT_DIR=OUT_DIR, sample=samples),
+        expand("{OUT_DIR}/{sample}.merged.fastq.index.fai", OUT_DIR=OUT_DIR, sample=samples),
+        expand("{OUT_DIR}/{sample}.merged.fastq.index.readdb", OUT_DIR=OUT_DIR, sample=samples),
+        expand("{OUT_DIR}/{sample}.sorted.bam", OUT_DIR=OUT_DIR, sample=samples),
+        expand("{OUT_DIR}/{sample}.sorted.bam.bai", OUT_DIR=OUT_DIR, sample=samples),
+        expand("{OUT_DIR}/{sample}.meth_calls.tsv", OUT_DIR=OUT_DIR, sample=samples),
+        expand("{OUT_DIR}/{sample}.meth_freq.tsv", OUT_DIR=OUT_DIR, sample=samples),
+        expand("{OUT_DIR}/{sample}.vcf", OUT_DIR=OUT_DIR, sample=samples),
+        expand("{OUT_DIR}/{sample}.methrix.bedGraph", OUT_DIR=OUT_DIR, sample=samples)
+
+#Add in rule here to check and make sure file hierarchy is met before proceeding
+
+
+#Running QC on the basecalled reads
+rule pycoqc:
+    input:
+        expand("{IN_FASTQ}/sequencing_summary.txt", IN_FASTQ=IN_FASTQ)
+    output:
+        "{OUT_DIR}/{samples}_pycoQC_output.html"
+    params:
+        jobname="QC",
+        runtime="4:00",
+        memusage="5000",
+        slots="1",
+        misc=" "
+    shell:
+        "pycoQC -f {input} -o {output}"
+
+#Merging basecalled fastq files, necessary for indexing and downstream steps
+rule merge_fastqs:
+    input:
+        expand("{IN_FASTQ}", IN_FASTQ=IN_FASTQ)
+    output:
+        "{OUT_DIR}/{samples}.merged.fastq"
+    params:
+        jobname="merge_fqs",
+        runtime="5:00",
+        memusage="5000",
+        slots="1",
+        misc=" "
+    shell:
+        "cat {input}/*.fastq > {output}"
+
+#Indexing raw reads with basecalled, merged fastq file
+rule index:
+    input:
+        f5s=expand("{IN_FAST5}/", IN_FAST5=IN_FAST5), 
+        fq="{OUT_DIR}/{samples}.merged.fastq"
+    output:
+        "{OUT_DIR}/{samples}.merged.fastq.index",
+        "{OUT_DIR}/{samples}.merged.fastq.index.gzi",
+        "{OUT_DIR}/{samples}.merged.fastq.index.fai",
+        "{OUT_DIR}/{samples}.merged.fastq.index.readdb"
+    params:
+        jobname="index_reads",
+        runtime="12:00",
+        memusage="5000",
+        slots="10",
+        misc=" "
+    shell:
+        "f5c index -d {input.f5s} {input.fq}"
+
+#Aligning basecalled reads to reference genome
+#rule minimap2_align:
+#    input:
+#        ref=expand("{REF}", REF=REF),
+#        fq="{OUT_DIR}/{samples}.merged.fastq"
+#    output:
+#        "{OUT_DIR}/{samples}.sorted.bam"
+#    params:
+#        jobname="index_reads",
+#        runtime="8:00",
+#        memusage="20000",
+#        slots="10",
+#        misc=" "
+#    shell:
+#        "minimap2 -t {params.slots} -ax map-ont {input.ref} {input.fq} | samtools sort -T {wildcards.samples} -o {output}"
+
+#Aligning basecalled reads to reference genome
+rule ngmlr_align:
+    input:
+        ref=expand("{REF}", REF=REF),
+        fq="{OUT_DIR}/{samples}.merged.fastq"
+    output:
+        "{OUT_DIR}/{samples}.sorted.bam"
+    params:
+        jobname="ngmlr_align",
+        runtime="150:00",
+        memusage="20000",
+        slots="20",
+        misc=" "
+    shell:
+        "ngmlr -t {params.slots} -r {input.ref} -q {input.fq} -x ont | samtools sort > {output}"
+
+#Indexing aligned bam file
+rule index_bams:
+    input:
+        "{OUT_DIR}/{samples}.sorted.bam"
+    output:
+        "{OUT_DIR}/{samples}.sorted.bam.bai"
+    params:
+        jobname="index_bams",
+        runtime="8:00",
+        memusage="20000",
+        slots="1",
+        misc=" "
+    shell:
+        "samtools index {input}"
+
+#Calling methylation
+rule call_meth:
+    input:
+        bam="{OUT_DIR}/{samples}.sorted.bam",
+        bai="{OUT_DIR}/{samples}.sorted.bam.bai",
+        ref=expand("{REF}", REF=REF),
+        fq="{OUT_DIR}/{samples}.merged.fastq",
+        index="{OUT_DIR}/{samples}.merged.fastq.index",
+        fai="{OUT_DIR}/{samples}.merged.fastq.index.fai",
+        gzi="{OUT_DIR}/{samples}.merged.fastq.index.gzi",
+        readdb="{OUT_DIR}/{samples}.merged.fastq.index.readdb"
+    output:
+        "{OUT_DIR}/{samples}.meth_calls.tsv"
+    params:
+        jobname="call_meth",
+        runtime="48:00",
+        memusage="10000",
+        slots="10",
+        misc=" "
+    shell:
+        "f5c call-methylation -t 10 -r {input.fq} -b {input.bam} -g {input.ref} > {output}"
+
+#Converting methylation tsv file to meth_freq tsv file, easier to interpret and work with downstream
+rule calc_freq:
+    input:
+        "{OUT_DIR}/{samples}.meth_calls.tsv"
+    output:
+        "{OUT_DIR}/{samples}.meth_freq.tsv"
+    params:
+        jobname="calc_freq",
+        runtime="8:00",
+        memusage="5000",
+        slots="1",
+        misc=" "
+    shell:
+        "f5c meth-freq -i {input} -o {output} -s"
+
+#Calling SVs
+#rule call_vars:
+#    input:
+#        bam="{OUT_DIR}/{samples}.sorted.bam",
+#        ref=expand("{REF}", REF=REF) #,
+        #wd="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{sample}"
+#    output:
+#        "{OUT_DIR}/{samples}.vcf"
+#    params:
+#        jobname="call_vars",
+#        runtime="8:00",
+#        memusage="10000",
+#        slots="20",
+#        misc=" "
+#    shell:
+#        """
+#        mkdir {OUT_DIR}/{wildcards.samples}
+#        cuteSV {input.bam} {input.ref} {output} {OUT_DIR}/{wildcards.samples} \
+#        --threads {params.slots} --max_cluster_bias_INS 100 --diff_ratio_merging_INS 0.3 --max_cluster_bias_DEL 100 --diff_ratio_merging_DEL 0.3
+#        
+#        """
+##Might want to add in rm -r part to rule above to get rid of empty folders 
+
+#Calling SVs
+rule call_vars:
+    input:
+        bam="{OUT_DIR}/{samples}.sorted.bam",
+        bai="{OUT_DIR}/{samples}.sorted.bam.bai"
+    output:
+        "{OUT_DIR}/{samples}.vcf"
+    params:
+        jobname="call_vars",
+        runtime="8:00",
+        memusage="20000",
+        slots="3",
+        misc=" "
+    shell:
+        """
+        sniffles -m {input.bam} -v {output}
+        """
+
+#Converting meth_freq.tsv file into bedGraph file for use in Methrix
+rule tsv_to_bg:
+    input:
+        "{OUT_DIR}/{samples}.meth_freq.tsv"
+    output:
+        "{OUT_DIR}/{samples}.methrix.bedGraph"
+    params:
+        jobname='frequency_to_methrix',
+        runtime='30:00',
+        memusage='10000',
+        slots='2',
+        misc=''
+    shell:
+        "python3 reformat_tsv.py -f {input} -o {output}"
