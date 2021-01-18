@@ -1,6 +1,6 @@
-# DKFZ Cluster Submission Scripts
+# Python and R scripts
 
-Submission scripts for use with the DKFZ's cluster.
+Python and R code (some used, some not) from the project
 
 For help email: k.henry@dkfz-heidelberg.de or brookshenry3@gmail.com
 
@@ -12,8 +12,8 @@ For help email: k.henry@dkfz-heidelberg.de or brookshenry3@gmail.com
 
 ## Description of files:
 
- * do_bamtofastq.sh: Convert a bam file to fastq format
- * do_bwa.sh: [BWA alignment tool](https://github.com/lh3/bwa)
+ * alignment_correlation.py: 
+ * bam_to_fasta.py: convert bam file to fasta file
  * do_canu.sh: [Canu de novo assembler](https://github.com/marbl/canu)
  * do_clair.sh: [Clair SV caller](https://github.com/HKU-BAL/Clair)
  * do_concensus.sh: Create a concensus vcf file from a bam file
