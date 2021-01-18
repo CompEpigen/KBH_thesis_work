@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Package precheck
-PKG_LIST=("samtools" "conda" "minimap2" "f5c")
+PKG_LIST=("samtools" "conda" "ngmlr" "f5c" "sniffles")
 
 for package in "${PKG_LIST[@]}"
 do 
