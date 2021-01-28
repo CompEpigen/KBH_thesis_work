@@ -217,8 +217,8 @@ def main ():
         "NC_000024.10" : "chrY"
         }
 
-    bedpe['chrom1'] = bedpe['chrom1'].map(chr_dict)
-    bedpe['chrom2'] = bedpe['chrom2'].map(chr_dict)
+    #bedpe['chrom1'] = bedpe['chrom1'].map(chr_dict) Need to uncomment this if using alternative chromosomes!!
+    #bedpe['chrom2'] = bedpe['chrom2'].map(chr_dict) ^ same as above, need to include as command line argument
 
     #print(bedpe.head())
 

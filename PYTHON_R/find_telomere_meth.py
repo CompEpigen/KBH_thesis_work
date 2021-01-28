@@ -167,10 +167,10 @@ def main ():
     '''
     
     telomeres = pd.DataFrame(telomeres)
-    telomeres = telomeres.transpose()
+    #telomeres = telomeres.transpose()
     telomeres.columns = ['chromosome', 'start', 'end', 'freq', 'n_meth', 'n_unmeth']
 
-    telomeres.to_csv(args.output + '_' + args.window + 'bp' + '_telomeric_meth.tsv', index=False, sep='\t')
+    telomeres.to_csv(args.output + '_' + str(args.window) + 'bp' + '_telomeric_meth.tsv', index=False, sep='\t')
 
 
 
