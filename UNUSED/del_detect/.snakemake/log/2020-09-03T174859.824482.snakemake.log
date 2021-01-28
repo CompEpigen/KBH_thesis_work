@@ -1,0 +1,36 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	def_region
+	1	index_bams
+	1	split_bam
+	1	split_meth
+	1	subset_meth
+	6
+
+[Thu Sep  3 17:49:00 2020]
+rule def_region:
+    input: data/FAB39075.bam
+    output: output/FAB39075.chr17:64803882-66303882.region.bam
+    jobid: 4
+    wildcards: sample=FAB39075, roi=chr17:64803882-66303882
+
+[Thu Sep  3 17:49:00 2020]
+Error in rule def_region:
+    jobid: 4
+    output: output/FAB39075.chr17:64803882-66303882.region.bam
+
+RuleException:
+CalledProcessError in line 39 of /icgc/dkfzlsdf/analysis/C010/brooks/del_detect/Snakefile:
+Command ' set -euo pipefail;  samtools view -b data/FAB39075.bam 'chr17:64803882-66303882' > output/FAB39075.chr17:64803882-66303882.region.bam ' returned non-zero exit status 127.
+  File "/icgc/dkfzlsdf/analysis/C010/brooks/del_detect/Snakefile", line 39, in __rule_def_region
+  File "/home/k001y/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job def_region since they might be corrupted:
+output/FAB39075.chr17:64803882-66303882.region.bam
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /icgc/dkfzlsdf/analysis/C010/brooks/del_detect/.snakemake/log/2020-09-03T174859.824482.snakemake.log

@@ -1,0 +1,5 @@
+samples: [FAB39075]
+
+roi: [chr17:64803882-66303882] #broad region of interest 
+
+deletion: [65792276-65792280] #Specific deletion of interest

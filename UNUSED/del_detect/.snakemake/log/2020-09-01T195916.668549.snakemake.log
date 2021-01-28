@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 26 of /icgc/dkfzlsdf/analysis/C010/brooks/del_detect/Snakefile:
+Missing input files for rule def_region:
+chr17:64803882-66303882

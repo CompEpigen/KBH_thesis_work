@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in line 19 of /icgc/dkfzlsdf/analysis/C010/brooks/del_detect/Snakefile:
+Missing input files for rule all:
+FAB39075.65792276-65792280_deletions.bam
+FAB39075.65792276-65792280_nodeletions.bam
+FAB39075.65792276-65792280_deletion_readids.txt

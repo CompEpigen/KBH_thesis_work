@@ -1,0 +1,128 @@
+#configfile: "config.yaml"
+#sample = config["samples"]
+#roi = config["roi"]
+#deletion = config["deletion"]
+SAMPLES = ['PDX661']
+ROI = ['chr7:90,816,248-93,892,905']
+DELETION = ['92263572-92445580']
+
+#Note that this snakefile relies on my methylation calling pipeline to have been run beforehand
+
+import os
+
+def activate_environment():
+    os.system("module load samtools/1.9")
+    os.system("module load anaconda3/2019.07")
+    os.system("source activate master-env")
+
+activate_environment()
+
+rule all:
+    input:
+        expand("output/{sample}.{roi}.region.bam", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}.region.bam.bai", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}.meth_calls.tsv", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}_deletion_readids.txt", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}_deletions.bam", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}_nodeletions.bam", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}_deletion_meth_calls.tsv", sample=SAMPLES, roi=ROI),
+        expand("output/{sample}.{roi}_nodeletion_meth_calls.tsv", sample=SAMPLES, roi=ROI)
+
+
+rule def_region:
+    input:
+        bam="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{sample}.sorted.bam"
+    output:
+        "output/{sample}.{roi}.region.bam"
+    #params:
+    shell:
+        "samtools view -b {input.bam} '{wildcards.roi}' > {output}"
+
+#rule index_bams:
+#    input:
+#        "output/{sample}.{roi}.region.bam"
+#    output:
+#        "output/{sample}.{roi}.region.bam.bai"
+    #params:
+    #    jobname="index_bams",
+    #    runtime="8:00",
+    #    memusage="20000",
+    #    slots="1",
+    #    misc=" "
+    shell:
+        "samtools index {input}"
+
+rule subset_meth:
+    input:
+        meth="data/{sample}.meth_calls.tsv",
+        bam="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{sample}.sorted.bam",
+        bai="output/{sample}.{roi}.region.bam.bai"
+    output:
+        "output/{sample}.{roi}.meth_calls.tsv"
+    #params:
+    shell:
+        "python3 scripts/filter_meth.py -f {input.meth} -b {input.bam} -o {output}"
+
+rule split_bam:
+    input:
+        bam="output/{sample}.{roi}.region.bam",
+        bai="output/{sample}.{roi}.region.bam.bai"
+    output:
+        "output/{sample}.{roi}_deletion_readids.txt",
+        "output/{sample}.{roi}_deletions.bam",
+        "output/{sample}.{roi}_nodeletions.bam"
+    #params:
+    shell:
+        "python3 scripts/split_bam.py -b {input.bam} -d {deletion} -o output/{wildcards.sample}.{wildcards.roi}"
+
+rule split_and_clean_meth:
+    input:
+        mc="output/{sample}.{roi}.meth_calls.tsv",
+        ids="output/{sample}.{roi}_deletion_readids.txt"
+    output:
+        "output/{sample}.{roi}_deletion_meth_calls.tsv",
+        "output/{sample}.{roi}_nodeletion_meth_calls.tsv"
+    #params:
+    shell:
+        "python3 scripts/split_clean_meth.py -f {input.mc} -l {input.ids} -o output/{wildcards.sample}.{wildcards.roi}"
+
+#rule cpg_agg:
+#    input:
+        #Will need ref genome, list of BOTH TSV files generated in previous step, path to write output bed & tsv files
+        #ref="reference genome",
+        #meth=
+#    output:
+        #Save bed & tsv files into a new sub-folder in ouput/ called "pycometh/"
+#    params:
+#    shell:
+        #Use pycometh's CpG_Aggregate function here
+
+#Next step might not be necessary for what I want to do
+
+#rule int_agg:
+#    input:
+#    output:
+#    params:
+#    shell:
+        #Use pycometh's Interval_Aggregate function here
+
+#rule meth_comp:
+#    input:
+#    output:
+#    params:
+#    shell:
+        #I'll use pycometh's Meth_Comp function here
+
+#rule comp_report:
+#    input:
+#    output:
+#    params:
+#    shell:
+        #Use pycometh's Comp_Report function here  
+
+
+#pycoMeth CpG_Aggregate -i CLEAN_normal_chroms_meth_calls.tsv \
+#-f /icgc/dkfzlsdf/analysis/C010/Data/Genomes/Hg38/seq/hg38.fa \
+#-b TEST.bed \
+#-t TEST.tsv \
+   

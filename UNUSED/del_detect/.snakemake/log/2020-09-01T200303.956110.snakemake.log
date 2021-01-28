@@ -1,0 +1,43 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	def_region
+	1	index_bams
+	1	subset_meth
+	4
+
+[Tue Sep  1 20:03:04 2020]
+rule def_region:
+    input: FAB39075.bam
+    output: FAB39075.chr17:64803882-66303882.region.bam
+    jobid: 2
+    wildcards: sample=FAB39075, roi=chr17:64803882-66303882
+
+[Tue Sep  1 20:03:04 2020]
+Finished job 2.
+1 of 4 steps (25%) done
+
+[Tue Sep  1 20:03:04 2020]
+rule subset_meth:
+    input: FAB39075.meth_calls.tsv, FAB39075.chr17:64803882-66303882.region.bam
+    output: FAB39075.chr17:64803882-66303882.meth_calls.tsv
+    jobid: 1
+    wildcards: sample=FAB39075, roi=chr17:64803882-66303882
+
+[Tue Sep  1 20:03:04 2020]
+Error in rule subset_meth:
+    jobid: 1
+    output: FAB39075.chr17:64803882-66303882.meth_calls.tsv
+
+RuleException:
+CalledProcessError in line 57 of /icgc/dkfzlsdf/analysis/C010/brooks/del_detect/Snakefile:
+Command ' set -euo pipefail;  python3 filter_bam.py -f FAB39075.meth_calls.tsv -b FAB39075.chr17:64803882-66303882.region.bam -o FAB39075.chr17:64803882-66303882.meth_calls.tsv ' returned non-zero exit status 2.
+  File "/icgc/dkfzlsdf/analysis/C010/brooks/del_detect/Snakefile", line 57, in __rule_subset_meth
+  File "/home/k001y/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /icgc/dkfzlsdf/analysis/C010/brooks/del_detect/.snakemake/log/2020-09-01T200303.956110.snakemake.log

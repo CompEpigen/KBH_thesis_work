@@ -1,0 +1,64 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	def_region
+	1	index_bams
+	1	split_bam
+	1	split_meth
+	1	subset_meth
+	6
+
+[Wed Sep  2 20:17:07 2020]
+rule def_region:
+    input: data/FAB39075.bam
+    output: output/FAB39075.chr17:64803882-66303882.region.bam
+    jobid: 5
+    wildcards: sample=FAB39075, roi=chr17:64803882-66303882
+
+[Wed Sep  2 20:17:07 2020]
+Finished job 5.
+1 of 6 steps (17%) done
+
+[Wed Sep  2 20:17:07 2020]
+rule index_bams:
+    input: output/FAB39075.chr17:64803882-66303882.region.bam
+    output: output/FAB39075.chr17:64803882-66303882.region.bam.bai
+    jobid: 3
+    wildcards: sample=FAB39075, roi=chr17:64803882-66303882
+
+[Wed Sep  2 20:17:07 2020]
+Finished job 3.
+2 of 6 steps (33%) done
+
+[Wed Sep  2 20:17:07 2020]
+rule subset_meth:
+    input: data/FAB39075.meth_calls.tsv, output/FAB39075.chr17:64803882-66303882.region.bam, output/FAB39075.chr17:64803882-66303882.region.bam.bai
+    output: output/FAB39075.chr17:64803882-66303882.meth_calls.tsv
+    jobid: 4
+    wildcards: sample=FAB39075, roi=chr17:64803882-66303882
+
+[Wed Sep  2 20:17:22 2020]
+Finished job 4.
+3 of 6 steps (50%) done
+
+[Wed Sep  2 20:17:22 2020]
+rule split_bam:
+    input: output/FAB39075.chr17:64803882-66303882.region.bam, output/FAB39075.chr17:64803882-66303882.region.bam.bai
+    output: output/FAB39075.chr17:64803882-66303882_deletion_readids.txt, output/FAB39075.chr17:64803882-66303882_deletions.bam, output/FAB39075.chr17:64803882-66303882_nodeletions.bam
+    jobid: 1
+    wildcards: sample=FAB39075, roi=chr17:64803882-66303882
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 75 of /icgc/dkfzlsdf/analysis/C010/brooks/del_detect/Snakefile:
+Missing files after 5 seconds:
+output/FAB39075.chr17:64803882-66303882_deletion_readids.txt
+output/FAB39075.chr17:64803882-66303882_deletions.bam
+output/FAB39075.chr17:64803882-66303882_nodeletions.bam
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /icgc/dkfzlsdf/analysis/C010/brooks/del_detect/.snakemake/log/2020-09-02T201706.669357.snakemake.log
