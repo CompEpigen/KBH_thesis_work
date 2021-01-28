@@ -1,3 +1,0 @@
-AttributeError in line 16 of /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/Snakefile:
-'list' object has no attribute 'split'
-  File "/icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/Snakefile", line 16, in <module>
