@@ -1,0 +1,252 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 20
+Job counts:
+	count	jobs
+	1	all
+	12	calc_freq
+	12	call_meth
+	12	index_bams
+	37
+
+[Fri Sep 11 13:54:49 2020]
+rule index_bams:
+    input: output/mapped/FAF01132-84868110_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAF01132-84868110_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 72
+    wildcards: sample=FAF01132-84868110_Multi_SQK-LSK108_WA01
+
+Submitted job 72 with external jobid 'Job <3997404> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:54:50 2020]
+rule index_bams:
+    input: output/mapped/FAF18554-4178920553_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAF18554-4178920553_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 76
+    wildcards: sample=FAF18554-4178920553_Multi_SQK-LSK108_WA01
+
+Submitted job 76 with external jobid 'Job <3997405> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:54:50 2020]
+rule index_bams:
+    input: output/mapped/FAB45271-152889212_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB45271-152889212_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 65
+    wildcards: sample=FAB45271-152889212_Multi_SQK-LSK108_WA01
+
+Submitted job 65 with external jobid 'Job <3997406> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:54:50 2020]
+rule index_bams:
+    input: output/mapped/FAB49908-481119249_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB49908-481119249_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 69
+    wildcards: sample=FAB49908-481119249_Multi_SQK-LSK108_WA01
+
+Submitted job 69 with external jobid 'Job <3997407> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:54:50 2020]
+rule index_bams:
+    input: output/mapped/FAF01127-353303576_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAF01127-353303576_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 71
+    wildcards: sample=FAF01127-353303576_Multi_SQK-LSK108_WA01
+
+Submitted job 71 with external jobid 'Job <3997408> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:54:50 2020]
+rule index_bams:
+    input: output/mapped/FAF01169-4245879798_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAF01169-4245879798_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 73
+    wildcards: sample=FAF01169-4245879798_Multi_SQK-LSK108_WA01
+
+Submitted job 73 with external jobid 'Job <3997409> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:54:51 2020]
+rule index_bams:
+    input: output/mapped/FAB49164-4045668814_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB49164-4045668814_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 60
+    wildcards: sample=FAB49164-4045668814_Multi_SQK-LSK108_WA01
+
+Submitted job 60 with external jobid 'Job <3997410> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:54:51 2020]
+rule index_bams:
+    input: output/mapped/FAB42451-4239353418_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB42451-4239353418_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 62
+    wildcards: sample=FAB42451-4239353418_Multi_SQK-LSK108_WA01
+
+Submitted job 62 with external jobid 'Job <3997411> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:54:51 2020]
+rule index_bams:
+    input: output/mapped/FAF05869-87644245_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAF05869-87644245_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 75
+    wildcards: sample=FAF05869-87644245_Multi_SQK-LSK108_WA01
+
+Submitted job 75 with external jobid 'Job <3997412> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:54:51 2020]
+rule index_bams:
+    input: output/mapped/FAB45277-86567043_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB45277-86567043_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 66
+    wildcards: sample=FAB45277-86567043_Multi_SQK-LSK108_WA01
+
+Submitted job 66 with external jobid 'Job <3997413> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:54:51 2020]
+rule index_bams:
+    input: output/mapped/FAB49712-622291475_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB49712-622291475_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 68
+    wildcards: sample=FAB49712-622291475_Multi_SQK-LSK108_WA01
+
+Submitted job 68 with external jobid 'Job <3997414> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:54:52 2020]
+rule index_bams:
+    input: output/mapped/FAB49914-3775529215_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB49914-3775529215_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 70
+    wildcards: sample=FAB49914-3775529215_Multi_SQK-LSK108_WA01
+
+Submitted job 70 with external jobid 'Job <3997415> is submitted to default queue <long>.'.
+[Fri Sep 11 13:54:59 2020]
+Error in rule index_bams:
+    jobid: 72
+    output: output/mapped/FAF01132-84868110_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    shell:
+        samtools index output/mapped/FAF01132-84868110_Multi_SQK-LSK108_WA01.sorted.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Job <3997404> is submitted to default queue <long>.
+
+Error executing rule index_bams on cluster (jobid: 72, external: Job <3997404> is submitted to default queue <long>., jobscript: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/tmp.u7wk3wdn/snakejob.index_bams.72.sh). For error details see the cluster log and the log files of the involved rule(s).
+Job failed, going on with independent jobs.
+[Fri Sep 11 13:54:59 2020]
+Error in rule index_bams:
+    jobid: 76
+    output: output/mapped/FAF18554-4178920553_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    shell:
+        samtools index output/mapped/FAF18554-4178920553_Multi_SQK-LSK108_WA01.sorted.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Job <3997405> is submitted to default queue <long>.
+
+Error executing rule index_bams on cluster (jobid: 76, external: Job <3997405> is submitted to default queue <long>., jobscript: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/tmp.u7wk3wdn/snakejob.index_bams.76.sh). For error details see the cluster log and the log files of the involved rule(s).
+Job failed, going on with independent jobs.
+[Fri Sep 11 13:54:59 2020]
+Error in rule index_bams:
+    jobid: 65
+    output: output/mapped/FAB45271-152889212_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    shell:
+        samtools index output/mapped/FAB45271-152889212_Multi_SQK-LSK108_WA01.sorted.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Job <3997406> is submitted to default queue <long>.
+
+Error executing rule index_bams on cluster (jobid: 65, external: Job <3997406> is submitted to default queue <long>., jobscript: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/tmp.u7wk3wdn/snakejob.index_bams.65.sh). For error details see the cluster log and the log files of the involved rule(s).
+Job failed, going on with independent jobs.
+[Fri Sep 11 13:54:59 2020]
+Error in rule index_bams:
+    jobid: 69
+    output: output/mapped/FAB49908-481119249_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    shell:
+        samtools index output/mapped/FAB49908-481119249_Multi_SQK-LSK108_WA01.sorted.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Job <3997407> is submitted to default queue <long>.
+
+Error executing rule index_bams on cluster (jobid: 69, external: Job <3997407> is submitted to default queue <long>., jobscript: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/tmp.u7wk3wdn/snakejob.index_bams.69.sh). For error details see the cluster log and the log files of the involved rule(s).
+Job failed, going on with independent jobs.
+[Fri Sep 11 13:54:59 2020]
+Error in rule index_bams:
+    jobid: 71
+    output: output/mapped/FAF01127-353303576_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    shell:
+        samtools index output/mapped/FAF01127-353303576_Multi_SQK-LSK108_WA01.sorted.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Job <3997408> is submitted to default queue <long>.
+
+Error executing rule index_bams on cluster (jobid: 71, external: Job <3997408> is submitted to default queue <long>., jobscript: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/tmp.u7wk3wdn/snakejob.index_bams.71.sh). For error details see the cluster log and the log files of the involved rule(s).
+Job failed, going on with independent jobs.
+[Fri Sep 11 13:54:59 2020]
+Error in rule index_bams:
+    jobid: 73
+    output: output/mapped/FAF01169-4245879798_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    shell:
+        samtools index output/mapped/FAF01169-4245879798_Multi_SQK-LSK108_WA01.sorted.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Job <3997409> is submitted to default queue <long>.
+
+Error executing rule index_bams on cluster (jobid: 73, external: Job <3997409> is submitted to default queue <long>., jobscript: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/tmp.u7wk3wdn/snakejob.index_bams.73.sh). For error details see the cluster log and the log files of the involved rule(s).
+Job failed, going on with independent jobs.
+[Fri Sep 11 13:54:59 2020]
+Error in rule index_bams:
+    jobid: 60
+    output: output/mapped/FAB49164-4045668814_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    shell:
+        samtools index output/mapped/FAB49164-4045668814_Multi_SQK-LSK108_WA01.sorted.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Job <3997410> is submitted to default queue <long>.
+
+Error executing rule index_bams on cluster (jobid: 60, external: Job <3997410> is submitted to default queue <long>., jobscript: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/tmp.u7wk3wdn/snakejob.index_bams.60.sh). For error details see the cluster log and the log files of the involved rule(s).
+Job failed, going on with independent jobs.
+[Fri Sep 11 13:54:59 2020]
+Error in rule index_bams:
+    jobid: 62
+    output: output/mapped/FAB42451-4239353418_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    shell:
+        samtools index output/mapped/FAB42451-4239353418_Multi_SQK-LSK108_WA01.sorted.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Job <3997411> is submitted to default queue <long>.
+
+Error executing rule index_bams on cluster (jobid: 62, external: Job <3997411> is submitted to default queue <long>., jobscript: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/tmp.u7wk3wdn/snakejob.index_bams.62.sh). For error details see the cluster log and the log files of the involved rule(s).
+Job failed, going on with independent jobs.
+[Fri Sep 11 13:54:59 2020]
+Error in rule index_bams:
+    jobid: 75
+    output: output/mapped/FAF05869-87644245_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    shell:
+        samtools index output/mapped/FAF05869-87644245_Multi_SQK-LSK108_WA01.sorted.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Job <3997412> is submitted to default queue <long>.
+
+Error executing rule index_bams on cluster (jobid: 75, external: Job <3997412> is submitted to default queue <long>., jobscript: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/tmp.u7wk3wdn/snakejob.index_bams.75.sh). For error details see the cluster log and the log files of the involved rule(s).
+Job failed, going on with independent jobs.
+[Fri Sep 11 13:54:59 2020]
+Error in rule index_bams:
+    jobid: 66
+    output: output/mapped/FAB45277-86567043_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    shell:
+        samtools index output/mapped/FAB45277-86567043_Multi_SQK-LSK108_WA01.sorted.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Job <3997413> is submitted to default queue <long>.
+
+Error executing rule index_bams on cluster (jobid: 66, external: Job <3997413> is submitted to default queue <long>., jobscript: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/tmp.u7wk3wdn/snakejob.index_bams.66.sh). For error details see the cluster log and the log files of the involved rule(s).
+Job failed, going on with independent jobs.
+[Fri Sep 11 13:55:00 2020]
+Error in rule index_bams:
+    jobid: 68
+    output: output/mapped/FAB49712-622291475_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    shell:
+        samtools index output/mapped/FAB49712-622291475_Multi_SQK-LSK108_WA01.sorted.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Job <3997414> is submitted to default queue <long>.
+
+Error executing rule index_bams on cluster (jobid: 68, external: Job <3997414> is submitted to default queue <long>., jobscript: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/tmp.u7wk3wdn/snakejob.index_bams.68.sh). For error details see the cluster log and the log files of the involved rule(s).
+Job failed, going on with independent jobs.
+[Fri Sep 11 13:55:00 2020]
+Error in rule index_bams:
+    jobid: 70
+    output: output/mapped/FAB49914-3775529215_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    shell:
+        samtools index output/mapped/FAB49914-3775529215_Multi_SQK-LSK108_WA01.sorted.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Job <3997415> is submitted to default queue <long>.
+
+Error executing rule index_bams on cluster (jobid: 70, external: Job <3997415> is submitted to default queue <long>., jobscript: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/tmp.u7wk3wdn/snakejob.index_bams.70.sh). For error details see the cluster log and the log files of the involved rule(s).
+Job failed, going on with independent jobs.
+Exiting because a job execution failed. Look above for error message
+Complete log: /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/.snakemake/log/2020-09-11T135448.284962.snakemake.log

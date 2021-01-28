@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 42 of /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/Snakefile:
+Missing input files for rule index_reads:
+/icgc/dkfzlsdf/analysis/C010/mayerma/methylation_analysis/raw/FAB39075-4246400039_Multi_SQK-LSK108_WA01,/guppy/

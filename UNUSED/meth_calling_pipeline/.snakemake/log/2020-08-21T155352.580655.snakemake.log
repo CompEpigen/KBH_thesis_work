@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 46 of /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/Snakefile:
+Missing input files for rule ngmlr_align:
+data/FAB39075-4246400039_Multi_SQK-LSK108_WA01.fq

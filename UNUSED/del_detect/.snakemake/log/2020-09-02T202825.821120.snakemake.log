@@ -1,4 +1,0 @@
-Building DAG of jobs...
-WildcardError in line 75 of /icgc/dkfzlsdf/analysis/C010/brooks/del_detect/Snakefile:
-Wildcards in input files cannot be determined from output files:
-'sample'

@@ -1,3 +1,0 @@
-WildcardError in line 21 of /icgc/dkfzlsdf/analysis/C010/brooks/del_detect/Snakefile:
-No values given for wildcard 'roi'.
-  File "/icgc/dkfzlsdf/analysis/C010/brooks/del_detect/Snakefile", line 21, in <module>

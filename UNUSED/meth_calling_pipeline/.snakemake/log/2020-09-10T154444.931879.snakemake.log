@@ -1,0 +1,119 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 20
+Job counts:
+	count	jobs
+	1	all
+	12	calc_freq
+	12	call_meth
+	12	index_bams
+	12	ngmlr_align
+	49
+
+[Thu Sep 10 15:44:46 2020]
+rule ngmlr_align:
+    input: GCF_000001405.26_GRCh38_genomic.fna, data/FAF18554-4178920553_Multi_SQK-LSK108_WA01.merged.fq
+    output: output/mapped/FAF18554-4178920553_Multi_SQK-LSK108_WA01.sorted.bam
+    jobid: 57
+    wildcards: sample=FAF18554-4178920553_Multi_SQK-LSK108_WA01
+
+Submitted job 57 with external jobid 'Job <3994901> is submitted to default queue <verylong>.'.
+
+[Thu Sep 10 15:44:46 2020]
+rule ngmlr_align:
+    input: GCF_000001405.26_GRCh38_genomic.fna, data/FAB45271-152889212_Multi_SQK-LSK108_WA01.merged.fq
+    output: output/mapped/FAB45271-152889212_Multi_SQK-LSK108_WA01.sorted.bam
+    jobid: 46
+    wildcards: sample=FAB45271-152889212_Multi_SQK-LSK108_WA01
+
+Submitted job 46 with external jobid 'Job <3994902> is submitted to default queue <verylong>.'.
+
+[Thu Sep 10 15:44:46 2020]
+rule ngmlr_align:
+    input: GCF_000001405.26_GRCh38_genomic.fna, data/FAB49908-481119249_Multi_SQK-LSK108_WA01.merged.fq
+    output: output/mapped/FAB49908-481119249_Multi_SQK-LSK108_WA01.sorted.bam
+    jobid: 50
+    wildcards: sample=FAB49908-481119249_Multi_SQK-LSK108_WA01
+
+Submitted job 50 with external jobid 'Job <3994903> is submitted to default queue <verylong>.'.
+
+[Thu Sep 10 15:44:46 2020]
+rule ngmlr_align:
+    input: GCF_000001405.26_GRCh38_genomic.fna, data/FAF01127-353303576_Multi_SQK-LSK108_WA01.merged.fq
+    output: output/mapped/FAF01127-353303576_Multi_SQK-LSK108_WA01.sorted.bam
+    jobid: 52
+    wildcards: sample=FAF01127-353303576_Multi_SQK-LSK108_WA01
+
+Submitted job 52 with external jobid 'Job <3994904> is submitted to default queue <verylong>.'.
+
+[Thu Sep 10 15:44:46 2020]
+rule ngmlr_align:
+    input: GCF_000001405.26_GRCh38_genomic.fna, data/FAF01169-4245879798_Multi_SQK-LSK108_WA01.merged.fq
+    output: output/mapped/FAF01169-4245879798_Multi_SQK-LSK108_WA01.sorted.bam
+    jobid: 54
+    wildcards: sample=FAF01169-4245879798_Multi_SQK-LSK108_WA01
+
+Submitted job 54 with external jobid 'Job <3994905> is submitted to default queue <verylong>.'.
+
+[Thu Sep 10 15:44:47 2020]
+rule ngmlr_align:
+    input: GCF_000001405.26_GRCh38_genomic.fna, data/FAB49164-4045668814_Multi_SQK-LSK108_WA01.merged.fq
+    output: output/mapped/FAB49164-4045668814_Multi_SQK-LSK108_WA01.sorted.bam
+    jobid: 41
+    wildcards: sample=FAB49164-4045668814_Multi_SQK-LSK108_WA01
+
+Submitted job 41 with external jobid 'Job <3994906> is submitted to default queue <verylong>.'.
+
+[Thu Sep 10 15:44:47 2020]
+rule ngmlr_align:
+    input: GCF_000001405.26_GRCh38_genomic.fna, data/FAF05869-87644245_Multi_SQK-LSK108_WA01.merged.fq
+    output: output/mapped/FAF05869-87644245_Multi_SQK-LSK108_WA01.sorted.bam
+    jobid: 56
+    wildcards: sample=FAF05869-87644245_Multi_SQK-LSK108_WA01
+
+Submitted job 56 with external jobid 'Job <3994907> is submitted to default queue <verylong>.'.
+
+[Thu Sep 10 15:44:47 2020]
+rule ngmlr_align:
+    input: GCF_000001405.26_GRCh38_genomic.fna, data/FAB42451-4239353418_Multi_SQK-LSK108_WA01.merged.fq
+    output: output/mapped/FAB42451-4239353418_Multi_SQK-LSK108_WA01.sorted.bam
+    jobid: 43
+    wildcards: sample=FAB42451-4239353418_Multi_SQK-LSK108_WA01
+
+Submitted job 43 with external jobid 'Job <3994908> is submitted to default queue <verylong>.'.
+
+[Thu Sep 10 15:44:47 2020]
+rule ngmlr_align:
+    input: GCF_000001405.26_GRCh38_genomic.fna, data/FAB45277-86567043_Multi_SQK-LSK108_WA01.merged.fq
+    output: output/mapped/FAB45277-86567043_Multi_SQK-LSK108_WA01.sorted.bam
+    jobid: 47
+    wildcards: sample=FAB45277-86567043_Multi_SQK-LSK108_WA01
+
+Submitted job 47 with external jobid 'Job <3994909> is submitted to default queue <verylong>.'.
+
+[Thu Sep 10 15:44:47 2020]
+rule ngmlr_align:
+    input: GCF_000001405.26_GRCh38_genomic.fna, data/FAB49712-622291475_Multi_SQK-LSK108_WA01.merged.fq
+    output: output/mapped/FAB49712-622291475_Multi_SQK-LSK108_WA01.sorted.bam
+    jobid: 49
+    wildcards: sample=FAB49712-622291475_Multi_SQK-LSK108_WA01
+
+Submitted job 49 with external jobid 'Job <3994910> is submitted to default queue <verylong>.'.
+
+[Thu Sep 10 15:44:48 2020]
+rule ngmlr_align:
+    input: GCF_000001405.26_GRCh38_genomic.fna, data/FAB49914-3775529215_Multi_SQK-LSK108_WA01.merged.fq
+    output: output/mapped/FAB49914-3775529215_Multi_SQK-LSK108_WA01.sorted.bam
+    jobid: 51
+    wildcards: sample=FAB49914-3775529215_Multi_SQK-LSK108_WA01
+
+Submitted job 51 with external jobid 'Job <3994911> is submitted to default queue <verylong>.'.
+
+[Thu Sep 10 15:44:48 2020]
+rule ngmlr_align:
+    input: GCF_000001405.26_GRCh38_genomic.fna, data/FAF01132-84868110_Multi_SQK-LSK108_WA01.merged.fq
+    output: output/mapped/FAF01132-84868110_Multi_SQK-LSK108_WA01.sorted.bam
+    jobid: 53
+    wildcards: sample=FAF01132-84868110_Multi_SQK-LSK108_WA01
+
+Submitted job 53 with external jobid 'Job <3994912> is submitted to default queue <verylong>.'.

@@ -1,0 +1,29 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 20
+Job counts:
+	count	jobs
+	1	all
+	1	calc_freq
+	1	call_meth
+	1	index_bams
+	1	index_reads
+	1	merge_fastqs
+	1	ngmlr_align
+	7
+
+[Fri Aug 21 16:09:18 2020]
+rule merge_fastqs:
+    input: data/
+    output: data/FAB39075-4246400039_Multi_SQK-LSK108_WA01.merged.fastq
+    jobid: 5
+    wildcards: sample=FAB39075-4246400039_Multi_SQK-LSK108_WA01
+
+RuleException in line 19 of /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/Snakefile:
+NameError: The name 'sample' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}
+  File "/home/k001y/miniconda3/envs/ngmlr-env/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 111, in run_jobs
+  File "/home/k001y/miniconda3/envs/ngmlr-env/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 876, in run
+  File "/home/k001y/miniconda3/envs/ngmlr-env/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 677, in _run
+  File "/home/k001y/miniconda3/envs/ngmlr-env/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 203, in _run
+  File "/home/k001y/miniconda3/envs/ngmlr-env/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 131, in _run
+  File "/home/k001y/miniconda3/envs/ngmlr-env/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 137, in printjob

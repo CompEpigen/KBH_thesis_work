@@ -1,0 +1,26 @@
+Building DAG of jobs...
+Job counts:
+	count	jobs
+	1	all
+	19	calc_freq
+	19	call_meth
+	19	index_bams
+	19	index_reads
+	19	merge_fastqs
+	19	ngmlr_align
+	115
+
+[Wed Sep  9 19:37:16 2020]
+rule merge_fastqs:
+    input: /icgc/dkfzlsdf/analysis/C010/mayerma/methylation_analysis/fastq/
+    output: data/FAB49908-481119249_Multi_SQK-LSK108_WA01.merged.fq
+    jobid: 12
+    wildcards: sample=FAB49908-481119249_Multi_SQK-LSK108_WA01
+
+RuleException in line 26 of /icgc/dkfzlsdf/analysis/C010/brooks/meth_calling_pipeline/Snakefile:
+NameError: The name 'sample' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}
+  File "/home/k001y/.conda/envs/pycometh/lib/python3.6/site-packages/snakemake/executors/__init__.py", line 115, in run_jobs
+  File "/home/k001y/.conda/envs/pycometh/lib/python3.6/site-packages/snakemake/executors/__init__.py", line 120, in run
+  File "/home/k001y/.conda/envs/pycometh/lib/python3.6/site-packages/snakemake/executors/__init__.py", line 131, in _run
+  File "/home/k001y/.conda/envs/pycometh/lib/python3.6/site-packages/snakemake/executors/__init__.py", line 151, in printjob
+  File "/home/k001y/.conda/envs/pycometh/lib/python3.6/site-packages/snakemake/executors/__init__.py", line 137, in printjob

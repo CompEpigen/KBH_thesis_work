@@ -1,3 +1,0 @@
-NameError in line 22 of /icgc/dkfzlsdf/analysis/C010/brooks/del_detect/Snakefile:
-name 'samples' is not defined
-  File "/icgc/dkfzlsdf/analysis/C010/brooks/del_detect/Snakefile", line 22, in <module>

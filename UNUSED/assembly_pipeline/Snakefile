@@ -1,0 +1,228 @@
+#configfile: "config.yaml"
+#Will need location of fast5 files, flowcell, kit, ref genome
+SAMPLES = ['PDX661']
+config_file = '/home/k001y/programs/ont-guppy-gpu/data/dna_r9.4.1_450bps_fast.cfg'
+genomeSize = '3g'
+
+import os
+
+def activate_environment():
+    os.system("module load samtools/1.9")
+    os.system("module load anaconda3/2019.07")
+    os.system("source activate pycoqc")
+
+activate_environment()
+
+rule all:
+    input:
+        #"data/fastq/",
+        #"data/fastq/sequencing_summary.txt",
+        expand("output/{sample}_pycoQC_output.html", sample=SAMPLES),
+        expand("output/{sample}.merged.fastq", sample=SAMPLES),
+        expand("output/{sample}.merged.fastq.index.gzi", sample=SAMPLES),
+        expand("output/{sample}.merged.fastq.index.fai", sample=SAMPLES),
+        expand("output/{sample}.merged.fastq.index.readdb", sample=SAMPLES) #,
+        #"output/draft/"
+
+#Removing the move_and_basecall rule because it should not be run as part of the pipeline 
+"""
+rule move_and_basecall:
+    input:
+        f5s="fast5_files/" #Will need to add in wildcard specification here
+    output:
+        fqs=directory("fastq/"),
+        ss="fastq/sequencing_summary.txt"
+    params:
+        jobname="move_and_basecall",
+        runtime="1:00",
+        memusage="5000",
+        slots="5",
+        misc="-gpu num=1:j_exclusive=yes:mode=exclusive_process:gmem=5G -q gputest"
+    shell:
+        '''
+        echo 'Moving fast5 files to /datasets...'
+        
+        rsync -rtu {input.f5s} /datasets/datasets_k001y/guppy_gpu/fast5_files/
+
+        echo 'Preparing files for basecalling...'
+
+        mkdir /datasets/datasets_k001y/guppy_gpu/basecalled/
+
+        DATASET_LOCATION=/datasets/datasets_k001y/guppy_gpu/fast5_files/
+        EXPERIMENT_LOCATION=/datasets/datasets_k001y/guppy_gpu/basecalled/           
+
+        tmp_dir=/ssd/k001y/${{LSB_JOBID}}
+
+        tmp_dir_data=${{tmp_dir}}/data # this is where I will store my dataset
+        mkdir $tmp_dir_data
+        tmp_dir_exp=${{tmp_dir}}/exp # here results are stored
+        mkdir $tmp_dir_exp
+
+        rsync -rtu ${{DATASET_LOCATION}}/ ${{tmp_dir_data}} # this copies the data to the SSD
+        rsync -rtu ${{EXPERIMENT_LOCATION}}/ ${{tmp_dir_exp}} # this copies (previous) experiment results to the SSD
+
+        DATASET_LOCATION_old=$DATASET_LOCATION
+        DATASET_LOCATION=$tmp_dir_data
+        export DATASET_LOCATION
+        EXPERIMENT_LOCATION_old=$EXPERIMENT_LOCATION
+        EXPERIMENT_LOCATION=$tmp_dir_exp
+        export EXPERIMENT_LOCATION
+
+        echo 'Basecalling...'
+
+        guppy_basecaller --input_path $DATASET_LOCATION \
+        --save_path $EXPERIMENT_LOCATION \
+        -c {config_file} \
+        --num_callers {params.slots} \
+        -x auto
+
+        rsync -rtu ${{EXPERIMENT_LOCATION}}/ ${{EXPERIMENT_LOCATION_old}}
+
+        echo 'Moving output back to C010...'
+
+        rsync -rtu ${{EXPERIMENT_LOCATION_old}}/ /icgc/dkfzlsdf/analysis/C010/brooks/testing/guppy_gpu/{output.fqs}
+        '''
+"""
+
+rule pycoqc:
+    input:
+        "/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_basecalled/{sample}/hac_cfg/sequencing_summary.txt"
+    output:
+        "output/{sample}_pycoQC_output.html"
+    params:
+        jobname="QC",
+        runtime="4:00",
+        memusage="10000",
+        slots="1",
+        misc=" "
+    shell:
+        "pycoQC -f {input} -o {output}"
+
+rule merge_fastqs:
+    input:
+        "/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_basecalled/{sample}/hac_cfg/"
+    output:
+        "output/{sample}.merged.fastq"
+    params:
+        jobname="merge_fqs",
+        runtime="1:00",
+        memusage="5000",
+        slots="1",
+        misc=" "
+    shell:
+        "cat {input}/*.fastq > {output}"
+
+rule index:
+    input:
+        f5s="/icgc/dkfzlsdf/analysis/C010/brooks/nanopore_raw/{sample}/fast5/", #need to change this, might be an issue when working with PDX661 sample
+        fq="output/{sample}.merged.fastq"
+    output:
+        "output/{sample}.merged.fastq.index",
+        "output/{sample}.merged.fastq.index.gzi",
+        "output/{sample}.merged.fastq.index.fai",
+        "output/{sample}.merged.fastq.index.readdb"
+    params:
+        jobname="index_reads",
+        runtime="8:00",
+        memusage="5000",
+        slots="10",
+        misc=" "
+    shell:
+        "f5c index -d {input.f5s} {input.fq}"
+
+#rule compute_draft:
+#    input:
+#        fqs=expand("output/{sample}.merged.fastq", sample=SAMPLES) #,
+#        #prefix=expand("{sample}", sample=SAMPLES)
+#    output:
+#        directory("output/{sample}_draft/")
+#    params:
+#        jobname="compute_draft_genome",
+#        runtime="24:00",
+#        memusage="20000",
+#        slots="10",
+#        misc=" "
+#    shell:
+#        "canu -p {SAMPLES} -d {output} genomeSize={genomeSize} -nanopore-raw {input.fqs}"
+
+
+
+rule minimap2_align:
+    input:
+        ref="GCF_000001405.26_GRCh38_genomic.fna",
+        fq="output/{sample}.merged.fq"
+    output:
+        "output/{sample}.sorted.bam"
+    params:
+        jobname="index_reads",
+        runtime="8:00",
+        memusage="20000",
+        slots="10",
+        misc=" "
+    shell:
+        "minimap2 -t {params.slots} -ax map-ont {input.ref} {input.fq} | samtools sort -o "
+
+rule index_bams:
+    input:
+        "output/{sample}.sorted.bam"
+    output:
+        "output/{sample}.sorted.bam.bai"
+    params:
+        jobname="index_bams",
+        runtime="8:00",
+        memusage="20000",
+        slots="1",
+        misc=" "
+    shell:
+        "samtools index {input}"
+
+"""
+
+rule segment_genome:
+    input:
+    output:
+    params:
+        jobname="index_reads",
+        runtime="8:00",
+        memusage="20000",
+        slots="10",
+        misc=" "
+    shell:
+        "python3 /home/k001y/nanopolish/scripts/nanopolish_makerange.py  "
+
+rule concensus:
+    input:
+    output:
+    params:
+    shell:
+
+rule vcf2fasta:
+    input:
+    output:
+    params:
+        jobname="index_reads",
+        runtime="8:00",
+        memusage="20000",
+        slots="10",
+        misc=" "
+    shell:
+        "/home/k001y/nanopolish/nanopolish vcf2fasta "
+
+rule merge:
+    input:
+    output:
+    params:
+    shell:
+
+rule eval_assembly:
+    input:
+    output:
+    params:
+        jobname="index_reads",
+        runtime="8:00",
+        memusage="20000",
+        slots="10",
+        misc=" "
+    shell:
+
+"""

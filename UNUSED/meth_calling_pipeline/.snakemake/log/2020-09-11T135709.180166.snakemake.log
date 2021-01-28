@@ -1,0 +1,262 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 20
+Job counts:
+	count	jobs
+	1	all
+	12	calc_freq
+	12	call_meth
+	12	index_bams
+	37
+
+[Fri Sep 11 13:57:10 2020]
+rule index_bams:
+    input: output/mapped/FAF01132-84868110_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAF01132-84868110_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 72
+    wildcards: sample=FAF01132-84868110_Multi_SQK-LSK108_WA01
+
+Submitted job 72 with external jobid 'Job <3997420> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:57:10 2020]
+rule index_bams:
+    input: output/mapped/FAF18554-4178920553_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAF18554-4178920553_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 76
+    wildcards: sample=FAF18554-4178920553_Multi_SQK-LSK108_WA01
+
+Submitted job 76 with external jobid 'Job <3997421> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:57:10 2020]
+rule index_bams:
+    input: output/mapped/FAB45271-152889212_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB45271-152889212_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 65
+    wildcards: sample=FAB45271-152889212_Multi_SQK-LSK108_WA01
+
+Submitted job 65 with external jobid 'Job <3997422> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:57:11 2020]
+rule index_bams:
+    input: output/mapped/FAB49908-481119249_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB49908-481119249_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 69
+    wildcards: sample=FAB49908-481119249_Multi_SQK-LSK108_WA01
+
+Submitted job 69 with external jobid 'Job <3997423> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:57:11 2020]
+rule index_bams:
+    input: output/mapped/FAF01127-353303576_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAF01127-353303576_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 71
+    wildcards: sample=FAF01127-353303576_Multi_SQK-LSK108_WA01
+
+Submitted job 71 with external jobid 'Job <3997424> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:57:11 2020]
+rule index_bams:
+    input: output/mapped/FAF01169-4245879798_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAF01169-4245879798_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 73
+    wildcards: sample=FAF01169-4245879798_Multi_SQK-LSK108_WA01
+
+Submitted job 73 with external jobid 'Job <3997425> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:57:11 2020]
+rule index_bams:
+    input: output/mapped/FAB49164-4045668814_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB49164-4045668814_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 60
+    wildcards: sample=FAB49164-4045668814_Multi_SQK-LSK108_WA01
+
+Submitted job 60 with external jobid 'Job <3997426> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:57:11 2020]
+rule index_bams:
+    input: output/mapped/FAB42451-4239353418_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB42451-4239353418_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 62
+    wildcards: sample=FAB42451-4239353418_Multi_SQK-LSK108_WA01
+
+Submitted job 62 with external jobid 'Job <3997427> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:57:11 2020]
+rule index_bams:
+    input: output/mapped/FAF05869-87644245_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAF05869-87644245_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 75
+    wildcards: sample=FAF05869-87644245_Multi_SQK-LSK108_WA01
+
+Submitted job 75 with external jobid 'Job <3997428> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:57:12 2020]
+rule index_bams:
+    input: output/mapped/FAB45277-86567043_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB45277-86567043_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 66
+    wildcards: sample=FAB45277-86567043_Multi_SQK-LSK108_WA01
+
+Submitted job 66 with external jobid 'Job <3997429> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:57:12 2020]
+rule index_bams:
+    input: output/mapped/FAB49712-622291475_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB49712-622291475_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 68
+    wildcards: sample=FAB49712-622291475_Multi_SQK-LSK108_WA01
+
+Submitted job 68 with external jobid 'Job <3997430> is submitted to default queue <long>.'.
+
+[Fri Sep 11 13:57:12 2020]
+rule index_bams:
+    input: output/mapped/FAB49914-3775529215_Multi_SQK-LSK108_WA01.sorted.bam
+    output: output/mapped/FAB49914-3775529215_Multi_SQK-LSK108_WA01.sorted.bam.bai
+    jobid: 70
+    wildcards: sample=FAB49914-3775529215_Multi_SQK-LSK108_WA01
+
+Submitted job 70 with external jobid 'Job <3997431> is submitted to default queue <long>.'.
+[Fri Sep 11 13:59:21 2020]
+Finished job 76.
+1 of 37 steps (3%) done
+[Fri Sep 11 13:59:21 2020]
+Finished job 65.
+2 of 37 steps (5%) done
+[Fri Sep 11 13:59:21 2020]
+Finished job 69.
+3 of 37 steps (8%) done
+[Fri Sep 11 13:59:21 2020]
+Finished job 66.
+4 of 37 steps (11%) done
+
+[Fri Sep 11 13:59:21 2020]
+rule call_meth:
+    input: output/mapped/FAF18554-4178920553_Multi_SQK-LSK108_WA01.sorted.bam, output/mapped/FAF18554-4178920553_Multi_SQK-LSK108_WA01.sorted.bam.bai, GCF_000001405.26_GRCh38_genomic.fna, data/FAF18554-4178920553_Multi_SQK-LSK108_WA01.merged.fq, data/FAF18554-4178920553_Multi_SQK-LSK108_WA01.merged.fq.index, data/FAF18554-4178920553_Multi_SQK-LSK108_WA01.merged.fq.index.fai, data/FAF18554-4178920553_Multi_SQK-LSK108_WA01.merged.fq.index.gzi, data/FAF18554-4178920553_Multi_SQK-LSK108_WA01.merged.fq.index.readdb
+    output: output/meth/FAF18554-4178920553_Multi_SQK-LSK108_WA01.meth_calls.tsv
+    jobid: 95
+    wildcards: sample=FAF18554-4178920553_Multi_SQK-LSK108_WA01
+
+Submitted job 95 with external jobid 'Job <3997437> is submitted to default queue <verylong>.'.
+
+[Fri Sep 11 13:59:21 2020]
+rule call_meth:
+    input: output/mapped/FAB45271-152889212_Multi_SQK-LSK108_WA01.sorted.bam, output/mapped/FAB45271-152889212_Multi_SQK-LSK108_WA01.sorted.bam.bai, GCF_000001405.26_GRCh38_genomic.fna, data/FAB45271-152889212_Multi_SQK-LSK108_WA01.merged.fq, data/FAB45271-152889212_Multi_SQK-LSK108_WA01.merged.fq.index, data/FAB45271-152889212_Multi_SQK-LSK108_WA01.merged.fq.index.fai, data/FAB45271-152889212_Multi_SQK-LSK108_WA01.merged.fq.index.gzi, data/FAB45271-152889212_Multi_SQK-LSK108_WA01.merged.fq.index.readdb
+    output: output/meth/FAB45271-152889212_Multi_SQK-LSK108_WA01.meth_calls.tsv
+    jobid: 84
+    wildcards: sample=FAB45271-152889212_Multi_SQK-LSK108_WA01
+
+Submitted job 84 with external jobid 'Job <3997438> is submitted to default queue <verylong>.'.
+
+[Fri Sep 11 13:59:21 2020]
+rule call_meth:
+    input: output/mapped/FAB49908-481119249_Multi_SQK-LSK108_WA01.sorted.bam, output/mapped/FAB49908-481119249_Multi_SQK-LSK108_WA01.sorted.bam.bai, GCF_000001405.26_GRCh38_genomic.fna, data/FAB49908-481119249_Multi_SQK-LSK108_WA01.merged.fq, data/FAB49908-481119249_Multi_SQK-LSK108_WA01.merged.fq.index, data/FAB49908-481119249_Multi_SQK-LSK108_WA01.merged.fq.index.fai, data/FAB49908-481119249_Multi_SQK-LSK108_WA01.merged.fq.index.gzi, data/FAB49908-481119249_Multi_SQK-LSK108_WA01.merged.fq.index.readdb
+    output: output/meth/FAB49908-481119249_Multi_SQK-LSK108_WA01.meth_calls.tsv
+    jobid: 88
+    wildcards: sample=FAB49908-481119249_Multi_SQK-LSK108_WA01
+
+Submitted job 88 with external jobid 'Job <3997439> is submitted to default queue <verylong>.'.
+
+[Fri Sep 11 13:59:22 2020]
+rule call_meth:
+    input: output/mapped/FAB45277-86567043_Multi_SQK-LSK108_WA01.sorted.bam, output/mapped/FAB45277-86567043_Multi_SQK-LSK108_WA01.sorted.bam.bai, GCF_000001405.26_GRCh38_genomic.fna, data/FAB45277-86567043_Multi_SQK-LSK108_WA01.merged.fq, data/FAB45277-86567043_Multi_SQK-LSK108_WA01.merged.fq.index, data/FAB45277-86567043_Multi_SQK-LSK108_WA01.merged.fq.index.fai, data/FAB45277-86567043_Multi_SQK-LSK108_WA01.merged.fq.index.gzi, data/FAB45277-86567043_Multi_SQK-LSK108_WA01.merged.fq.index.readdb
+    output: output/meth/FAB45277-86567043_Multi_SQK-LSK108_WA01.meth_calls.tsv
+    jobid: 85
+    wildcards: sample=FAB45277-86567043_Multi_SQK-LSK108_WA01
+
+Submitted job 85 with external jobid 'Job <3997440> is submitted to default queue <verylong>.'.
+[Fri Sep 11 13:59:22 2020]
+Finished job 70.
+5 of 37 steps (14%) done
+
+[Fri Sep 11 13:59:22 2020]
+rule call_meth:
+    input: output/mapped/FAB49914-3775529215_Multi_SQK-LSK108_WA01.sorted.bam, output/mapped/FAB49914-3775529215_Multi_SQK-LSK108_WA01.sorted.bam.bai, GCF_000001405.26_GRCh38_genomic.fna, data/FAB49914-3775529215_Multi_SQK-LSK108_WA01.merged.fq, data/FAB49914-3775529215_Multi_SQK-LSK108_WA01.merged.fq.index, data/FAB49914-3775529215_Multi_SQK-LSK108_WA01.merged.fq.index.fai, data/FAB49914-3775529215_Multi_SQK-LSK108_WA01.merged.fq.index.gzi, data/FAB49914-3775529215_Multi_SQK-LSK108_WA01.merged.fq.index.readdb
+    output: output/meth/FAB49914-3775529215_Multi_SQK-LSK108_WA01.meth_calls.tsv
+    jobid: 89
+    wildcards: sample=FAB49914-3775529215_Multi_SQK-LSK108_WA01
+
+Submitted job 89 with external jobid 'Job <3997441> is submitted to default queue <verylong>.'.
+[Fri Sep 11 13:59:32 2020]
+Finished job 72.
+6 of 37 steps (16%) done
+[Fri Sep 11 13:59:32 2020]
+Finished job 75.
+7 of 37 steps (19%) done
+
+[Fri Sep 11 13:59:32 2020]
+rule call_meth:
+    input: output/mapped/FAF01132-84868110_Multi_SQK-LSK108_WA01.sorted.bam, output/mapped/FAF01132-84868110_Multi_SQK-LSK108_WA01.sorted.bam.bai, GCF_000001405.26_GRCh38_genomic.fna, data/FAF01132-84868110_Multi_SQK-LSK108_WA01.merged.fq, data/FAF01132-84868110_Multi_SQK-LSK108_WA01.merged.fq.index, data/FAF01132-84868110_Multi_SQK-LSK108_WA01.merged.fq.index.fai, data/FAF01132-84868110_Multi_SQK-LSK108_WA01.merged.fq.index.gzi, data/FAF01132-84868110_Multi_SQK-LSK108_WA01.merged.fq.index.readdb
+    output: output/meth/FAF01132-84868110_Multi_SQK-LSK108_WA01.meth_calls.tsv
+    jobid: 91
+    wildcards: sample=FAF01132-84868110_Multi_SQK-LSK108_WA01
+
+Submitted job 91 with external jobid 'Job <3997448> is submitted to default queue <verylong>.'.
+
+[Fri Sep 11 13:59:32 2020]
+rule call_meth:
+    input: output/mapped/FAF05869-87644245_Multi_SQK-LSK108_WA01.sorted.bam, output/mapped/FAF05869-87644245_Multi_SQK-LSK108_WA01.sorted.bam.bai, GCF_000001405.26_GRCh38_genomic.fna, data/FAF05869-87644245_Multi_SQK-LSK108_WA01.merged.fq, data/FAF05869-87644245_Multi_SQK-LSK108_WA01.merged.fq.index, data/FAF05869-87644245_Multi_SQK-LSK108_WA01.merged.fq.index.fai, data/FAF05869-87644245_Multi_SQK-LSK108_WA01.merged.fq.index.gzi, data/FAF05869-87644245_Multi_SQK-LSK108_WA01.merged.fq.index.readdb
+    output: output/meth/FAF05869-87644245_Multi_SQK-LSK108_WA01.meth_calls.tsv
+    jobid: 94
+    wildcards: sample=FAF05869-87644245_Multi_SQK-LSK108_WA01
+
+Submitted job 94 with external jobid 'Job <3997449> is submitted to default queue <verylong>.'.
+[Fri Sep 11 14:00:16 2020]
+Finished job 71.
+8 of 37 steps (22%) done
+[Fri Sep 11 14:00:16 2020]
+Finished job 73.
+9 of 37 steps (24%) done
+
+[Fri Sep 11 14:00:16 2020]
+rule call_meth:
+    input: output/mapped/FAF01127-353303576_Multi_SQK-LSK108_WA01.sorted.bam, output/mapped/FAF01127-353303576_Multi_SQK-LSK108_WA01.sorted.bam.bai, GCF_000001405.26_GRCh38_genomic.fna, data/FAF01127-353303576_Multi_SQK-LSK108_WA01.merged.fq, data/FAF01127-353303576_Multi_SQK-LSK108_WA01.merged.fq.index, data/FAF01127-353303576_Multi_SQK-LSK108_WA01.merged.fq.index.fai, data/FAF01127-353303576_Multi_SQK-LSK108_WA01.merged.fq.index.gzi, data/FAF01127-353303576_Multi_SQK-LSK108_WA01.merged.fq.index.readdb
+    output: output/meth/FAF01127-353303576_Multi_SQK-LSK108_WA01.meth_calls.tsv
+    jobid: 90
+    wildcards: sample=FAF01127-353303576_Multi_SQK-LSK108_WA01
+
+[Fri Sep 11 14:00:16 2020]
+Finished job 60.
+10 of 37 steps (27%) done
+[Fri Sep 11 14:00:16 2020]
+Finished job 62.
+11 of 37 steps (30%) done
+Submitted job 90 with external jobid 'Job <3997450> is submitted to default queue <verylong>.'.
+
+[Fri Sep 11 14:00:16 2020]
+rule call_meth:
+    input: output/mapped/FAF01169-4245879798_Multi_SQK-LSK108_WA01.sorted.bam, output/mapped/FAF01169-4245879798_Multi_SQK-LSK108_WA01.sorted.bam.bai, GCF_000001405.26_GRCh38_genomic.fna, data/FAF01169-4245879798_Multi_SQK-LSK108_WA01.merged.fq, data/FAF01169-4245879798_Multi_SQK-LSK108_WA01.merged.fq.index, data/FAF01169-4245879798_Multi_SQK-LSK108_WA01.merged.fq.index.fai, data/FAF01169-4245879798_Multi_SQK-LSK108_WA01.merged.fq.index.gzi, data/FAF01169-4245879798_Multi_SQK-LSK108_WA01.merged.fq.index.readdb
+    output: output/meth/FAF01169-4245879798_Multi_SQK-LSK108_WA01.meth_calls.tsv
+    jobid: 92
+    wildcards: sample=FAF01169-4245879798_Multi_SQK-LSK108_WA01
+
+Submitted job 92 with external jobid 'Job <3997452> is submitted to default queue <verylong>.'.
+
+[Fri Sep 11 14:00:17 2020]
+rule call_meth:
+    input: output/mapped/FAB49164-4045668814_Multi_SQK-LSK108_WA01.sorted.bam, output/mapped/FAB49164-4045668814_Multi_SQK-LSK108_WA01.sorted.bam.bai, GCF_000001405.26_GRCh38_genomic.fna, data/FAB49164-4045668814_Multi_SQK-LSK108_WA01.merged.fq, data/FAB49164-4045668814_Multi_SQK-LSK108_WA01.merged.fq.index, data/FAB49164-4045668814_Multi_SQK-LSK108_WA01.merged.fq.index.fai, data/FAB49164-4045668814_Multi_SQK-LSK108_WA01.merged.fq.index.gzi, data/FAB49164-4045668814_Multi_SQK-LSK108_WA01.merged.fq.index.readdb
+    output: output/meth/FAB49164-4045668814_Multi_SQK-LSK108_WA01.meth_calls.tsv
+    jobid: 79
+    wildcards: sample=FAB49164-4045668814_Multi_SQK-LSK108_WA01
+
+Submitted job 79 with external jobid 'Job <3997453> is submitted to default queue <verylong>.'.
+
+[Fri Sep 11 14:00:17 2020]
+rule call_meth:
+    input: output/mapped/FAB42451-4239353418_Multi_SQK-LSK108_WA01.sorted.bam, output/mapped/FAB42451-4239353418_Multi_SQK-LSK108_WA01.sorted.bam.bai, GCF_000001405.26_GRCh38_genomic.fna, data/FAB42451-4239353418_Multi_SQK-LSK108_WA01.merged.fq, data/FAB42451-4239353418_Multi_SQK-LSK108_WA01.merged.fq.index, data/FAB42451-4239353418_Multi_SQK-LSK108_WA01.merged.fq.index.fai, data/FAB42451-4239353418_Multi_SQK-LSK108_WA01.merged.fq.index.gzi, data/FAB42451-4239353418_Multi_SQK-LSK108_WA01.merged.fq.index.readdb
+    output: output/meth/FAB42451-4239353418_Multi_SQK-LSK108_WA01.meth_calls.tsv
+    jobid: 81
+    wildcards: sample=FAB42451-4239353418_Multi_SQK-LSK108_WA01
+
+[Fri Sep 11 14:00:17 2020]
+Finished job 68.
+12 of 37 steps (32%) done
+Submitted job 81 with external jobid 'Job <3997454> is submitted to default queue <verylong>.'.
+
+[Fri Sep 11 14:00:17 2020]
+rule call_meth:
+    input: output/mapped/FAB49712-622291475_Multi_SQK-LSK108_WA01.sorted.bam, output/mapped/FAB49712-622291475_Multi_SQK-LSK108_WA01.sorted.bam.bai, GCF_000001405.26_GRCh38_genomic.fna, data/FAB49712-622291475_Multi_SQK-LSK108_WA01.merged.fq, data/FAB49712-622291475_Multi_SQK-LSK108_WA01.merged.fq.index, data/FAB49712-622291475_Multi_SQK-LSK108_WA01.merged.fq.index.fai, data/FAB49712-622291475_Multi_SQK-LSK108_WA01.merged.fq.index.gzi, data/FAB49712-622291475_Multi_SQK-LSK108_WA01.merged.fq.index.readdb
+    output: output/meth/FAB49712-622291475_Multi_SQK-LSK108_WA01.meth_calls.tsv
+    jobid: 87
+    wildcards: sample=FAB49712-622291475_Multi_SQK-LSK108_WA01
+
+Submitted job 87 with external jobid 'Job <3997455> is submitted to default queue <verylong>.'.
