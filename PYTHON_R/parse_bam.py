@@ -9,17 +9,17 @@ import numpy as np
 
 def main ():
 
-    parser = argparse.ArgumentParser(description='Parse BAM file for multi-alignment and soft-clipped reads')
+    parser = argparse.ArgumentParser(description='Parse BAM file for multi-alignment and soft-clipped reads. Will return a BAM file containing split reads and a BEDPE file containing the coordinates of the split reads (useful for circos plots, etc.). Can additionally return a filtered methylation TSV file if one is provided (optional)')
 
     required = parser.add_argument_group(
         'Required',
-        'Bam, deletion, output location, flags to filter on, and splits to filter on')
+        'Bam, clip size to filter on, output location, flags to filter on, splits to filter on, and True/False if alternative chromosomes were used')
 
     required.add_argument(
         '-b',
         '--bam',
         type=str,
-        help='bam file')
+        help='bam file - must be created with NGMLR')
 
     required.add_argument(
         '-c',
@@ -45,8 +45,15 @@ def main ():
         '-s',
         '--splits',
         type=int,
-        help='Number of splits read aligns to to filter on for bedpe file [2]',
+        help='Number of splits read aligns to filter on for bedpe file (2 only option right now, hope to change in the future)[2]',
         default=2)
+
+    required.add_argument(
+        '-a',
+        '--alt_chroms',
+        type=bool,
+        help='Does BAM file use alternative chromosome names? (i.e. NC_000001.11, etc.) [False]',
+        default=False)
 
     optional = parser.add_argument_group(
             'Optional',
@@ -122,7 +129,7 @@ def main ():
 
     outfile = pysam.AlignmentFile(args.output + '_clipped.bam', 'w', template=inbam)
 
-    inbam = pysam.AlignmentFile(args.bam, "rb") #Ok so apparently this is necessary to include the inbam again, as the first invocation of it isnt global?
+    inbam = pysam.AlignmentFile(args.bam, "rb") #Always need to re-load bam file for some reason
 
     for read in inbam:
         if read.query_name in big_clip:
@@ -133,7 +140,7 @@ def main ():
     5. Creating bedpe file 
     BEDPE format:
     chrom1, start1, end1, chrom2, start2, end2
-    Right now this will only return reads that map to 2 places in the genome, obviously this is not ideal but it is at my limit in terms of complexity
+    Right now this will only return reads that map to 2 places in the genome, in the future having it enabled for multi-mapping reads would be preferable
     '''
 
     test_list = []
@@ -147,7 +154,7 @@ def main ():
     
     unique_reads = []
 
-    N = args.splits
+    N = args.splits #Right now this will always be 2, but in the future I'd like to make the program able to identify multi-mapping reads
 
     for key, value in counts.items():
         #print(key, value)
@@ -174,11 +181,8 @@ def main ():
                 splits[read.query_name]["start"] += ","+str(read.reference_start)
                 splits[read.query_name]["end"] += ","+str(read.reference_end)
                 #print(splits)
-        #print(splits)
     
-     #Ok so the print statement above returns the right results except for the last line, so that is where something is going wrong!
     #print(splits)
-
 
     bedpe = pd.DataFrame.from_dict(splits, orient='index')
 
@@ -217,8 +221,9 @@ def main ():
         "NC_000024.10" : "chrY"
         }
 
-    bedpe['chrom1'] = bedpe['chrom1'].map(chr_dict)
-    bedpe['chrom2'] = bedpe['chrom2'].map(chr_dict)
+    if args.alt_chroms == True:
+        bedpe['chrom1'] = bedpe['chrom1'].map(chr_dict)
+        bedpe['chrom2'] = bedpe['chrom2'].map(chr_dict)
 
     #print(bedpe.head())
 
