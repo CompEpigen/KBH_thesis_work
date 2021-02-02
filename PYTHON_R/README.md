@@ -105,6 +105,7 @@ While parse_bam.py was useful in this project, it is not without limitations tha
 
 * Currently, there is no way to select a region of interest in the intial input bam file, and the script will run on the entire bam file. This can be worked-around by pre-subsetting the bam file using [samtools view](https://www.htslib.org/doc/samtools-view.html)
 * parse_bam.py has only been used/tested with the default flags (256,2046,2304), and there is no guarentee that the script will behave the same or even work with other flags. Theoretically it should work with any flags, and at the very least would give a bam file filtered for flags of interest (however the bedpe file would likely be broken)
+* During the creation of the bedpe file, only reads that map to exactly 2 locations in the genome will be identified. This obviously misses many reads that may map to multiple locations, and should be taken into account when using parse_bam.py
 * There is no guarentee that the reads identified are truly chimeric reads, as the script takes a very literal approach to finding them. Always confirm reads of interest using other methods (IGV, Ribbon, etc.)! 
 
 
