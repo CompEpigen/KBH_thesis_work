@@ -1,8 +1,20 @@
 # Nanopore Data Processing Pipeline
 
-A [Snakemake](https://snakemake.readthedocs.io/en/stable/index.html) workflow for taking basecalled fastq files, aligning to a reference genome, indexing, calling methylation, and calling structural variants. 
+A [Snakemake](https://snakemake.readthedocs.io/en/stable/index.html) workflow for taking basecalled fastq files, aligning to a reference genome, indexing, calling methylation, and calling structural variants. Built to operate in IBM LSF cluster environments (using BSUB, etc.)
 
-Running precheck.sh will ensure that all needed packages are installed and on PATH, if not please install and run again
+Running precheck.sh will ensure that all needed packages are installed and on the user's $PATH, if not please install and run again
+
+After ensuring that all dependencies are installed and on the user's $PATH, the user may edit the config.yaml file to contain the necessary data and output locations, reference genome, sample names, etc.
+
+After the config.yaml file has been edited and saved, the user may run the pipeline with the following command:
+
+```
+USER$ bash do_snakemake.sh
+```
+
+This will launch the snakemake pipeline. It is recommended to do this in a screen that one can detach from after starting the pipeline so that it is running in the background. 
+
+Based on the size of the intial data, and if the full pipeline is being run, the workflow may take anywhwere from a few hours to several days.
 
 ## Workflow
 

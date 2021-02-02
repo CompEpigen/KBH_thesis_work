@@ -1,10 +1,11 @@
 job_template
-/data
-/output
 /nanopore_raw
 /nanopore_basecalled
-/chm13_bismark_data
 /REF
 /OLD
-/TESTING/fastq/sequencing_telemetry.js
+/data_temp
+DELETE_move_data.sh
+
+
+
 

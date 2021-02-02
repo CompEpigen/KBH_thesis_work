@@ -37,7 +37,6 @@ rule all:
 
 #Add in rule here to check and make sure file hierarchy is met before proceeding
 
-
 #Running QC on the basecalled reads
 rule pycoqc:
     input:
@@ -86,22 +85,6 @@ rule index:
         misc=" "
     shell:
         "f5c index -d {input.f5s} {input.fq}"
-
-#Aligning basecalled reads to reference genome
-#rule minimap2_align:
-#    input:
-#        ref=expand("{REF}", REF=REF),
-#        fq="{OUT_DIR}/{samples}.merged.fastq"
-#    output:
-#        "{OUT_DIR}/{samples}.sorted.bam"
-#    params:
-#        jobname="index_reads",
-#        runtime="8:00",
-#        memusage="20000",
-#        slots="10",
-#        misc=" "
-#    shell:
-#        "minimap2 -t {params.slots} -ax map-ont {input.ref} {input.fq} | samtools sort -T {wildcards.samples} -o {output}"
 
 #Aligning basecalled reads to reference genome
 rule ngmlr_align:
@@ -170,29 +153,6 @@ rule calc_freq:
         misc=" "
     shell:
         "f5c meth-freq -i {input} -o {output} -s"
-
-#Calling SVs
-#rule call_vars:
-#    input:
-#        bam="{OUT_DIR}/{samples}.sorted.bam",
-#        ref=expand("{REF}", REF=REF) #,
-        #wd="/icgc/dkfzlsdf/analysis/C010/brooks/master_pipeline/output/{sample}"
-#    output:
-#        "{OUT_DIR}/{samples}.vcf"
-#    params:
-#        jobname="call_vars",
-#        runtime="8:00",
-#        memusage="10000",
-#        slots="20",
-#        misc=" "
-#    shell:
-#        """
-#        mkdir {OUT_DIR}/{wildcards.samples}
-#        cuteSV {input.bam} {input.ref} {output} {OUT_DIR}/{wildcards.samples} \
-#        --threads {params.slots} --max_cluster_bias_INS 100 --diff_ratio_merging_INS 0.3 --max_cluster_bias_DEL 100 --diff_ratio_merging_DEL 0.3
-#        
-#        """
-##Might want to add in rm -r part to rule above to get rid of empty folders 
 
 #Calling SVs
 rule call_vars:
